@@ -10,19 +10,22 @@ test("build emits the deployable Sites worker", async () => {
 });
 
 test("the deck carries the Build Week story and dual-mode interaction", async () => {
-  const [slides, deck, layout] = await Promise.all([
+  const [slides, deck, layout, styles] = await Promise.all([
     readFile(new URL("app/data/slides.ts", root), "utf8"),
     readFile(new URL("app/components/DeckExperience.tsx", root), "utf8"),
     readFile(new URL("app/layout.tsx", root), "utf8"),
+    readFile(new URL("app/globals.css", root), "utf8"),
   ]);
   assert.match(slides, /THE AI PRESENTATION FATIGUE/);
   assert.match(slides, /CODEX × GPT IMAGE 2/);
   assert.match(slides, /FROM A PRESENTATION TO A RELATIONSHIP/);
   assert.match(deck, /mode="present"|mode: Mode/);
+  assert.match(deck, /initialSlide/);
   assert.match(deck, /\/api\/comments/);
   assert.match(deck, /slideId/);
   assert.match(layout, /New Era Presentation/);
   assert.doesNotMatch(layout, /Starter Project|codex-preview/);
+  assert.match(styles, /\.join-qr svg[\s\S]*width:\s*100%[\s\S]*height:\s*100%/);
 });
 
 test("authentication, admin boundaries, and Cloudflare email are wired", async () => {

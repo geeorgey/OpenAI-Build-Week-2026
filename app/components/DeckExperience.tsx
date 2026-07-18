@@ -35,7 +35,7 @@ const stamps = [
 
 const subscribeToOrigin = () => () => undefined;
 
-function initialSlideIndex() {
+function currentUrlSlideIndex() {
   if (typeof window === "undefined") return 0;
   const raw = Number(new URLSearchParams(window.location.search).get("slide"));
   if (!Number.isFinite(raw)) return 0;
@@ -240,7 +240,7 @@ function InteractionRail({
   const [sending, setSending] = useState(false);
   const currentSlide = slides[activeSlide];
   const currentComments = comments.filter((comment) => comment.slideId === currentSlide.id);
-  const groupRef = useRef<HTMLDivElement>(null);
+  const commentStreamRef = useRef<HTMLDivElement>(null);
   const joinUrl = useSyncExternalStore(
     subscribeToOrigin,
     () => `${window.location.origin}/join`,
@@ -248,7 +248,7 @@ function InteractionRail({
   );
 
   useEffect(() => {
-    groupRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    commentStreamRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   }, [activeSlide, pulse]);
 
   const submit = async () => {
@@ -272,13 +272,13 @@ function InteractionRail({
         </div>
       </div>
 
-      <div className="rail-context" ref={groupRef}>
+      <div className="rail-context">
         <span>{language === "ja" ? "いまのスライド" : "ACTIVE SLIDE"}</span>
         <strong>{String(activeSlide + 1).padStart(2, "0")} · {language === "ja" ? currentSlide.chapter : currentSlide.chapter}</strong>
         <small>{currentComments.length} {language === "ja" ? "件のコメントへ移動" : "comments in context"}</small>
       </div>
 
-      <div className="comment-stream" aria-live="polite">
+      <div className="comment-stream" ref={commentStreamRef} aria-live="polite">
         {currentComments.length ? currentComments.map((comment) => (
           <article className="comment-card" key={comment.id}>
             <header>
@@ -324,8 +324,8 @@ function InteractionRail({
   );
 }
 
-export function DeckExperience({ mode }: { mode: Mode }) {
-  const [activeSlide, setActiveSlide] = useState(initialSlideIndex);
+export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initialSlide?: number }) {
+  const [activeSlide, setActiveSlide] = useState(initialSlide);
   const [language, setLanguage] = useState<Language>("ja");
   const [comments, setComments] = useState<CommentItem[]>(starterComments);
   const [reactionBurst, setReactionBurst] = useState<{ symbol: string; key: number } | null>(null);
@@ -362,7 +362,7 @@ export function DeckExperience({ mode }: { mode: Mode }) {
         goTo(activeSlide - 1);
       }
     };
-    const onPop = () => setActiveSlide(initialSlideIndex());
+    const onPop = () => setActiveSlide(currentUrlSlideIndex());
     window.addEventListener("keydown", onKey);
     window.addEventListener("popstate", onPop);
     return () => {
