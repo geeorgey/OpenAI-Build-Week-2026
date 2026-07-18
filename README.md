@@ -131,7 +131,7 @@ WORKER_SHARED_SECRET
 
 ## Build Week judge access
 
-The working demo is available at [`/admin`](https://new-era-presentation.lvnsk.jp/admin). Use one of the three allowlisted IDs documented above. The shared admin password is provided only through the private Devpost testing instructions and is deliberately absent from this public repository.
+The working demo is available at [`/admin`](https://new-era-presentation.lvnsk.jp/admin). Use one of the three allowlisted IDs documented above. Copy the shared admin password into the private Devpost testing instructions before submission; it is deliberately absent from this public repository.
 
 The official rules require a private repository to be shared with `testing@devpost.com` and `build-week-event@openai.com`. This repository is public and MIT-licensed, so those same official addresses are instead used as the application-level judge IDs.
 

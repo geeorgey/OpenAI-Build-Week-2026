@@ -17,8 +17,8 @@ export const slides: Slide[] = [
     id: "manifesto",
     eyebrow: "OPENAI BUILD WEEK 2026 / WORK & PRODUCTIVITY",
     eyebrowEn: "OPENAI BUILD WEEK 2026 / WORK & PRODUCTIVITY",
-    title: "プレゼンテーションは、\n新時代へ。\n観るものから、参加するものへ。",
-    titleEn: "PRESENTATIONS,\nREIMAGINED.\nFROM WATCHING TO PARTICIPATING.",
+    title: "プレゼンテーションは、\n新時代へ。\n観るものから、\n参加するものへ。",
+    titleEn: "PRESENTATIONS,\nREIMAGINED.\nFROM WATCHING\nTO PARTICIPATING.",
     lead: "QRから参加し、リアクションと対話がスライドに同期する。Codex + GPT-5.6 + ChatGPT Sitesでつくった、参加型プレゼンテーション・メディア。",
     leadEn:
       "Join by QR as reactions and conversations sync to every slide—a participatory presentation medium built with Codex, GPT-5.6, and ChatGPT Sites.",

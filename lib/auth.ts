@@ -12,6 +12,7 @@ export type Identity = {
 
 const SESSION_COOKIE = "nep_session";
 const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
+const ADMIN_SESSION_TTL = 12 * 60 * 60 * 1000;
 export const ADMIN_EMAILS = new Set([
   "y@lne.st",
   "testing@devpost.com",
@@ -129,14 +130,15 @@ export async function createVerifiedSession(input: {
 
   const token = randomToken();
   const tokenHash = await sha256(token);
-  const expiresAt = new Date(Date.now() + THIRTY_DAYS).toISOString();
+  const sessionTtl = input.provider === "admin" ? ADMIN_SESSION_TTL : THIRTY_DAYS;
+  const expiresAt = new Date(Date.now() + sessionTtl).toISOString();
   await database.prepare(
     "INSERT INTO sessions (token_hash, user_id, expires_at) VALUES (?, ?, ?)",
   ).bind(tokenHash, userId, expiresAt).run();
 
   return {
     token,
-    cookie: sessionCookie(token),
+    cookie: sessionCookie(token, sessionTtl),
     identity: {
       id: userId,
       email,
@@ -190,8 +192,8 @@ export function isAdmin(identity: Identity | null) {
   );
 }
 
-export function sessionCookie(token: string) {
-  return `${SESSION_COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${THIRTY_DAYS / 1000}`;
+export function sessionCookie(token: string, lifetime = THIRTY_DAYS) {
+  return `${SESSION_COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${lifetime / 1000}`;
 }
 
 function safeDecode(value: string) {

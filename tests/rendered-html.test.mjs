@@ -17,7 +17,7 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
     readFile(new URL("app/globals.css", root), "utf8"),
   ]);
   assert.match(slides, /THE AI PRESENTATION FATIGUE/);
-  assert.match(slides, /プレゼンテーションは、\\n新時代へ。\\n観るものから、参加するものへ。/);
+  assert.match(slides, /プレゼンテーションは、\\n新時代へ。\\n観るものから、\\n参加するものへ。/);
   assert.match(slides, /QRから参加し、リアクションと対話がスライドに同期する。/);
   assert.match(slides, /CODEX × GPT IMAGE 2/);
   assert.match(slides, /FROM A PRESENTATION TO A RELATIONSHIP/);
@@ -46,6 +46,7 @@ test("authentication, admin boundaries, and Cloudflare email are wired", async (
   assert.match(auth, /testing@devpost\.com/);
   assert.match(auth, /build-week-event@openai\.com/);
   assert.match(auth, /identity\.provider === "admin"/);
+  assert.match(auth, /ADMIN_SESSION_TTL/);
   assert.match(google, /email_verified/);
   assert.match(google, /location: "\/mypage"/);
   assert.match(emailWorker, /newEraPresentation@lvnsk\.jp/);
