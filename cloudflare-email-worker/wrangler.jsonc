@@ -14,7 +14,8 @@
     }
   ],
   "vars": {
-    "APP_NAME": "New Era Presentation"
+    "APP_NAME": "New Era Presentation",
+    "APP_BASE_URL": "https://new-era-presentation.lvnsk.jp"
   },
   "observability": {
     "enabled": true

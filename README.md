@@ -2,7 +2,7 @@
 
 **AI made slides fast. We make them human.**
 
-[New Era Presentation](https://github.com/geeorgey/OpenAI-Build-Week-2026) is a live, participatory presentation medium built for **OpenAI Build Week 2026** with **Codex, GPT-5.6, and ChatGPT Sites**.
+[New Era Presentation](https://new-era-presentation.lvnsk.jp) is a live, participatory presentation medium built for **OpenAI Build Week 2026** with **Codex, GPT-5.6, and ChatGPT Sites**. The public source is available in the [Build Week repository](https://github.com/geeorgey/OpenAI-Build-Week-2026).
 
 ## Inspiration
 
@@ -174,7 +174,7 @@ This project makes presentations worth joining and worth remembering.
 - Marketing delivery requires opt-in and supports unsubscribe.
 - User content remains manageable through the restricted control room.
 
-See [Privacy](https://new-era-presentation.example/privacy) and [Terms](https://new-era-presentation.example/terms); production links will replace these placeholders after deployment.
+See [Privacy](https://new-era-presentation.lvnsk.jp/privacy) and [Terms](https://new-era-presentation.lvnsk.jp/terms).
 
 ## License
 
