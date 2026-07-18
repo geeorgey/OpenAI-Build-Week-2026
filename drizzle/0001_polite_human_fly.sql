@@ -1,0 +1,2 @@
+CREATE INDEX `comments_slide_idx` ON `comments` (`presentation_slug`,`slide_id`,`visible`,`created_at`);--> statement-breakpoint
+CREATE INDEX `reactions_slide_idx` ON `reactions` (`presentation_slug`,`slide_id`,`stamp`);

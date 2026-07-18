@@ -1,0 +1,253 @@
+export type Slide = {
+  id: string;
+  eyebrow: string;
+  eyebrowEn: string;
+  title: string;
+  titleEn: string;
+  lead: string;
+  leadEn: string;
+  points: string[];
+  pointsEn: string[];
+  theme: string;
+  chapter: string;
+};
+
+export const slides: Slide[] = [
+  {
+    id: "manifesto",
+    eyebrow: "OPENAI BUILD WEEK 2026 / WORK & PRODUCTIVITY",
+    eyebrowEn: "OPENAI BUILD WEEK 2026 / WORK & PRODUCTIVITY",
+    title: "AIが速く作るほど、\nプレゼンは\n人間になる。",
+    titleEn: "THE FASTER AI\nCREATES,\nTHE MORE HUMAN WE MUST BE.",
+    lead: "人間の注意、編集判断、ライブな相互作用。その価値は、AIがコンテンツを速く作るほど高くなる。",
+    leadEn:
+      "As AI makes content faster, human attention, editorial judgment, and live interaction become more valuable.",
+    points: ["NEW ERA PRESENTATION", "BUILT WITH CHATGPT SITES", "LIVE • VERIFIED • REMEMBERED"],
+    pointsEn: ["NEW ERA PRESENTATION", "BUILT WITH CHATGPT SITES", "LIVE • VERIFIED • REMEMBERED"],
+    theme: "theme-void",
+    chapter: "THE IDEA",
+  },
+  {
+    id: "ai-fatigue",
+    eyebrow: "01 / THE AI PRESENTATION FATIGUE",
+    eyebrowEn: "01 / THE AI PRESENTATION FATIGUE",
+    title: "量産された\nAIプレゼンに、\nもう飽きている。",
+    titleEn: "WE’RE TIRED OF\nMASS-PRODUCED\nAI PRESENTATIONS.",
+    lead: "PowerPointもGoogle Slidesも、一発生成は簡単になった。ほぼ編集されない構成、同じトーン、予測できる視覚リズムが聞き手の注意を奪う。",
+    leadEn:
+      "One-shot PowerPoint and Google Slides are easy. Unedited structure, identical tone, and predictable visual rhythm are exhausting the audience.",
+    points: ["ONE-SHOT GENERATION", "NO EDITORIAL JUDGMENT", "SAME STORY RHYTHM"],
+    pointsEn: ["ONE-SHOT GENERATION", "NO EDITORIAL JUDGMENT", "SAME STORY RHYTHM"],
+    theme: "theme-signal",
+    chapter: "THE PROBLEM",
+  },
+  {
+    id: "shared-time",
+    eyebrow: "02 / THE ANTITHESIS",
+    eyebrowEn: "02 / THE ANTITHESIS",
+    title: "増やすべきは、\nスライドではない。\n同じ時間だ。",
+    titleEn: "DON’T MAKE\nMORE SLIDES.\nMAKE SHARED TIME.",
+    lead: "使い捨てのAIスライドではなく、登壇者と参加者がリアルタイムに反応し、対話し、記憶する参加型メディアをつくる。",
+    leadEn:
+      "Not more disposable AI slides. Build participatory media where speakers and audiences react, converse, and remember together.",
+    points: ["PRESENTER", "LIVE MOMENT", "PARTICIPANT", "SHARED MEMORY"],
+    pointsEn: ["PRESENTER", "LIVE MOMENT", "PARTICIPANT", "SHARED MEMORY"],
+    theme: "theme-shared",
+    chapter: "THE IDEA",
+  },
+  {
+    id: "join",
+    eyebrow: "03 / ONE QR. FOUR WAYS IN.",
+    eyebrowEn: "03 / ONE QR. FOUR WAYS IN.",
+    title: "聞くだけ、から。\n参加する、へ。",
+    titleEn: "FROM\nWATCHING\nTO JOINING.",
+    lead: "参加者はQRから /join へ。摩擦の少なさと、信頼できるアイデンティティを両立する。",
+    leadEn:
+      "A single QR opens /join. Choose the right balance between instant access and verified identity.",
+    points: ["ゲスト参加", "メール認証", "Google 認証", "ChatGPT 認証"],
+    pointsEn: ["Guest", "Email verified", "Google verified", "ChatGPT verified"],
+    theme: "theme-citrus",
+    chapter: "THE EXPERIENCE",
+  },
+  {
+    id: "interaction",
+    eyebrow: "04 / REACT IN THE MOMENT",
+    eyebrowEn: "04 / REACT IN THE MOMENT",
+    title: "感情を、\nそのスライドに\n置いていく。",
+    titleEn: "LEAVE THE\nFEELING ON\nTHE SLIDE.",
+    lead: "スタンプもコメントも、投稿された瞬間のスライド番号と結びつく。",
+    leadEn:
+      "Every stamp and comment is anchored to the exact slide that sparked it.",
+    points: ["🔥 刺さった", "💡 発見", "👏 共感", "❓ 質問"],
+    pointsEn: ["🔥 Resonated", "💡 Insight", "👏 Agree", "❓ Question"],
+    theme: "theme-magenta",
+    chapter: "THE EXPERIENCE",
+  },
+  {
+    id: "context",
+    eyebrow: "05 / THE COMMENT RAIL FIX",
+    eyebrowEn: "05 / THE COMMENT RAIL FIX",
+    title: "ページが変われば、\n会話もそこへ\n追いつく。",
+    titleEn: "WHEN THE SLIDE\nMOVES, THE\nCONVERSATION FOLLOWS.",
+    lead: "最後のコメントを表示し続けない。スライド遷移と同時に、該当コメント群へ自動で移動する。",
+    leadEn:
+      "Never pin the last comment forever. The rail automatically moves to the active slide’s conversation.",
+    points: ["slide_id で永続化", "遷移時にフィルター", "該当グループへ自動スクロール"],
+    pointsEn: ["Persist by slide_id", "Filter on navigation", "Auto-scroll to the matching group"],
+    theme: "theme-grid",
+    chapter: "THE EXPERIENCE",
+  },
+  {
+    id: "modes",
+    eyebrow: "06 / TWO MODES. ONE STORY.",
+    eyebrowEn: "06 / TWO MODES. ONE STORY.",
+    title: "話す時間も、\n読まれる時間も。",
+    titleEn: "BUILT FOR\nTHE STAGE AND\nAFTER THE STAGE.",
+    lead: "同じコンテンツを、登壇者が進めるプレゼンモードと、読者が自分で進むWeb公開モードに最適化。",
+    leadEn:
+      "One story, tuned for a speaker-led stage and a self-paced web experience.",
+    points: ["PRESENT：登壇者が進行 / /joinで参加", "WEB：読者が進行 / 投稿欄はsticky & compact"],
+    pointsEn: ["PRESENT: speaker-led / audience joins", "WEB: self-paced / sticky compact composer"],
+    theme: "theme-split",
+    chapter: "THE PRODUCT",
+  },
+  {
+    id: "memory",
+    eyebrow: "07 / YOUR PRESENTATION MEMORY",
+    eyebrowEn: "07 / YOUR PRESENTATION MEMORY",
+    title: "終わったあとに、\n自分の思考と\n再会する。",
+    titleEn: "MEET YOUR\nOWN THINKING\nAGAIN.",
+    lead: "認証済参加者はマイページで、どこにスタンプを置き、どんなコメントを残したかを時系列で振り返る。",
+    leadEn:
+      "Verified participants revisit every stamp and comment in a personal, slide-linked timeline.",
+    points: ["参加履歴", "スライド別リアクション", "コメント再訪", "次回イベントへの接続"],
+    pointsEn: ["Attendance history", "Slide reactions", "Comment recall", "Next-event connection"],
+    theme: "theme-paper",
+    chapter: "THE PRODUCT",
+  },
+  {
+    id: "admin",
+    eyebrow: "08 / CONTROL WITHOUT FRICTION",
+    eyebrowEn: "08 / CONTROL WITHOUT FRICTION",
+    title: "公開も、信頼も、\nひとつの\nコントロールルームで。",
+    titleEn: "ONE CONTROL ROOM\nFOR ACCESS,\nTRUST, AND SAFETY.",
+    lead: "/admin は Google 認証済みの y@lne.st だけ。公開範囲、コメント、ユーザー、配信を管理する。",
+    leadEn:
+      "/admin is restricted to Google-verified y@lne.st. Manage access, comments, users, and campaigns.",
+    points: ["公開", "パスワード付き限定公開", "非公開", "コメント非表示 / ユーザー管理"],
+    pointsEn: ["Public", "Password protected", "Private", "Moderation / user management"],
+    theme: "theme-control",
+    chapter: "THE PRODUCT",
+  },
+  {
+    id: "marketing",
+    eyebrow: "09 / FROM A PRESENTATION TO A RELATIONSHIP",
+    eyebrowEn: "09 / FROM A PRESENTATION TO A RELATIONSHIP",
+    title: "拍手で終わらず、\n次の会話を\n始める。",
+    titleEn: "DON’T END\nAT APPLAUSE.\nSTART THE NEXT LOOP.",
+    lead: "従来はリード生成で終わった。Sites上で同意ベースの興味シグナルを捉え、テーマ別にセグメントし、登壇者自身が次の対話を始める。",
+    leadEn:
+      "Traditional tools stop at lead capture. Sites turns consented interest signals into segments and lets the presenter start the next conversation.",
+    points: ["オプトイン", "興味セグメント", "配信予約", "開封・クリック・配信停止"],
+    pointsEn: ["Opt-in", "Interest segments", "Scheduled delivery", "Open / click / unsubscribe"],
+    theme: "theme-mail",
+    chapter: "THE PRODUCT",
+  },
+  {
+    id: "sites",
+    eyebrow: "10 / BUILT IN CHATGPT SITES",
+    eyebrowEn: "10 / BUILT IN CHATGPT SITES",
+    title: "アイデアを、\nその場で\n動く体験へ。",
+    titleEn: "FROM IDEA\nTO A WORKING\nEXPERIENCE.",
+    lead: "Codex + GPT-5.6 + ChatGPT Sitesで、企画、UI、ルート、D1、認証、公開までを一気通貫。",
+    leadEn:
+      "Codex + GPT-5.6 + ChatGPT Sites connect concept, UI, routes, D1, authentication, and deployment in one flow.",
+    points: ["CONCEPT", "UI + MOTION", "ROUTES + D1", "AUTH", "DEPLOY"],
+    pointsEn: ["CONCEPT", "UI + MOTION", "ROUTES + D1", "AUTH", "DEPLOY"],
+    theme: "theme-sites",
+    chapter: "THE BUILD",
+  },
+  {
+    id: "gpt-image",
+    eyebrow: "11 / CODEX × GPT IMAGE 2",
+    eyebrowEn: "11 / CODEX × GPT IMAGE 2",
+    title: "画像を作る、\nだけでは\n終わらせない。",
+    titleEn: "NOT JUST\nGENERATING\nAN IMAGE.",
+    lead: "CodexからGPT Image 2へシームレスにつなぎ、ビジュアル方向、モーション、参加モデル、サービス実装を一つの体験として練り込む。",
+    leadEn:
+      "Codex connects seamlessly to GPT Image 2, weaving visual direction, motion, participation, and service implementation into one product experience.",
+    points: ["VISUAL DIRECTION", "MOTION SYSTEM", "PARTICIPATION MODEL", "SERVICE IMPLEMENTATION"],
+    pointsEn: ["VISUAL DIRECTION", "MOTION SYSTEM", "PARTICIPATION MODEL", "SERVICE IMPLEMENTATION"],
+    theme: "theme-image",
+    chapter: "THE BUILD",
+  },
+  {
+    id: "cloudflare",
+    eyebrow: "12 / SITES + CODEX PLUGIN",
+    eyebrowEn: "12 / SITES + CODEX PLUGIN",
+    title: "メールだけは、\nCloudflare が\nバトンを受ける。",
+    titleEn: "CLOUDFLARE\nTAKES THE\nEMAIL BATON.",
+    lead: "Sites単体で完結しないメール認証とマーケティング配信は、Codexの cloudflare-deploy プラグインで Email Service Worker を構築する。",
+    leadEn:
+      "Email verification and campaigns extend beyond Sites, so the cloudflare-deploy plugin builds an Email Service Worker.",
+    points: ["newEraPresentation@lvnsk.jp", "SPF / DKIM / DMARC", "Magic link", "Consent & unsubscribe"],
+    pointsEn: ["newEraPresentation@lvnsk.jp", "SPF / DKIM / DMARC", "Magic link", "Consent & unsubscribe"],
+    theme: "theme-cloud",
+    chapter: "THE BUILD",
+  },
+  {
+    id: "google",
+    eyebrow: "13 / GOOGLE OAUTH, EXPLAINED",
+    eyebrowEn: "13 / GOOGLE OAUTH, EXPLAINED",
+    title: "認証の裏側も、\nユーザーには\nシンプルに。",
+    titleEn: "SIMPLE FOR\nTHE USER.\nVERIFIABLE BY DESIGN.",
+    lead: "Google Cloudでプロジェクト、OAuth同意画面、Webクライアントを作成。独自ドメインはDNS TXTで所有権を証明する。",
+    leadEn:
+      "Create the Google Cloud project, consent screen, and web client. Verify the custom domain with a DNS TXT record.",
+    points: ["1. Project", "2. Branding & audience", "3. OAuth client", "4. Redirect URI", "5. DNS TXT verification"],
+    pointsEn: ["1. Project", "2. Branding & audience", "3. OAuth client", "4. Redirect URI", "5. DNS TXT verification"],
+    theme: "theme-google",
+    chapter: "THE BUILD",
+  },
+  {
+    id: "buildweek",
+    eyebrow: "14 / BUILT FOR OPENAI BUILD WEEK",
+    eyebrowEn: "14 / BUILT FOR OPENAI BUILD WEEK",
+    title: "4つの審査軸を、\n1つの体験で\n証明する。",
+    titleEn: "ONE EXPERIENCE.\nFOUR REASONS\nTO BELIEVE.",
+    lead: "Codexで期間内に構築した、動く非自明な実装。会場とWebをつなぐ完成体験。実在する登壇者の課題。既存デッキにはない新しい記憶層。",
+    leadEn:
+      "A working, non-trivial Codex build; a coherent stage-to-web product; a real presenter problem; and a new memory layer for slides.",
+    points: ["TECHNOLOGICAL IMPLEMENTATION", "DESIGN", "POTENTIAL IMPACT", "QUALITY OF THE IDEA"],
+    pointsEn: ["TECHNOLOGICAL IMPLEMENTATION", "DESIGN", "POTENTIAL IMPACT", "QUALITY OF THE IDEA"],
+    theme: "theme-score",
+    chapter: "THE ENTRY",
+  },
+  {
+    id: "demo",
+    eyebrow: "15 / THE THREE-MINUTE DEMO",
+    eyebrowEn: "15 / THE THREE-MINUTE DEMO",
+    title: "見るだけで、\n価値がわかる\n180秒。",
+    titleEn: "UNDERSTAND\nTHE VALUE\nIN 180 SECONDS.",
+    lead: "AIプレゼン疲れ → 話す → QRで参加 → スタンプとコメント → ページ連動 → 記憶 → 関係構築 → SitesのBuild。",
+    leadEn:
+      "AI presentation fatigue → live join → react → follow the slide → remember → build a relationship → show the Sites build.",
+    points: ["0:00 FATIGUE", "0:25 LIVE JOIN", "1:00 CONTEXT", "1:30 MEMORY", "2:00 RELATIONSHIP", "2:30 SITES BUILD"],
+    pointsEn: ["0:00 FATIGUE", "0:25 LIVE JOIN", "1:00 CONTEXT", "1:30 MEMORY", "2:00 RELATIONSHIP", "2:30 SITES BUILD"],
+    theme: "theme-demo",
+    chapter: "THE ENTRY",
+  },
+  {
+    id: "finale",
+    eyebrow: "NEW ERA PRESENTATION / BUILD WEEK 2026",
+    eyebrowEn: "NEW ERA PRESENTATION / BUILD WEEK 2026",
+    title: "MAKE EVERY\nSLIDE\nANSWER BACK.",
+    titleEn: "MAKE EVERY\nSLIDE\nANSWER BACK.",
+    lead: "使い捨てのAIスライドではなく、参加する価値と記憶する価値のあるプレゼンを。",
+    leadEn: "Not more disposable AI slides. Build presentations worth joining and remembering.",
+    points: ["SCAN • JOIN • REACT • REMEMBER • RELATE"],
+    pointsEn: ["SCAN • JOIN • REACT • REMEMBER • RELATE"],
+    theme: "theme-finale",
+    chapter: "THE ASK",
+  },
+];
