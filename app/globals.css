@@ -1457,6 +1457,32 @@ a {
   cursor: pointer;
 }
 
+.admin-login-ids {
+  display: grid;
+  gap: 7px;
+  margin: 4px 0 20px;
+  padding: 16px;
+  color: #dce3d9;
+  background: #17191d;
+}
+.admin-login-ids span {
+  color: #c8ff51;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+.admin-login-ids code { font-size: 11px; }
+.auth-error { margin: 4px 0 0; color: #8d2d22; font-size: 11px; }
+.admin-logout {
+  margin-top: 6px;
+  padding: 10px 14px;
+  color: #fff;
+  border: 0;
+  background: #17191d;
+  cursor: pointer;
+}
+
 .consent-row {
   display: flex;
   align-items: flex-start;

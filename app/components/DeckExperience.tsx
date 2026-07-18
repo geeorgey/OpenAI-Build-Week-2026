@@ -142,7 +142,7 @@ function Visual({ slideIndex, language }: { slideIndex: number; language: Langua
   if (slide.id === "admin") {
     return (
       <div className="visual control-panel">
-        <div className="control-header"><span>CONTROL ROOM</span><b>y@lne.st ✓</b></div>
+        <div className="control-header"><span>CONTROL ROOM</span><b>3 IDS / PASSWORD ✓</b></div>
         {points.map((point, index) => (
           <div className={`control-row ${index === 0 ? "is-live" : ""}`} key={point}>
             <i /> <span>{point}</span><b>{index === 0 ? "ON" : "READY"}</b>
@@ -374,13 +374,8 @@ export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initial
   useEffect(() => {
     void fetch("/api/me")
       .then((response) => response.ok ? response.json() : null)
-      .then((payload: { identity?: { email?: string; provider?: string; verified?: boolean } } | null) => {
-        const identity = payload?.identity;
-        setIsLiveController(Boolean(
-          identity?.verified &&
-          identity.provider === "google" &&
-          identity.email?.toLowerCase() === "y@lne.st",
-        ));
+      .then((payload: { admin?: boolean } | null) => {
+        setIsLiveController(Boolean(payload?.admin));
       })
       .catch(() => undefined);
   }, []);

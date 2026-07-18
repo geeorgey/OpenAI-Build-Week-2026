@@ -17,12 +17,12 @@ export async function PresentationGate({ children }: { children: React.ReactNode
         </h1>
         <p className="surface-lead">
           {access.visibility === "private"
-            ? "主催者が公開するまで、少しお待ちください。管理者はGoogleでログインできます。"
+            ? "主催者が公開するまで、少しお待ちください。管理者は審査用IDとパスワードでログインできます。"
             : "主催者から共有されたパスワードを入力してください。"}
         </p>
         {access.visibility === "password"
           ? <AccessPrompt />
-          : <Link className="primary-action" style={{ display: "inline-block", marginTop: 28 }} href="/auth/google/start">管理者としてGoogle認証</Link>}
+          : <Link className="primary-action" style={{ display: "inline-block", marginTop: 28 }} href="/admin">管理者ログイン</Link>}
       </div>
     </main>
   );

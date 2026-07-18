@@ -17,6 +17,8 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
     readFile(new URL("app/globals.css", root), "utf8"),
   ]);
   assert.match(slides, /THE AI PRESENTATION FATIGUE/);
+  assert.match(slides, /プレゼンテーションは、\\n新時代へ。\\n観るものから、参加するものへ。/);
+  assert.match(slides, /QRから参加し、リアクションと対話がスライドに同期する。/);
   assert.match(slides, /CODEX × GPT IMAGE 2/);
   assert.match(slides, /FROM A PRESENTATION TO A RELATIONSHIP/);
   assert.match(deck, /mode="present"|mode: Mode/);
@@ -29,17 +31,26 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
 });
 
 test("authentication, admin boundaries, and Cloudflare email are wired", async () => {
-  const [admin, google, emailWorker, hosting, migration] = await Promise.all([
+  const [admin, adminAuth, auth, google, emailWorker, hosting, migration, readme] = await Promise.all([
     readFile(new URL("app/admin/page.tsx", root), "utf8"),
+    readFile(new URL("app/api/auth/admin/login/route.ts", root), "utf8"),
+    readFile(new URL("lib/auth.ts", root), "utf8"),
     readFile(new URL("app/auth/google/callback/route.ts", root), "utf8"),
     readFile(new URL("cloudflare-email-worker/src/index.ts", root), "utf8"),
     readFile(new URL(".openai/hosting.json", root), "utf8"),
     readFile(new URL("drizzle/0000_married_bloodaxe.sql", root), "utf8"),
+    readFile(new URL("README.md", root), "utf8"),
   ]);
-  assert.match(admin, /y@lne\.st/);
+  assert.match(admin, /ID \+ PASSWORD/);
+  assert.match(adminAuth, /ADMIN_PASSWORD/);
+  assert.match(auth, /testing@devpost\.com/);
+  assert.match(auth, /build-week-event@openai\.com/);
+  assert.match(auth, /identity\.provider === "admin"/);
   assert.match(google, /email_verified/);
+  assert.match(google, /location: "\/mypage"/);
   assert.match(emailWorker, /newEraPresentation@lvnsk\.jp/);
   assert.match(emailWorker, /List-Unsubscribe/);
   assert.match(hosting, /"d1": "DB"/);
   assert.match(migration, /CREATE TABLE `comments`/);
+  assert.doesNotMatch(readme, /Shared password:/);
 });

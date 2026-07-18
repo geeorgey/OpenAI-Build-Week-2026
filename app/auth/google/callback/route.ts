@@ -56,7 +56,7 @@ export async function GET(request: Request) {
   return new Response(null, {
     status: 302,
     headers: {
-      location: profile.email.toLowerCase() === "y@lne.st" ? "/admin" : "/mypage",
+      location: "/mypage",
       "set-cookie": `${session.cookie}, nep_google_state=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`,
     },
   });

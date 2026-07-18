@@ -1,8 +1,10 @@
 # New Era Presentation
 
-**AI made slides fast. We make them human.**
+**プレゼンテーションは、新時代へ。観るものから、参加するものへ。**
 
-[New Era Presentation](https://new-era-presentation.lvnsk.jp) is a live, participatory presentation medium built for **OpenAI Build Week 2026** with **Codex, GPT-5.6, and ChatGPT Sites**. The public source is available in the [Build Week repository](https://github.com/geeorgey/OpenAI-Build-Week-2026).
+*Presentations, reimagined. From watching to participating.*
+
+[New Era Presentation](https://new-era-presentation.lvnsk.jp) lets people join by QR while reactions and conversations stay synchronized to every slide. It is a participatory presentation medium built for **OpenAI Build Week 2026** with **Codex, GPT-5.6, and ChatGPT Sites**. The public source is available in the [Build Week repository](https://github.com/geeorgey/OpenAI-Build-Week-2026).
 
 ## Inspiration
 
@@ -22,7 +24,7 @@ New Era Presentation is an antithesis to that pattern. It does not use AI to mak
 - Anchors every stamp, comment, and question to the active slide
 - Moves the conversation rail to the matching comment group when the slide changes
 - Gives verified participants a personal reaction and comment history at `/mypage`
-- Restricts `/admin` to the Google-verified email `y@lne.st`
+- Protects `/admin` with an allowlisted Build Week ID and shared judging password
 - Lets the admin moderate comments and users, control public/password/private visibility, and send consent-based follow-up campaigns
 
 ## From a presentation to a relationship
@@ -56,7 +58,7 @@ flowchart LR
   S --> E["Cloudflare Email Worker"]
   E --> F["Email Service<br/>newEraPresentation@lvnsk.jp"]
   S --> M["My Page /mypage"]
-  S --> N["Admin /admin<br/>Google + y@lne.st only"]
+  S --> N["Admin /admin<br/>allowlisted ID + password"]
 ```
 
 ### Routes
@@ -79,8 +81,9 @@ flowchart LR
 | Email magic link | Yes | Delivered by the Cloudflare Email Worker |
 | Google OAuth | Yes | Uses only `openid email profile` |
 | Sign in with ChatGPT | Yes | Uses the dispatch-owned Sites sign-in flow |
+| Admin ID + password | Admin only | Owner plus the two official Build Week testing addresses |
 
-Admin authorization is enforced server-side: the identity must be Google-verified and the normalized email must equal `y@lne.st`.
+Admin authorization is enforced server-side. The normalized ID must be one of `y@lne.st`, `testing@devpost.com`, or `build-week-event@openai.com`, and the shared judging password must match the secret stored in the Sites runtime environment. Google authentication remains available for participant verification, but it does not grant admin access.
 
 ## Run locally
 
@@ -114,6 +117,7 @@ GOOGLE_CLIENT_ID
 GOOGLE_CLIENT_SECRET
 EMAIL_WORKER_URL
 EMAIL_WORKER_SECRET
+ADMIN_PASSWORD
 ```
 
 The Cloudflare Email Worker uses:
@@ -124,6 +128,12 @@ WORKER_SHARED_SECRET
 ```
 
 `EMAIL_WORKER_SECRET` and `WORKER_SHARED_SECRET` must contain the same high-entropy value. Never commit real credentials.
+
+## Build Week judge access
+
+The working demo is available at [`/admin`](https://new-era-presentation.lvnsk.jp/admin). Use one of the three allowlisted IDs documented above. The shared admin password is provided only through the private Devpost testing instructions and is deliberately absent from this public repository.
+
+The official rules require a private repository to be shared with `testing@devpost.com` and `build-week-event@openai.com`. This repository is public and MIT-licensed, so those same official addresses are instead used as the application-level judge IDs.
 
 ## Google OAuth setup
 
@@ -170,7 +180,7 @@ This project makes presentations worth joining and worth remembering.
 - Secrets are supplied only through deployment environment variables.
 - Session and magic-link tokens are stored as SHA-256 hashes.
 - OAuth state is checked before token exchange.
-- Admin authorization is enforced on both the page and API routes.
+- Admin ID/password authorization is enforced on both the page and API routes.
 - Marketing delivery requires opt-in and supports unsubscribe.
 - User content remains manageable through the restricted control room.
 

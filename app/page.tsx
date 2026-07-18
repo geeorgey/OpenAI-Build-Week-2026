@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "New Era Presentation — OpenAI Build Week",
   description:
-    "A presentation that remembers every reaction, question, and participant.",
+    "QRから参加し、リアクションと対話がスライドに同期する。Codex + GPT-5.6 + ChatGPT Sitesでつくった、参加型プレゼンテーション・メディア。",
 };
 
 type Props = {

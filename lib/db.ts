@@ -9,6 +9,7 @@ type RuntimeEnv = {
   EMAIL_WORKER_URL?: string;
   EMAIL_WORKER_SECRET?: string;
   APP_BASE_URL?: string;
+  ADMIN_PASSWORD?: string;
 };
 
 export function getRuntimeEnv(): RuntimeEnv {

@@ -5,13 +5,18 @@ export type Identity = {
   id: string;
   email: string | null;
   displayName: string;
-  provider: "guest" | "email" | "google" | "chatgpt";
+  provider: "guest" | "email" | "google" | "chatgpt" | "admin";
   verified: boolean;
   marketingOptIn: boolean;
 };
 
 const SESSION_COOKIE = "nep_session";
 const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
+export const ADMIN_EMAILS = new Set([
+  "y@lne.st",
+  "testing@devpost.com",
+  "build-week-event@openai.com",
+]);
 
 function parseCookie(cookieHeader: string | null, name: string) {
   if (!cookieHeader) return null;
@@ -23,6 +28,10 @@ function parseCookie(cookieHeader: string | null, name: string) {
 }
 
 export async function getIdentityFromRequest(request: Request): Promise<Identity | null> {
+  const token = parseCookie(request.headers.get("cookie"), SESSION_COOKIE);
+  const sessionIdentity = token ? await getIdentityByToken(token) : null;
+  if (sessionIdentity?.provider === "admin") return sessionIdentity;
+
   const chatGptEmail = request.headers.get("oai-authenticated-user-email");
   if (chatGptEmail) {
     const encodedName = request.headers.get("oai-authenticated-user-full-name");
@@ -37,12 +46,15 @@ export async function getIdentityFromRequest(request: Request): Promise<Identity
     };
   }
 
-  const token = parseCookie(request.headers.get("cookie"), SESSION_COOKIE);
-  if (!token) return null;
-  return getIdentityByToken(token);
+  return sessionIdentity;
 }
 
 export async function getServerIdentity(): Promise<Identity | null> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(SESSION_COOKIE)?.value;
+  const sessionIdentity = token ? await getIdentityByToken(token) : null;
+  if (sessionIdentity?.provider === "admin") return sessionIdentity;
+
   const requestHeaders = await headers();
   const chatGptEmail = requestHeaders.get("oai-authenticated-user-email");
   if (chatGptEmail) {
@@ -58,10 +70,7 @@ export async function getServerIdentity(): Promise<Identity | null> {
     };
   }
 
-  const cookieStore = await cookies();
-  const token = cookieStore.get(SESSION_COOKIE)?.value;
-  if (!token) return null;
-  return getIdentityByToken(token);
+  return sessionIdentity;
 }
 
 async function getIdentityByToken(token: string): Promise<Identity | null> {
@@ -96,7 +105,7 @@ async function getIdentityByToken(token: string): Promise<Identity | null> {
 export async function createVerifiedSession(input: {
   email: string;
   displayName: string;
-  provider: "email" | "google" | "chatgpt";
+  provider: "email" | "google" | "chatgpt" | "admin";
   marketingOptIn?: boolean;
 }) {
   const database = getDatabase();
@@ -139,6 +148,18 @@ export async function createVerifiedSession(input: {
   };
 }
 
+export async function createAdminSession(email: string) {
+  const normalizedEmail = email.trim().toLowerCase();
+  if (!ADMIN_EMAILS.has(normalizedEmail)) {
+    throw new Error("Email is not authorized for administration.");
+  }
+  return createVerifiedSession({
+    email: normalizedEmail,
+    displayName: normalizedEmail === "y@lne.st" ? "New Era Presentation Admin" : "Build Week Judge",
+    provider: "admin",
+  });
+}
+
 export async function upsertIdentity(identity: Identity) {
   if (!identity.verified || !identity.email) return;
   const database = getDatabase();
@@ -162,9 +183,10 @@ export async function upsertIdentity(identity: Identity) {
 export function isAdmin(identity: Identity | null) {
   return Boolean(
     identity &&
-    identity.provider === "google" &&
+    identity.provider === "admin" &&
     identity.verified &&
-    identity.email?.toLowerCase() === "y@lne.st",
+    identity.email &&
+    ADMIN_EMAILS.has(identity.email.toLowerCase()),
   );
 }
 

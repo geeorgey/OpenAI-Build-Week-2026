@@ -26,7 +26,7 @@ export async function GET() {
 export async function PATCH(request: Request) {
   const identity = await getIdentityFromRequest(request);
   if (!isAdmin(identity)) {
-    return Response.json({ error: "Google認証済みの y@lne.st のみ操作できます。" }, { status: 403 });
+    return Response.json({ error: "管理者IDとパスワードでのログインが必要です。" }, { status: 403 });
   }
   const payload = await request.json() as {
     visibility?: "public" | "password" | "private";

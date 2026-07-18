@@ -27,21 +27,21 @@ export async function generateMetadata(): Promise<Metadata> {
       template: "%s — New Era Presentation",
     },
     description:
-      "Not more disposable AI slides. Build presentations worth joining and remembering—with Codex, GPT-5.6, ChatGPT Sites, and Cloudflare.",
+      "QRから参加し、リアクションと対話がスライドに同期する。Codex + GPT-5.6 + ChatGPT Sitesでつくった、参加型プレゼンテーション・メディア。",
     icons: {
       icon: "/favicon.svg",
       shortcut: "/favicon.svg",
     },
     openGraph: {
-      title: "New Era Presentation",
-      description: "AI made slides fast. We make them human.",
+      title: "プレゼンテーションは、新時代へ。",
+      description: "観るものから、参加するものへ。",
       type: "website",
       images: [{ url: socialImage, width: 1729, height: 910, alt: "New Era Presentation — OpenAI Build Week 2026" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "New Era Presentation",
-      description: "AI made slides fast. We make them human.",
+      title: "プレゼンテーションは、新時代へ。",
+      description: "観るものから、参加するものへ。",
       images: [socialImage],
     },
   };
