@@ -68,5 +68,5 @@ H.264/AAC, 48 kHz stereo, and approximately `-16.3 LUFS`. The final narration
 was transcribed again with `gpt-4o-mini-transcribe` to confirm that the spoken
 output matches the English script.
 
-The remaining external submission step is to upload the final MP4 as a public
-YouTube video and add its URL to the Devpost entry.
+The final public YouTube demo is:
+https://www.youtube.com/watch?v=oDUv_vl-CeQ

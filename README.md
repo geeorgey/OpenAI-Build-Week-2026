@@ -171,12 +171,13 @@ The demo should show the real path in under three minutes:
 `AI presentation fatigue → live QR join → stamp/comment → slide-linked conversation → reveal the live application → prove one Sites project powers five experiences → personal memory → relationship follow-up`
 
 The English submission video, narration source, captions, and reproducible
-Remotion project are in [`video/`](video/). The finished demo is 2:49 with
-English OpenAI text-to-speech narration and burned-in English captions.
+Remotion project are in [`video/`](video/). The finished demo is 2:41 with
+English OpenAI text-to-speech narration and burned-in English captions. The
+public demo is available on
+[YouTube](https://www.youtube.com/watch?v=oDUv_vl-CeQ).
 
-Before submission, add the required Codex feedback session ID to the Devpost
-project, upload the finished demo as a public YouTube video, and add that URL to
-Devpost.
+For judging, the Devpost entry must include the required Codex feedback session
+ID, public repository, live testing path, and judge-only admin credentials.
 
 ## Why it matters
 
