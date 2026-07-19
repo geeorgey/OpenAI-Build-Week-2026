@@ -176,8 +176,10 @@ English OpenAI text-to-speech narration and burned-in English captions. The
 public demo is available on
 [YouTube](https://www.youtube.com/watch?v=oDUv_vl-CeQ).
 
-For judging, the Devpost entry must include the required Codex feedback session
-ID, public repository, live testing path, and judge-only admin credentials.
+The completed OpenAI Build Week submission is published on
+[Devpost](https://devpost.com/software/new-era-presentation). It includes the
+required Codex feedback session ID, public repository, live testing path, and
+judge-only admin credentials.
 
 ## Why it matters
 
