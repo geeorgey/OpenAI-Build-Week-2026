@@ -41,6 +41,8 @@ const stamps = [
   { symbol: "❓", label: "質問" },
 ];
 
+const titleMotionVariants = ["drop", "mosaic", "slice", "rise", "focus", "scatter"] as const;
+
 const subscribeToOrigin = () => () => undefined;
 const emptyBranchCounts = () => Object.fromEntries(
   branchOptions.map((option) => [option.id, 0]),
@@ -51,6 +53,60 @@ function currentUrlSlideIndex() {
   const raw = Number(new URLSearchParams(window.location.search).get("slide"));
   if (!Number.isFinite(raw)) return 0;
   return Math.min(slides.length - 1, Math.max(0, raw - 1));
+}
+
+function TitleMotion({ title, slideIndex }: { title: string; slideIndex: number }) {
+  const variant = titleMotionVariants[slideIndex % titleMotionVariants.length];
+  let characterIndex = 0;
+
+  return (
+    <h1
+      className={`title-motion title-motion-${variant}`}
+      data-title-motion={variant}
+      aria-label={title.replaceAll("\n", " ")}
+    >
+      {title.split("\n").map((line, lineIndex) => {
+        const tokens = line.match(/([A-Za-z0-9][A-Za-z0-9+./:’'&-]*|\s+|.)/gu) ?? [];
+        return (
+          <span
+            className="title-line"
+            style={{ "--line-index": lineIndex } as React.CSSProperties}
+            aria-hidden="true"
+            key={`${line}-${lineIndex}`}
+          >
+            {tokens.map((token, tokenIndex) => {
+              if (/^\s+$/u.test(token)) {
+                return <span className="title-space" key={`space-${tokenIndex}`}>{token}</span>;
+              }
+
+              const isLatinWord = /^[A-Za-z0-9][A-Za-z0-9+./:’'&-]*$/u.test(token);
+              const characters = Array.from(token).map((character, tokenCharacterIndex) => {
+                const index = characterIndex++;
+                return (
+                  <span
+                    className="title-char"
+                    style={{
+                      "--char-index": index,
+                      "--char-skew": index % 2 ? "-8deg" : "8deg",
+                      "--char-shift": index % 2 ? "-.34em" : ".34em",
+                      "--char-tilt": index % 2 ? "-7deg" : "7deg",
+                    } as React.CSSProperties}
+                    key={`${character}-${tokenCharacterIndex}`}
+                  >
+                    {character}
+                  </span>
+                );
+              });
+
+              return isLatinWord
+                ? <span className="title-word" key={`${token}-${tokenIndex}`}>{characters}</span>
+                : characters;
+            })}
+          </span>
+        );
+      })}
+    </h1>
+  );
 }
 
 function Visual({ slideIndex, language }: { slideIndex: number; language: Language }) {
@@ -694,7 +750,10 @@ export function DeckExperience({
         <div className="slide-content">
           <div className="slide-copy">
             <span className="eyebrow">{language === "ja" ? slide.eyebrow : slide.eyebrowEn}</span>
-            <h1>{language === "ja" ? slide.title : slide.titleEn}</h1>
+            <TitleMotion
+              title={language === "ja" ? slide.title : slide.titleEn}
+              slideIndex={activeSlide}
+            />
             <p className="slide-lead">{language === "ja" ? slide.lead : slide.leadEn}</p>
             <div className="point-list">
               {points.map((point, index) => (

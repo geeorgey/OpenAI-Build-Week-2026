@@ -41,6 +41,14 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
   assert.doesNotMatch(web, /showGoogleBranding/);
   assert.match(deck, /showGoogleBranding && activeSlide === 0/);
   assert.match(deck, /New Era Presentation is a participatory presentation medium where audiences join by QR code to react,/);
+  assert.match(deck, /titleMotionVariants = \["drop", "mosaic", "slice", "rise", "focus", "scatter"\]/);
+  assert.match(deck, /data-title-motion=\{variant\}/);
+  assert.match(styles, /@keyframes titleDrop/);
+  assert.match(styles, /@keyframes titleMosaic/);
+  assert.match(styles, /@keyframes titleSlice/);
+  assert.match(styles, /@keyframes titleRise/);
+  assert.match(styles, /@keyframes titleFocus/);
+  assert.match(styles, /@keyframes titleScatter/);
   assert.match(join, /\/api\/branch-votes/);
   assert.match(join, /CHOOSE THE NEXT PATH/);
   assert.match(branchApi, /ON CONFLICT\(presentation_slug, slide_id, visitor_id\)/);

@@ -209,12 +209,66 @@ a {
 .slide-copy h1 {
   max-width: 760px;
   margin: 20px 0 22px;
-  white-space: pre-line;
   font-size: clamp(48px, 5.55vw, 92px);
   font-weight: 720;
   line-height: .94;
   letter-spacing: -.075em;
   text-wrap: balance;
+}
+
+.title-motion {
+  perspective: 900px;
+}
+
+.title-line {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.title-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.title-space {
+  white-space: pre;
+}
+
+.title-char {
+  display: inline-block;
+  transform-origin: 50% 75%;
+  will-change: transform, opacity, filter;
+}
+
+.title-motion-drop .title-char {
+  animation: titleDrop .48s cubic-bezier(.16, 1, .3, 1) calc(var(--char-index) * 7ms) both;
+}
+
+.title-motion-mosaic .title-char {
+  animation: titleMosaic .5s cubic-bezier(.2, .82, .2, 1) calc(var(--char-index) * 6ms) both;
+}
+
+.title-motion-slice .title-line {
+  clip-path: inset(0 100% 0 0);
+  animation: titleSlice .52s cubic-bezier(.2, .82, .2, 1) calc(var(--line-index) * 48ms) both;
+}
+
+.title-motion-rise .title-line {
+  overflow: clip;
+}
+
+.title-motion-rise .title-char {
+  animation: titleRise .46s cubic-bezier(.16, 1, .3, 1) calc(var(--char-index) * 7ms) both;
+}
+
+.title-motion-focus .title-char {
+  animation: titleFocus .5s cubic-bezier(.2, .8, .2, 1) calc(var(--char-index) * 6ms) both;
+}
+
+.title-motion-scatter .title-char {
+  animation: titleScatter .5s cubic-bezier(.16, 1, .3, 1) calc(var(--char-index) * 6ms) both;
 }
 
 .slide-lead {
@@ -1816,6 +1870,62 @@ a {
 @keyframes slideCopyIn {
   from { opacity: 0; transform: translateY(28px); filter: blur(7px); }
   to { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes titleDrop {
+  0% { opacity: 0; transform: translate3d(0, -.72em, 0) rotateX(-52deg); filter: blur(5px); }
+  68% { opacity: 1; transform: translate3d(0, .045em, 0) rotateX(4deg); filter: blur(0); }
+  100% { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes titleMosaic {
+  0% {
+    opacity: .18;
+    color: transparent;
+    background: var(--slide-accent);
+    box-shadow: 0 0 0 .04em var(--slide-accent);
+    transform: scale(.72) skewX(var(--char-skew));
+    filter: blur(4px);
+  }
+  45% {
+    opacity: .82;
+    color: transparent;
+    background: color-mix(in srgb, var(--slide-accent) 68%, white);
+  }
+  100% {
+    opacity: 1;
+    color: #fff;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes titleSlice {
+  0% { opacity: .25; clip-path: inset(0 100% 0 0); transform: translateX(-.18em); }
+  100% { opacity: 1; clip-path: inset(0); transform: none; }
+}
+
+@keyframes titleRise {
+  0% { opacity: 0; transform: translate3d(0, .78em, 0) rotate(3deg); }
+  75% { opacity: 1; transform: translate3d(0, -.035em, 0); }
+  100% { opacity: 1; transform: none; }
+}
+
+@keyframes titleFocus {
+  0% { opacity: 0; transform: scale(1.32); filter: blur(12px); }
+  60% { opacity: .9; filter: blur(1px); }
+  100% { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes titleScatter {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--char-shift), -.22em, 0) rotate(var(--char-tilt)) scale(.78);
+    filter: blur(4px);
+  }
+  100% { opacity: 1; transform: none; filter: none; }
 }
 
 @keyframes visualIn {
