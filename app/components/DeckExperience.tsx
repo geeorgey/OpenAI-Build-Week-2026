@@ -531,7 +531,7 @@ export function DeckExperience({
   showGoogleBranding?: boolean;
 }) {
   const [activeSlide, setActiveSlide] = useState(initialSlide);
-  const [language, setLanguage] = useState<Language>("ja");
+  const [language, setLanguage] = useState<Language>("en");
   const [comments, setComments] = useState<CommentItem[]>(starterComments);
   const [reactionBurst, setReactionBurst] = useState<{ symbol: string; key: number } | null>(null);
   const [pulse, setPulse] = useState(0);

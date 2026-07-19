@@ -35,6 +35,8 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
   assert.match(deck, /<InteractionRail[\s\S]*readOnly=\{mode === "present"\}/);
   assert.match(deck, /\{!readOnly && \(\s*<>[\s\S]*className="rail-actions"[\s\S]*className="stamp-row"[\s\S]*className=\{`composer/);
   assert.match(deck, /\/web\?slide=/);
+  assert.match(deck, /useState<Language>\("en"\)/);
+  assert.match(await readFile("app/layout.tsx", "utf8"), /<html lang="en">/);
   assert.match(deck, /BRANCH_REJOIN_SLIDE_ID/);
   assert.match(deck, /resolveBranchWinner/);
   assert.match(home, /showGoogleBranding/);
