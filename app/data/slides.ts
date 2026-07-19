@@ -213,7 +213,7 @@ export const slides: Slide[] = [
     id: "finale",
     eyebrow: "NEW ERA PRESENTATION / BUILD WEEK 2026",
     eyebrowEn: "NEW ERA PRESENTATION / BUILD WEEK 2026",
-    title: "SOFTWARE YOU\nCAN PRESENT.\nA PRESENTATION\nPEOPLE CAN USE.",
+    title: "プレゼンできる、\nソフトウェア。\n人が参加して使える、\nプレゼンテーション。",
     titleEn: "SOFTWARE YOU\nCAN PRESENT.\nA PRESENTATION\nPEOPLE CAN USE.",
     lead: "ChatGPT Sitesは、プレゼンのアイデアを、人が入り、変え、記憶し、その先へ続けられるプロダクトにした。",
     leadEn: "ChatGPT Sites turned a presentation idea into a product people can enter, influence, remember, and continue.",
