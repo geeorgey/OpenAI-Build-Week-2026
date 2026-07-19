@@ -18,6 +18,7 @@ New Era Presentation is an antithesis to that pattern. It does not use AI to mak
 
 - Presents a motion-rich, bilingual stage deck at `/`
 - Offers a self-paced web version at `/web`
+- Keeps a read-only, slide-synchronized QR and comment rail in PRESENT mode while audience input stays on `/join`
 - Lets an audience join from a QR code at `/join`
 - Supports guest, email, Google, and ChatGPT participation
 - Marks email, Google, and ChatGPT identities as verified

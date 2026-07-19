@@ -238,6 +238,7 @@ function InteractionRail({
   onStamp,
   pulse,
   language,
+  readOnly = false,
 }: {
   activeSlide: number;
   comments: CommentItem[];
@@ -245,6 +246,7 @@ function InteractionRail({
   onStamp: (symbol: string) => Promise<void>;
   pulse: number;
   language: Language;
+  readOnly?: boolean;
 }) {
   const [body, setBody] = useState("");
   const [displayName, setDisplayName] = useState("Guest");
@@ -271,7 +273,7 @@ function InteractionRail({
   };
 
   return (
-    <aside className={`interaction-rail ${pulse ? "rail-pulse" : ""}`}>
+    <aside className={`interaction-rail ${readOnly ? "is-read-only" : ""} ${pulse ? "rail-pulse" : ""}`}>
       <div className="rail-top">
         <div className="join-qr">
           <QRCodeSVG value={joinUrl} size={72} bgColor="transparent" fgColor="currentColor" level="M" />
@@ -308,44 +310,33 @@ function InteractionRail({
         )}
       </div>
 
-      <div className="stamp-row">
-        {stamps.map((stamp) => (
-          <button key={stamp.symbol} onClick={() => onStamp(stamp.symbol)} title={stamp.label} aria-label={stamp.label}>
-            {stamp.symbol}
-          </button>
-        ))}
-      </div>
+      {!readOnly && (
+        <>
+          <div className="stamp-row">
+            {stamps.map((stamp) => (
+              <button key={stamp.symbol} onClick={() => onStamp(stamp.symbol)} title={stamp.label} aria-label={stamp.label}>
+                {stamp.symbol}
+              </button>
+            ))}
+          </div>
 
-      <div className="composer">
-        <input value={displayName} onChange={(event) => setDisplayName(event.target.value)} aria-label="表示名" />
-        <textarea
-          value={body}
-          onChange={(event) => setBody(event.target.value)}
-          placeholder={language === "ja" ? "このスライドにコメント…" : "Comment on this slide…"}
-          maxLength={280}
-          onKeyDown={(event) => {
-            if ((event.metaKey || event.ctrlKey) && event.key === "Enter") void submit();
-          }}
-        />
-        <button onClick={() => void submit()} disabled={!body.trim() || sending}>
-          {sending ? "…" : language === "ja" ? "投稿する ↗" : "POST ↗"}
-        </button>
-      </div>
-    </aside>
-  );
-}
-
-function PresentJoinChip({ joinUrl, language }: { joinUrl: string; language: Language }) {
-  return (
-    <aside className="present-join-chip">
-      <div className="present-join-qr">
-        <QRCodeSVG value={joinUrl} size={72} bgColor="transparent" fgColor="currentColor" level="M" />
-      </div>
-      <div>
-        <span>LIVE / JOIN</span>
-        <b>{language === "ja" ? "投票・リアクションはこちら" : "Vote and react here"}</b>
-        <a href="/join">/join ↗</a>
-      </div>
+          <div className="composer">
+            <input value={displayName} onChange={(event) => setDisplayName(event.target.value)} aria-label="表示名" />
+            <textarea
+              value={body}
+              onChange={(event) => setBody(event.target.value)}
+              placeholder={language === "ja" ? "このスライドにコメント…" : "Comment on this slide…"}
+              maxLength={280}
+              onKeyDown={(event) => {
+                if ((event.metaKey || event.ctrlKey) && event.key === "Enter") void submit();
+              }}
+            />
+            <button onClick={() => void submit()} disabled={!body.trim() || sending}>
+              {sending ? "…" : language === "ja" ? "投稿する ↗" : "POST ↗"}
+            </button>
+          </div>
+        </>
+      )}
     </aside>
   );
 }
@@ -442,11 +433,6 @@ export function DeckExperience({
   const [branchRoundReady, setBranchRoundReady] = useState(true);
   const reactId = useId();
   const visitorId = `deck-${reactId.replaceAll(":", "")}`;
-  const joinUrl = useSyncExternalStore(
-    subscribeToOrigin,
-    () => `${window.location.origin}/join`,
-    () => "/join",
-  );
   const slide = slides[activeSlide];
   const points = language === "ja" ? slide.points : slide.pointsEn;
   const branchSlideIndex = slides.findIndex((item) => item.id === BRANCH_SLIDE_ID);
@@ -695,7 +681,6 @@ export function DeckExperience({
             {language === "ja" ? "EN" : "日本語"}
           </button>
         </header>
-        {mode === "present" && <PresentJoinChip joinUrl={joinUrl} language={language} />}
         {showGoogleBranding && activeSlide === 0 && (
           <aside className="google-branding-proof" aria-label="Application identity">
             <strong>New Era Presentation</strong>
@@ -753,16 +738,15 @@ export function DeckExperience({
         </footer>
         {reactionBurst && <div className="reaction-burst" key={reactionBurst.key}>{reactionBurst.symbol}</div>}
       </section>
-      {mode === "web" && (
-        <InteractionRail
-          activeSlide={activeSlide}
-          comments={comments}
-          onComment={onComment}
-          onStamp={onStamp}
-          pulse={pulse}
-          language={language}
-        />
-      )}
+      <InteractionRail
+        activeSlide={activeSlide}
+        comments={comments}
+        onComment={onComment}
+        onStamp={onStamp}
+        pulse={pulse}
+        language={language}
+        readOnly={mode === "present"}
+      />
       {mode === "web" && (
         <div className="web-mode-hint">
           <span>SELF-PACED</span>

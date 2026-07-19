@@ -32,7 +32,8 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
   assert.match(deck, /\/api\/comments/);
   assert.match(deck, /slideId/);
   assert.match(slides, /THE ROOM CHOOSES THE NEXT PATH/);
-  assert.match(deck, /mode === "web" && \(\s*<InteractionRail/);
+  assert.match(deck, /<InteractionRail[\s\S]*readOnly=\{mode === "present"\}/);
+  assert.match(deck, /\{!readOnly && \(\s*<>[\s\S]*className="stamp-row"[\s\S]*className="composer"/);
   assert.match(deck, /\/web\?slide=/);
   assert.match(deck, /BRANCH_REJOIN_SLIDE_ID/);
   assert.match(deck, /resolveBranchWinner/);
@@ -48,7 +49,8 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
   assert.match(layout, /New Era Presentation/);
   assert.doesNotMatch(layout, /Starter Project|codex-preview/);
   assert.match(styles, /\.join-qr svg[\s\S]*width:\s*100%[\s\S]*height:\s*100%/);
-  assert.match(styles, /\.deck-shell\.is-present-mode[\s\S]*display:\s*block/);
+  assert.match(styles, /\.interaction-rail\.is-read-only[\s\S]*grid-template-rows:\s*auto auto minmax\(0,\s*1fr\)/);
+  assert.doesNotMatch(styles, /\.deck-shell\.is-present-mode/);
 });
 
 test("authentication, admin boundaries, and Cloudflare email are wired", async () => {
