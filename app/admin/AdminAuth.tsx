@@ -20,12 +20,12 @@ export function AdminLoginForm() {
       });
       const payload = await response.json() as { error?: string };
       if (!response.ok) {
-        setStatus(payload.error ?? "ログインできませんでした。");
+        setStatus(payload.error ?? "Could not sign in.");
         return;
       }
       window.location.assign("/admin");
     } catch {
-      setStatus("通信に失敗しました。もう一度お試しください。");
+      setStatus("Connection failed. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -33,28 +33,28 @@ export function AdminLoginForm() {
 
   return (
     <form className="email-auth-form" onSubmit={login}>
-      <label className="sr-only" htmlFor="admin-email">管理者ID</label>
+      <label className="sr-only" htmlFor="admin-email">Admin ID</label>
       <input
         id="admin-email"
         type="email"
         value={email}
         onChange={(event) => setEmail(event.target.value)}
-        placeholder="管理者ID（メールアドレス）"
+        placeholder="Admin ID (email address)"
         autoComplete="username"
         required
       />
-      <label className="sr-only" htmlFor="admin-password">パスワード</label>
+      <label className="sr-only" htmlFor="admin-password">Password</label>
       <input
         id="admin-password"
         type="password"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
-        placeholder="審査用パスワード"
+        placeholder="Judging password"
         autoComplete="current-password"
         required
       />
       <button type="submit" disabled={submitting}>
-        {submitting ? "確認しています…" : "コントロールルームへ →"}
+        {submitting ? "CHECKING…" : "ENTER CONTROL ROOM →"}
       </button>
       {status && <p className="auth-error" role="alert">{status}</p>}
     </form>
@@ -72,7 +72,7 @@ export function AdminLogoutButton() {
 
   return (
     <button className="admin-logout" type="button" onClick={() => void logout()} disabled={submitting}>
-      {submitting ? "終了中…" : "管理者ログアウト"}
+      {submitting ? "SIGNING OUT…" : "ADMIN SIGN OUT"}
     </button>
   );
 }

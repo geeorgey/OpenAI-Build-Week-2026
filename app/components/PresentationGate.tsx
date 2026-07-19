@@ -13,16 +13,16 @@ export async function PresentationGate({ children }: { children: React.ReactNode
       <div className="surface-shell">
         <span className="surface-eyebrow">NEW ERA PRESENTATION / ACCESS</span>
         <h1 className="surface-title">
-          {access.visibility === "private" ? "ただいま非公開です。" : "限られた人だけの、プレゼンです。"}
+          {access.visibility === "private" ? "This presentation is private." : "This presentation has limited access."}
         </h1>
         <p className="surface-lead">
           {access.visibility === "private"
-            ? "主催者が公開するまで、少しお待ちください。管理者は審査用IDとパスワードでログインできます。"
-            : "主催者から共有されたパスワードを入力してください。"}
+            ? "Please wait until the host publishes it. Admins can enter with an allowlisted ID and judging password."
+            : "Enter the password shared by the host."}
         </p>
         {access.visibility === "password"
           ? <AccessPrompt />
-          : <Link className="primary-action" style={{ display: "inline-block", marginTop: 28 }} href="/admin">管理者ログイン</Link>}
+          : <Link className="primary-action" style={{ display: "inline-block", marginTop: 28 }} href="/admin">ADMIN LOGIN</Link>}
       </div>
     </main>
   );

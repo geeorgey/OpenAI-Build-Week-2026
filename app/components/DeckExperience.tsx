@@ -27,20 +27,38 @@ type CommentItem = {
   createdAt?: string;
 };
 
-const starterComments: CommentItem[] = [
-  { id: "c1", slideId: "ai-fatigue", displayName: "Mika", body: "量産型のAIプレゼンに飽きる感覚、まさにこれ。", verified: true, provider: "google" },
-  { id: "c2", slideId: "join", displayName: "Ken", body: "ゲストで一瞬、必要なら認証へ進めるのが良い。", verified: false },
-  { id: "c3", slideId: "context", displayName: "Aoi", body: "スライドが変わったらコメントも追従してほしかった！", verified: true, provider: "chatgpt" },
-  { id: "c4", slideId: "sites", displayName: "Riku", body: "Sitesの担当範囲が一枚で理解できた。", verified: true, provider: "email" },
-  { id: "c5", slideId: "cloudflare", displayName: "Nao", body: "メールだけCloudflareへ渡す境界が明快。", verified: true, provider: "google" },
-  { id: "c6", slideId: "buildweek", displayName: "Devpost Judge", body: "Working product + clear impact.", verified: true, provider: "google" },
-];
+const starterComments: Record<Language, CommentItem[]> = {
+  en: [
+    { id: "en-c1", slideId: "ai-fatigue", displayName: "Maya", body: "I have felt this sameness in almost every AI-generated deck.", verified: true, provider: "google" },
+    { id: "en-c2", slideId: "interaction", displayName: "Maya", body: "The audience is writing the presentation back.", verified: true, provider: "google" },
+    { id: "en-c3", slideId: "interaction", displayName: "Ken", body: "Can the room change what comes next?", verified: false },
+    { id: "en-c4", slideId: "interaction", displayName: "Sofia", body: "This is what live should feel like.", verified: true, provider: "chatgpt" },
+    { id: "en-c5", slideId: "interaction", displayName: "Leo", body: "I want to remember this slide later.", verified: true, provider: "email" },
+    { id: "en-c6", slideId: "context", displayName: "Aoi", body: "The conversation moved with the slide—context preserved.", verified: true, provider: "chatgpt" },
+    { id: "en-c7", slideId: "modes", displayName: "Devpost Judge", body: "Wait—this is one live Sites application?", verified: true, provider: "google" },
+    { id: "en-c8", slideId: "sites", displayName: "Riku", body: "Five surfaces from one Sites project is the real reveal.", verified: true, provider: "email" },
+    { id: "en-c9", slideId: "gpt-image", displayName: "Nao", body: "One comment reached the stage, memory, and admin.", verified: true, provider: "google" },
+    { id: "en-c10", slideId: "cloudflare", displayName: "Maya", body: "Clear boundary: Sites owns the product; Cloudflare delivers email.", verified: true, provider: "google" },
+  ],
+  ja: [
+    { id: "ja-c1", slideId: "ai-fatigue", displayName: "Mika", body: "量産型のAIプレゼンに飽きる感覚、まさにこれ。", verified: true, provider: "google" },
+    { id: "ja-c2", slideId: "interaction", displayName: "Mika", body: "聞き手がプレゼンに返事をしている。", verified: true, provider: "google" },
+    { id: "ja-c3", slideId: "interaction", displayName: "Ken", body: "会場の反応で次の話も変わる？", verified: false },
+    { id: "ja-c4", slideId: "interaction", displayName: "Sofia", body: "ライブはこういう体験であってほしい。", verified: true, provider: "chatgpt" },
+    { id: "ja-c5", slideId: "interaction", displayName: "Leo", body: "このスライドを後で振り返りたい。", verified: true, provider: "email" },
+    { id: "ja-c6", slideId: "context", displayName: "Aoi", body: "スライドと一緒に会話も移動して、文脈が残った。", verified: true, provider: "chatgpt" },
+    { id: "ja-c7", slideId: "modes", displayName: "Devpost Judge", body: "これ全部が1つのSitesアプリ？", verified: true, provider: "google" },
+    { id: "ja-c8", slideId: "sites", displayName: "Riku", body: "1つのSitesプロジェクトから5つの体験が生まれている。", verified: true, provider: "email" },
+    { id: "ja-c9", slideId: "gpt-image", displayName: "Nao", body: "1つのコメントが登壇画面、記憶、管理まで届いた。", verified: true, provider: "google" },
+    { id: "ja-c10", slideId: "cloudflare", displayName: "Mika", body: "プロダクトはSites、メール配送だけCloudflare。境界が明快。", verified: true, provider: "google" },
+  ],
+};
 
 const stamps = [
-  { symbol: "🔥", label: "刺さった" },
-  { symbol: "💡", label: "発見" },
-  { symbol: "👏", label: "共感" },
-  { symbol: "❓", label: "質問" },
+  { symbol: "🔥", label: "刺さった", labelEn: "Resonated" },
+  { symbol: "💡", label: "発見", labelEn: "Insight" },
+  { symbol: "👏", label: "共感", labelEn: "Agree" },
+  { symbol: "❓", label: "質問", labelEn: "Question" },
 ];
 
 const titleMotionVariants = ["drop", "mosaic", "slice", "rise", "focus", "scatter"] as const;
@@ -175,14 +193,15 @@ function Visual({ slideIndex, language }: { slideIndex: number; language: Langua
   }
 
   if (slide.id === "context") {
+    const contextItems = language === "ja"
+      ? ["04 · 「この会話へ移動」", "04 · 「文脈が残る」", "04 · 「自動スクロール」"]
+      : ["04 · “MOVE TO THIS THREAD”", "04 · “CONTEXT PRESERVED”", "04 · “AUTO-SCROLL”"];
     return (
       <div className="visual context-flow">
         <div className="mini-slide"><b>04</b><span>ACTIVE SLIDE</span></div>
         <div className="flow-line"><i /></div>
         <div className="mini-comments">
-          <span>04 · “この会話へ移動”</span>
-          <span>04 · “文脈が残る”</span>
-          <span>04 · “自動スクロール”</span>
+          {contextItems.map((item) => <span key={item}>{item}</span>)}
         </div>
       </div>
     );
@@ -190,9 +209,13 @@ function Visual({ slideIndex, language }: { slideIndex: number; language: Langua
 
   if (slide.id === "modes") {
     return (
-      <div className="visual mode-cards">
-        <div><small>01</small><b>PRESENT</b><span>speaker-led</span><i>← →</i></div>
-        <div><small>02</small><b>WEB</b><span>self-paced</span><i>SCROLL</i></div>
+      <div className="visual sites-constellation">
+        <div className="sites-core"><small>ONE PROJECT</small><strong>SITES</strong><span>SHARED STATE</span></div>
+        {["PRESENT", "WEB", "JOIN", "MY PAGE", "ADMIN"].map((item, index) => (
+          <div className="sites-surface" style={{ "--i": index } as React.CSSProperties} key={item}>
+            <i>0{index + 1}</i><b>{item}</b>
+          </div>
+        ))}
       </div>
     );
   }
@@ -232,17 +255,20 @@ function Visual({ slideIndex, language }: { slideIndex: number; language: Langua
     );
   }
 
-  if (slide.id === "sites" || slide.id === "cloudflare") {
-    const items = slide.id === "sites"
-      ? ["CODEX", "GPT-5.6", "SITES", "D1", "DEPLOY"]
-      : ["SITES", "PLUGIN", "WORKER", "EMAIL"];
+  if (slide.id === "sites") {
+    const items = [
+      ["05", "SURFACES"],
+      ["11", "API ROUTES"],
+      ["08", "D1 TABLES"],
+      ["04", "IDENTITY PATHS"],
+      ["01", "LIVE PRODUCT"],
+    ];
     return (
-      <div className="visual build-pipeline">
-        {items.map((item, index) => (
-          <div key={item}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <b>{item}</b>
-            {index < items.length - 1 && <i>→</i>}
+      <div className="visual sites-evidence">
+        {items.map(([value, label], index) => (
+          <div key={label} style={{ "--i": index } as React.CSSProperties}>
+            <strong>{value}</strong>
+            <span>{label}</span>
           </div>
         ))}
       </div>
@@ -251,30 +277,32 @@ function Visual({ slideIndex, language }: { slideIndex: number; language: Langua
 
   if (slide.id === "gpt-image") {
     return (
-      <div className="visual image-weave">
-        <div className="image-core"><small>CODEX</small><b>×</b><strong>GPT<br />IMAGE 2</strong></div>
-        {points.map((point, index) => (
-          <span key={point} style={{ "--i": index } as React.CSSProperties}>{point}</span>
-        ))}
+      <div className="visual state-cascade">
+        <div className="cascade-source"><small>AUDIENCE</small><b>/join</b><span>COMMENT + STAMP</span></div>
+        <div className="cascade-line"><i /></div>
+        <div className="cascade-core"><small>CHATGPT SITES</small><b>D1</b><span>SHARED STATE</span></div>
+        <div className="cascade-line cascade-line-out"><i /></div>
+        <div className="cascade-targets">
+          {["PRESENT · RESPOND NOW", "MY PAGE · REMEMBER", "ADMIN · UNDERSTAND"].map((item, index) => (
+            <span key={item} style={{ "--i": index } as React.CSSProperties}>{item}</span>
+          ))}
+        </div>
       </div>
     );
   }
 
-  if (slide.id === "google") {
+  if (slide.id === "cloudflare") {
     return (
-      <div className="visual google-steps">
-        {points.map((point, index) => (
-          <div key={point}><b>{index + 1}</b><span>{point.replace(/^\d+\.\s*/, "")}</span></div>
-        ))}
-      </div>
-    );
-  }
-
-  if (slide.id === "buildweek") {
-    return (
-      <div className="visual score-grid">
-        {points.map((point, index) => (
-          <div key={point}><strong>0{index + 1}</strong><span>{point}</span><i>25%</i></div>
+      <div className="visual build-loop">
+        {[
+          ["01", "CODEX + GPT-5.6", "DECIDE + BUILD"],
+          ["02", "GPT IMAGE 2", "VISUAL SYSTEM"],
+          ["03", "CHATGPT SITES", "ROUTES + D1 + AUTH + DEPLOY"],
+          ["04", "CLOUDFLARE", "EMAIL DELIVERY ONLY"],
+        ].map(([number, name, role], index) => (
+          <div key={name} style={{ "--i": index } as React.CSSProperties}>
+            <i>{number}</i><b>{name}</b><span>{role}</span>
+          </div>
         ))}
       </div>
     );
@@ -367,8 +395,12 @@ function InteractionRail({
       </div>
 
       <div className="comment-stream" ref={commentStreamRef} aria-live="polite">
-        {currentComments.length ? currentComments.map((comment) => (
-          <article className="comment-card" key={comment.id}>
+        {currentComments.length ? currentComments.map((comment, index) => (
+          <article
+            className="comment-card"
+            style={{ "--comment-index": Math.min(index, 5) } as React.CSSProperties}
+            key={comment.id}
+          >
             <header>
               <span className="avatar">{comment.displayName.slice(0, 1).toUpperCase()}</span>
               <b>{comment.displayName}</b>
@@ -390,7 +422,12 @@ function InteractionRail({
           <div className="rail-actions">
             <div className="stamp-row">
               {stamps.map((stamp) => (
-                <button key={stamp.symbol} onClick={() => onStamp(stamp.symbol)} title={stamp.label} aria-label={stamp.label}>
+                <button
+                  key={stamp.symbol}
+                  onClick={() => onStamp(stamp.symbol)}
+                  title={language === "ja" ? stamp.label : stamp.labelEn}
+                  aria-label={language === "ja" ? stamp.label : stamp.labelEn}
+                >
                   {stamp.symbol}
                 </button>
               ))}
@@ -429,7 +466,11 @@ function InteractionRail({
             >
               <X size={18} weight="bold" aria-hidden="true" />
             </button>
-            <input value={displayName} onChange={(event) => setDisplayName(event.target.value)} aria-label="表示名" />
+            <input
+              value={displayName}
+              onChange={(event) => setDisplayName(event.target.value)}
+              aria-label={language === "ja" ? "表示名" : "Display name"}
+            />
             <textarea
               ref={composerTextareaRef}
               value={body}
@@ -532,7 +573,7 @@ export function DeckExperience({
 }) {
   const [activeSlide, setActiveSlide] = useState(initialSlide);
   const [language, setLanguage] = useState<Language>("en");
-  const [comments, setComments] = useState<CommentItem[]>(starterComments);
+  const [liveComments, setLiveComments] = useState<CommentItem[]>([]);
   const [reactionBurst, setReactionBurst] = useState<{ symbol: string; key: number } | null>(null);
   const [pulse, setPulse] = useState(0);
   const [isLiveController, setIsLiveController] = useState(false);
@@ -545,6 +586,7 @@ export function DeckExperience({
   const visitorId = `deck-${reactId.replaceAll(":", "")}`;
   const slide = slides[activeSlide];
   const points = language === "ja" ? slide.points : slide.pointsEn;
+  const comments = [...starterComments[language], ...liveComments];
   const branchSlideIndex = slides.findIndex((item) => item.id === BRANCH_SLIDE_ID);
   const branchRejoinIndex = slides.findIndex((item) => item.id === BRANCH_REJOIN_SLIDE_ID);
 
@@ -754,7 +796,7 @@ export function DeckExperience({
         const response = await fetch("/api/comments");
         if (!response.ok) return;
         const payload = await response.json() as { comments?: CommentItem[] };
-        if (!cancelled && payload.comments?.length) setComments(payload.comments);
+        if (!cancelled) setLiveComments(payload.comments ?? []);
       } catch {
         // The seeded conversation keeps the deck useful before D1 is provisioned.
       }
@@ -775,7 +817,7 @@ export function DeckExperience({
       body,
       verified: false,
     };
-    setComments((items) => [...items, optimistic]);
+    setLiveComments((items) => [...items, optimistic]);
     try {
       const response = await fetch("/api/comments", {
         method: "POST",
@@ -785,7 +827,7 @@ export function DeckExperience({
       if (!response.ok) return;
       const payload = await response.json() as { comment?: CommentItem };
       if (payload.comment) {
-        setComments((items) => items.map((item) => item.id === optimistic.id ? payload.comment! : item));
+        setLiveComments((items) => items.map((item) => item.id === optimistic.id ? payload.comment! : item));
       }
     } catch {
       // The optimistic comment remains visible in the local demo.

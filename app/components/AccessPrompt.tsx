@@ -13,15 +13,15 @@ export function AccessPrompt() {
       body: JSON.stringify({ password }),
     });
     if (response.ok) window.location.reload();
-    else setError("パスワードが違います。");
+    else setError("That password is incorrect.");
   };
   return (
     <div className="join-panel" style={{ maxWidth: 560, marginTop: 34 }}>
       <span className="surface-eyebrow">PASSWORD PROTECTED</span>
-      <h2>限定公開プレゼン</h2>
+      <h2>Limited-access presentation</h2>
       <div className="email-auth-form">
-        <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="パスワード" />
-        <button onClick={() => void unlock()} disabled={!password}>プレゼンを開く ↗</button>
+        <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
+        <button onClick={() => void unlock()} disabled={!password}>OPEN PRESENTATION ↗</button>
         {error && <small>{error}</small>}
       </div>
     </div>

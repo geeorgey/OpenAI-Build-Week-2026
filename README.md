@@ -40,7 +40,7 @@ This project stores consented interest signals on ChatGPT Sites: participation, 
 
 Codex and GPT-5.6 were used as one continuous build environment:
 
-1. Turn the product thesis into an 18-scene branching narrative.
+1. Turn the product thesis into a 15-scene branching narrative.
 2. Design the stage, self-paced web mode, QR join surface, participant memory, and control room.
 3. Implement routes, responsive motion, authentication boundaries, and slide-aware interaction.
 4. Persist presentations, users, sessions, magic links, comments, reactions, and campaigns in Sites D1.
@@ -164,11 +164,11 @@ Magic links expire after 15 minutes. Campaign mail includes consent language and
 
 ## Build Week scope and judging notes
 
-The underlying observation came from building earlier presentation decks. This repository and its working implementation were created during the Build Week submission period. The new work includes the product narrative, 18-scene branching visual system, dual-mode deck, QR participation, D1 persistence, slide-linked interaction, live four-choice routing, four identity paths, participant memory, restricted admin control room, access modes, campaign workflow, Cloudflare email extension, tests, and production deployment.
+The underlying observation came from building earlier presentation decks. This repository and its working implementation were created during the Build Week submission period. The new work includes the product narrative, 15-scene branching visual system, dual-mode deck, QR participation, D1 persistence, slide-linked interaction, live four-choice routing, four identity paths, participant memory, restricted admin control room, access modes, campaign workflow, Cloudflare email extension, tests, and production deployment.
 
 The demo should show the real path in under three minutes:
 
-`AI presentation fatigue → live QR join → stamp/comment → slide-linked conversation → personal memory → relationship follow-up → Codex + GPT-5.6 + Sites build`
+`AI presentation fatigue → live QR join → stamp/comment → slide-linked conversation → reveal the live application → prove one Sites project powers five experiences → personal memory → relationship follow-up`
 
 The English submission video, narration source, captions, and reproducible
 Remotion project are in [`video/`](video/). The finished demo is 2:49 with

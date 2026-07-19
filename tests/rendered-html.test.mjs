@@ -25,7 +25,12 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
   assert.match(slides, /THE AI PRESENTATION FATIGUE/);
   assert.match(slides, /プレゼンテーションは、\\n新時代へ。\\n観るものから、\\n参加するものへ。/);
   assert.match(slides, /QRから参加し、リアクションと対話がスライドに同期する。/);
-  assert.match(slides, /CODEX × GPT IMAGE 2/);
+  assert.match(slides, /THIS IS NOT\\nA DECK\.\\nIT’S A LIVE APP\./);
+  assert.match(slides, /ONE SITES PROJECT|one Sites project/);
+  assert.match(slides, /5 SURFACES/);
+  assert.match(slides, /11 API ROUTES/);
+  assert.match(slides, /8 D1 TABLES/);
+  assert.match(slides, /SOFTWARE YOU\\nCAN PRESENT/);
   assert.match(slides, /FROM A PRESENTATION TO A RELATIONSHIP/);
   assert.match(deck, /mode="present"|mode: Mode/);
   assert.match(deck, /initialSlide/);
@@ -66,6 +71,8 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
   assert.match(styles, /@keyframes titleScatter/);
   assert.match(join, /\/api\/branch-votes/);
   assert.match(join, /CHOOSE THE NEXT PATH/);
+  assert.match(join, /Choose how to participate/);
+  assert.match(join, /POST TO SLIDE/);
   assert.match(branchApi, /ON CONFLICT\(presentation_slug, slide_id, visitor_id\)/);
   assert.match(branching, /count > highestCount/);
   assert.match(migration, /CREATE TABLE `branch_votes`/);

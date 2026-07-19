@@ -21,13 +21,13 @@ export default async function MyPage() {
         <SurfaceNav />
         <div className="surface-shell">
           <span className="surface-eyebrow">MY PRESENTATION MEMORY</span>
-          <h1 className="surface-title">思考の履歴は、<br />認証した人のもの。</h1>
-          <p className="surface-lead">Google、ChatGPT、またはメールで認証すると、スタンプとコメントを自分の記憶として保存できます。</p>
+          <h1 className="surface-title">Your thinking deserves<br />a place to return to.</h1>
+          <p className="surface-lead">Verify with Google, ChatGPT, or email to save every stamp and comment as your personal presentation memory.</p>
           <div className="join-panel" style={{ marginTop: 36, maxWidth: 660 }}>
             <div className="identity-options">
-              <Link className="identity-option" href="/auth/google/start"><span>G</span><div><b>Google で認証</b><small>Googleアカウントで続ける</small></div><em>✓ VERIFIED</em></Link>
-              <Link className="identity-option" href="/auth/chatgpt/complete"><span>◉</span><div><b>ChatGPT で認証</b><small>Sign in with ChatGPT</small></div><em>✓ VERIFIED</em></Link>
-              <Link className="identity-option" href="/join"><span>@</span><div><b>メールで認証</b><small>/join からマジックリンクを受け取る</small></div><em>✓ VERIFIED</em></Link>
+              <Link className="identity-option" href="/auth/google/start"><span>G</span><div><b>Verify with Google</b><small>Continue with your Google account</small></div><em>✓ VERIFIED</em></Link>
+              <Link className="identity-option" href="/auth/chatgpt/complete"><span>◉</span><div><b>Verify with ChatGPT</b><small>Sign in with ChatGPT</small></div><em>✓ VERIFIED</em></Link>
+              <Link className="identity-option" href="/join"><span>@</span><div><b>Verify with email</b><small>Receive a magic link from /join</small></div><em>✓ VERIFIED</em></Link>
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@ export default async function MyPage() {
       <SurfaceNav />
       <div className="surface-shell">
         <span className="surface-eyebrow">MY PRESENTATION MEMORY / VERIFIED</span>
-        <h1 className="surface-title">{identity.displayName}さんの<br />プレゼン記憶。</h1>
+        <h1 className="surface-title">{identity.displayName}&apos;s<br />presentation memory.</h1>
         <div className="verified-banner" style={{ maxWidth: 560 }}>
           <span>✓</span>
           <div><b>{identity.email}</b><small>{identity.provider.toUpperCase()} VERIFIED</small></div>
@@ -68,16 +68,16 @@ export default async function MyPage() {
           <section className="profile-panel">
             <span className="panel-kicker">STAMPS</span>
             <strong className="panel-number">{reactionsResult.results.length}</strong>
-            <p>スライドに置いたリアクション</p>
+            <p>Reactions left on a specific slide</p>
           </section>
           <section className="profile-panel">
             <span className="panel-kicker">COMMENTS</span>
             <strong className="panel-number">{commentsResult.results.length}</strong>
-            <p>文脈と一緒に残したコメント</p>
+            <p>Comments saved with their context</p>
           </section>
           <section className="profile-panel full">
             <span className="panel-kicker">YOUR TIMELINE</span>
-            <h2>どこで、何を感じたか。</h2>
+            <h2>What moved you—and where.</h2>
             <div className="activity-list">
               {activities.length ? activities.map((item, index) => {
                 const slideIndex = slides.findIndex((slide) => slide.id === item.slideId);
@@ -87,12 +87,12 @@ export default async function MyPage() {
                     <span>{item.type === "reaction" ? item.stamp : "💬"}</span>
                     <div>
                       <b>SLIDE {String(slideIndex + 1).padStart(2, "0")} · {slide.chapter}</b>
-                      <p>{item.type === "comment" ? item.body : `${item.stamp} を置きました`}</p>
+                      <p>{item.type === "comment" ? item.body : `${item.stamp} added to this slide`}</p>
                     </div>
                     <small>{item.createdAt.slice(0, 16).replace("T", " ")}</small>
                   </Link>
                 );
-              }) : <p>認証後のスタンプとコメントが、ここに時系列で並びます。</p>}
+              }) : <p>Your verified stamps and comments will appear here as a slide-linked timeline.</p>}
             </div>
           </section>
         </div>

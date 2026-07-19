@@ -17,10 +17,10 @@ type Identity = {
 };
 
 const stamps = [
-  { symbol: "🔥", label: "刺さった" },
-  { symbol: "💡", label: "発見" },
-  { symbol: "👏", label: "共感" },
-  { symbol: "❓", label: "質問" },
+  { symbol: "🔥", label: "Resonated" },
+  { symbol: "💡", label: "Insight" },
+  { symbol: "👏", label: "Agree" },
+  { symbol: "❓", label: "Question" },
 ];
 
 export function JoinExperience() {
@@ -93,18 +93,18 @@ export function JoinExperience() {
   }, [visitorId]);
 
   const startEmail = async () => {
-    setEmailStatus("送信中…");
+    setEmailStatus("Sending…");
     const response = await fetch("/api/auth/email/start", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, marketingOptIn }),
     });
     const payload = await response.json() as { message?: string; error?: string };
-    setEmailStatus(response.ok ? payload.message ?? "メールを送信しました。" : payload.error ?? "送信できませんでした。");
+    setEmailStatus(response.ok ? payload.message ?? "Verification email sent." : payload.error ?? "Could not send the email.");
   };
 
   const react = async (stamp: string) => {
-    setSent(`${stamp} をスライド ${currentSlide} に置きました`);
+    setSent(`${stamp} added to slide ${currentSlide}`);
     await fetch("/api/reactions", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -123,12 +123,12 @@ export function JoinExperience() {
         displayName: identity?.displayName || guestName || "Guest",
       }),
     });
-    setSent(response.ok ? `スライド ${currentSlide} にコメントしました` : "コメントを送信できませんでした");
+    setSent(response.ok ? `Comment added to slide ${currentSlide}` : "Could not send the comment");
     if (response.ok) setComment("");
   };
 
   const vote = async (optionId: string) => {
-    setVoteStatus("投票を送信中…");
+    setVoteStatus("Sending your vote…");
     const response = await fetch("/api/branch-votes", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -140,13 +140,13 @@ export function JoinExperience() {
       error?: string;
     };
     if (!response.ok) {
-      setVoteStatus(payload.error ?? "投票できませんでした。");
+      setVoteStatus(payload.error ?? "Could not submit your vote.");
       return;
     }
     setBranchCounts((counts) => ({ ...counts, ...payload.counts }));
     setSelectedBranch(payload.selectedOptionId ?? optionId);
     const option = branchOptions.find((item) => item.id === optionId);
-    setVoteStatus(`${option?.shortLabel ?? optionId} に投票しました。変更もできます。`);
+    setVoteStatus(`Voted for ${option?.shortLabelEn ?? optionId}. You can change your vote.`);
   };
 
   const joined = Boolean(identity || guest);
@@ -157,9 +157,9 @@ export function JoinExperience() {
     <div className="join-layout">
       <section className="live-slide-card">
         <div className="live-status"><i /> LIVE / SLIDE {String(currentSlide).padStart(2, "0")}</div>
-        <small>{slide.eyebrow}</small>
-        <h2>{slide.title}</h2>
-        <p>{slide.lead}</p>
+        <small>{slide.eyebrowEn}</small>
+        <h2>{slide.titleEn}</h2>
+        <p>{slide.leadEn}</p>
       </section>
 
       <section className="join-panel">
@@ -168,42 +168,42 @@ export function JoinExperience() {
             <span>✓</span>
             <div>
               <b>{identity.displayName}</b>
-              <small>{identity.provider.toUpperCase()} VERIFIED · 投稿はマイページに残ります</small>
+              <small>{identity.provider.toUpperCase()} VERIFIED · Your activity will stay on My Page</small>
             </div>
           </div>
         ) : guest ? (
           <div className="verified-banner" style={{ background: "#4d4e49" }}>
             <span style={{ background: "#fff" }}>◎</span>
             <div>
-              <b>ゲスト参加中</b>
-              <small>すぐ参加できます。履歴保存には認証が必要です。</small>
+              <b>Participating as a guest</b>
+              <small>React instantly. Verify your identity to save your history.</small>
             </div>
           </div>
         ) : (
           <>
             <span className="surface-eyebrow">CHOOSE HOW TO JOIN</span>
-            <h2>参加方法を選ぶ</h2>
-            <p className="surface-lead">見るだけならゲストで一瞬。認証すると、終了後も自分の反応とコメントを振り返れます。</p>
+            <h2>Choose how to participate</h2>
+            <p className="surface-lead">Join instantly as a guest, or verify your identity to revisit every reaction and comment later.</p>
 
             <div className="identity-options">
               <button className="identity-option" onClick={() => setGuest(true)}>
-                <span>◎</span><div><b>ゲストで参加</b><small>名前だけ・履歴は端末内</small></div>
+                <span>◎</span><div><b>Continue as guest</b><small>Instant access · local history only</small></div>
               </button>
               <Link className="identity-option" href="/auth/google/start">
-                <span>G</span><div><b>Google で参加</b><small>Googleアカウントで認証</small></div><em>✓ VERIFIED</em>
+                <span>G</span><div><b>Continue with Google</b><small>Verify with your Google account</small></div><em>✓ VERIFIED</em>
               </Link>
               <Link className="identity-option" href="/auth/chatgpt/complete">
-                <span>◉</span><div><b>ChatGPT で参加</b><small>Sign in with ChatGPT</small></div><em>✓ VERIFIED</em>
+                <span>◉</span><div><b>Continue with ChatGPT</b><small>Sign in with ChatGPT</small></div><em>✓ VERIFIED</em>
               </Link>
             </div>
 
             <div className="email-auth-form">
-              <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="メールアドレスで認証" />
+              <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Verify with your email address" />
               <label className="consent-row">
                 <input type="checkbox" checked={marketingOptIn} onChange={(event) => setMarketingOptIn(event.target.checked)} />
-                このプレゼンに関連する資料・次回案内のメールを受け取る（いつでも解除できます）
+                Send me relevant resources and future presentation updates. I can unsubscribe at any time.
               </label>
-              <button onClick={() => void startEmail()} disabled={!email}>認証リンクを受け取る ↗</button>
+              <button onClick={() => void startEmail()} disabled={!email}>SEND VERIFICATION LINK ↗</button>
               {emailStatus && <small>{emailStatus}</small>}
             </div>
           </>
@@ -213,14 +213,14 @@ export function JoinExperience() {
           <>
             {!identity && (
               <div className="join-composer">
-                <input value={guestName} onChange={(event) => setGuestName(event.target.value)} placeholder="表示名" maxLength={40} />
+                <input value={guestName} onChange={(event) => setGuestName(event.target.value)} placeholder="Display name" maxLength={40} />
               </div>
             )}
             {isBranchSlide && (
               <div className="join-branch-vote">
                 <span className="surface-eyebrow">CHOOSE THE NEXT PATH</span>
-                <h3>次に見たいテーマへ投票</h3>
-                <p>最多票のルートへ、登壇者が次に進んだ瞬間に分岐します。</p>
+                <h3>Vote for what comes next</h3>
+                <p>When the presenter advances, the room follows the most popular route.</p>
                 <div className="join-branch-options">
                   {branchOptions.map((option, index) => {
                     const count = Math.max(0, Number(branchCounts[option.id]) || 0);
@@ -232,12 +232,12 @@ export function JoinExperience() {
                         onClick={() => void vote(option.id)}
                       >
                         <i>{String.fromCharCode(65 + index)}</i>
-                        <span><b>{option.label}</b><small>{count}票</small></span>
+                        <span><b>{option.labelEn}</b><small>{count} {count === 1 ? "vote" : "votes"}</small></span>
                       </button>
                     );
                   })}
                 </div>
-                <small>{voteStatus || `${branchTotal}票をリアルタイム集計中 · 同数はA→Dの順で決定`}</small>
+                <small>{voteStatus || `${branchTotal} votes live · ties resolve in stable A → D order`}</small>
               </div>
             )}
             <div className="join-composer">
@@ -249,8 +249,8 @@ export function JoinExperience() {
                   </button>
                 ))}
               </div>
-              <textarea value={comment} onChange={(event) => setComment(event.target.value)} placeholder="いまのスライドにコメント…" maxLength={280} />
-              <button onClick={() => void post()} disabled={!comment.trim()}>スライド {currentSlide} に投稿 ↗</button>
+              <textarea value={comment} onChange={(event) => setComment(event.target.value)} placeholder="Comment on the current slide…" maxLength={280} />
+              <button onClick={() => void post()} disabled={!comment.trim()}>POST TO SLIDE {currentSlide} ↗</button>
               {sent && <small>{sent}</small>}
             </div>
           </>

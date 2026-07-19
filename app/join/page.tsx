@@ -17,8 +17,8 @@ export default function JoinPage() {
         <SurfaceNav />
         <div className="surface-shell">
           <span className="surface-eyebrow">LIVE PARTICIPATION / JOIN</span>
-          <h1 className="surface-title">いまのスライドに、<br />あなたの反応を。</h1>
-          <p className="surface-lead">スタンプもコメントも、投稿された瞬間のスライドに結びつきます。</p>
+          <h1 className="surface-title">React to the slide.<br />Shape the room.</h1>
+          <p className="surface-lead">Every stamp, comment, and vote stays connected to the slide that sparked it.</p>
           <JoinExperience />
         </div>
       </main>

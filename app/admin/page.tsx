@@ -21,15 +21,15 @@ export default async function AdminPage() {
         <SurfaceNav />
         <div className="surface-shell">
           <span className="surface-eyebrow">CONTROL ROOM / ID + PASSWORD</span>
-          <h1 className="surface-title">管理画面は、<br />審査員と主催者だけに。</h1>
-          <p className="surface-lead">Build Week審査用のIDとパスワードで保護しています。主催者と公式審査アドレスだけがアクセスできます。</p>
+          <h1 className="surface-title">The control room is<br />for reviewers and hosts.</h1>
+          <p className="surface-lead">This Build Week control room is protected by an allowlisted ID and judging password.</p>
           <div className="join-panel" style={{ marginTop: 36, maxWidth: 660 }}>
             {identity ? (
               <div className="verified-banner" style={{ background: "#6a3329" }}>
-                <span>!</span><div><b>このセッションには管理権限がありません</b><small>{identity.email} / {identity.provider.toUpperCase()}</small></div>
+                <span>!</span><div><b>This session does not have admin access</b><small>{identity.email} / {identity.provider.toUpperCase()}</small></div>
               </div>
             ) : null}
-            <div className="admin-login-ids" aria-label="管理画面へログインできるID">
+            <div className="admin-login-ids" aria-label="Authorized control room IDs">
               <span>AUTHORIZED IDS</span>
               <code>y@lne.st</code>
               <code>testing@devpost.com</code>
@@ -47,7 +47,7 @@ export default async function AdminPage() {
       <SurfaceNav />
       <div className="surface-shell">
         <span className="surface-eyebrow">CONTROL ROOM / {identity.email}</span>
-        <h1 className="surface-title">公開、対話、配信。<br />全部ここから。</h1>
+        <h1 className="surface-title">Publishing, conversation,<br />and follow-up. One room.</h1>
         <AdminLogoutButton />
         <AdminConsole />
       </div>
