@@ -84,6 +84,19 @@ const schemaStatements = [
     FOREIGN KEY(user_id) REFERENCES users(id)
   )`,
   `CREATE INDEX IF NOT EXISTS reactions_slide_idx ON reactions(presentation_slug, slide_id, stamp)`,
+  `CREATE TABLE IF NOT EXISTS branch_votes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    presentation_slug TEXT NOT NULL DEFAULT 'build-week',
+    slide_id TEXT NOT NULL,
+    option_id TEXT NOT NULL,
+    visitor_id TEXT NOT NULL,
+    user_id TEXT,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  )`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS branch_votes_visitor_idx ON branch_votes(presentation_slug, slide_id, visitor_id)`,
+  `CREATE INDEX IF NOT EXISTS branch_votes_option_idx ON branch_votes(presentation_slug, slide_id, option_id)`,
   `CREATE TABLE IF NOT EXISTS campaigns (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     subject TEXT NOT NULL,

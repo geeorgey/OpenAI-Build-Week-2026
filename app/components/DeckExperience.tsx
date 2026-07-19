@@ -3,6 +3,14 @@
 import { QRCodeSVG } from "qrcode.react";
 import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
+import {
+  BRANCH_REJOIN_SLIDE_ID,
+  BRANCH_SLIDE_ID,
+  branchOptions,
+  isBranchTargetSlide,
+  resolveBranchWinner,
+  type BranchCounts,
+} from "../../lib/branching";
 import { slides } from "../data/slides";
 
 type Mode = "present" | "web";
@@ -34,6 +42,9 @@ const stamps = [
 ];
 
 const subscribeToOrigin = () => () => undefined;
+const emptyBranchCounts = () => Object.fromEntries(
+  branchOptions.map((option) => [option.id, 0]),
+) as BranchCounts;
 
 function currentUrlSlideIndex() {
   if (typeof window === "undefined") return 0;
@@ -324,6 +335,92 @@ function InteractionRail({
   );
 }
 
+function PresentJoinChip({ joinUrl, language }: { joinUrl: string; language: Language }) {
+  return (
+    <aside className="present-join-chip">
+      <div className="present-join-qr">
+        <QRCodeSVG value={joinUrl} size={72} bgColor="transparent" fgColor="currentColor" level="M" />
+      </div>
+      <div>
+        <span>LIVE / JOIN</span>
+        <b>{language === "ja" ? "投票・リアクションはこちら" : "Vote and react here"}</b>
+        <a href="/join">/join ↗</a>
+      </div>
+    </aside>
+  );
+}
+
+function BranchPanel({
+  mode,
+  language,
+  counts,
+  selectedOptionId,
+  notice,
+  onSelect,
+}: {
+  mode: Mode;
+  language: Language;
+  counts: BranchCounts;
+  selectedOptionId: string | null;
+  notice: string;
+  onSelect: (optionId: string) => void;
+}) {
+  const total = Object.values(counts).reduce((sum, count) => sum + count, 0);
+  const winner = resolveBranchWinner(counts);
+
+  return (
+    <div className={`visual branch-panel branch-panel-${mode}`}>
+      <div className="branch-panel-header">
+        <span>{mode === "present" ? "LIVE VOTE" : "CHOOSE YOUR PATH"}</span>
+        <b>
+          {mode === "present"
+            ? total
+              ? language === "ja" ? `${total}票を集計中` : `${total} votes live`
+              : language === "ja" ? "最初の1票を待っています" : "Waiting for the first vote"
+            : language === "ja" ? "クリックした道へ進みます" : "Click to continue"}
+        </b>
+      </div>
+      <div className="branch-options">
+        {branchOptions.map((option, index) => {
+          const count = Math.max(0, Number(counts[option.id]) || 0);
+          const percentage = total ? Math.round((count / total) * 100) : 0;
+          const isLeading = mode === "present" && winner?.option.id === option.id;
+          const isSelected = selectedOptionId === option.id;
+          return (
+            <button
+              type="button"
+              className={`${isLeading ? "is-leading" : ""} ${isSelected ? "is-selected" : ""}`}
+              key={option.id}
+              onClick={() => onSelect(option.id)}
+              disabled={mode === "present"}
+            >
+              <i>{String.fromCharCode(65 + index)}</i>
+              <span>
+                <b>{language === "ja" ? option.label : option.labelEn}</b>
+                <small>
+                  {mode === "present"
+                    ? `${count} ${language === "ja" ? "票" : count === 1 ? "vote" : "votes"} · ${percentage}%`
+                    : language === "ja" ? "このルートを見る →" : "Explore this route →"}
+                </small>
+              </span>
+              {mode === "present" && <em style={{ "--vote-width": `${percentage}%` } as React.CSSProperties} />}
+            </button>
+          );
+        })}
+      </div>
+      <p className="branch-rule">
+        {notice || (mode === "present"
+          ? language === "ja"
+            ? "次へ進む瞬間の最多票を採用。同数票は A → D の順で決定します。"
+            : "The top vote at advance wins. Ties resolve in stable A → D order."
+          : language === "ja"
+            ? "このスライドでは右矢印とSpaceは無効です。四択から選んでください。"
+            : "ArrowRight and Space are disabled here. Choose one of the four paths.")}
+      </p>
+    </div>
+  );
+}
+
 export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initialSlide?: number }) {
   const [activeSlide, setActiveSlide] = useState(initialSlide);
   const [language, setLanguage] = useState<Language>("ja");
@@ -331,11 +428,31 @@ export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initial
   const [reactionBurst, setReactionBurst] = useState<{ symbol: string; key: number } | null>(null);
   const [pulse, setPulse] = useState(0);
   const [isLiveController, setIsLiveController] = useState(false);
+  const [branchCounts, setBranchCounts] = useState<BranchCounts>(emptyBranchCounts);
+  const [branchSelection, setBranchSelection] = useState<string | null>(null);
+  const [branchNotice, setBranchNotice] = useState("");
+  const [branchRoundReady, setBranchRoundReady] = useState(true);
+  const reactId = useId();
+  const visitorId = `deck-${reactId.replaceAll(":", "")}`;
+  const joinUrl = useSyncExternalStore(
+    subscribeToOrigin,
+    () => `${window.location.origin}/join`,
+    () => "/join",
+  );
   const slide = slides[activeSlide];
   const points = language === "ja" ? slide.points : slide.pointsEn;
+  const branchSlideIndex = slides.findIndex((item) => item.id === BRANCH_SLIDE_ID);
+  const branchRejoinIndex = slides.findIndex((item) => item.id === BRANCH_REJOIN_SLIDE_ID);
 
   const goTo = useCallback((next: number) => {
     const clamped = Math.min(slides.length - 1, Math.max(0, next));
+    const enteringBranch = slides[clamped]?.id === BRANCH_SLIDE_ID;
+    if (enteringBranch) {
+      setBranchCounts(emptyBranchCounts());
+      setBranchSelection(null);
+      setBranchNotice("");
+      if (isLiveController && mode === "present") setBranchRoundReady(false);
+    }
     setActiveSlide(clamped);
     setPulse((value) => value + 1);
     const url = new URL(window.location.href);
@@ -346,20 +463,126 @@ export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initial
         method: "PATCH",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ currentSlide: clamped + 1 }),
+      }).then((response) => {
+        if (enteringBranch) {
+          setBranchRoundReady(response.ok);
+          if (!response.ok) {
+            setBranchNotice(language === "ja"
+              ? "投票ラウンドを開始できませんでした。もう一度お試しください。"
+              : "The voting round could not start. Please try again.");
+          }
+        }
       });
     }
-  }, [isLiveController, mode]);
+  }, [isLiveController, language, mode]);
+
+  const loadBranchVotes = useCallback(async () => {
+    try {
+      const response = await fetch("/api/branch-votes", { cache: "no-store" });
+      if (!response.ok) return null;
+      const payload = await response.json() as { counts?: BranchCounts };
+      const counts = { ...emptyBranchCounts(), ...payload.counts };
+      setBranchCounts(counts);
+      return counts;
+    } catch {
+      return null;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (slide.id !== BRANCH_SLIDE_ID || mode !== "present" || !branchRoundReady) return;
+    const initial = window.setTimeout(() => void loadBranchVotes(), 0);
+    const timer = window.setInterval(() => void loadBranchVotes(), 1500);
+    return () => {
+      window.clearTimeout(initial);
+      window.clearInterval(timer);
+    };
+  }, [branchRoundReady, loadBranchVotes, mode, slide.id]);
+
+  const advance = useCallback(async () => {
+    if (slide.id === BRANCH_SLIDE_ID) {
+      if (mode === "web") {
+        setBranchNotice(language === "ja"
+          ? "四択をクリックすると、そのルートへ進みます。"
+          : "Click one of the four choices to continue.");
+        return;
+      }
+      if (!branchRoundReady) {
+        setBranchNotice(language === "ja"
+          ? "投票ラウンドを準備しています。"
+          : "Preparing the voting round.");
+        return;
+      }
+      const latestCounts = await loadBranchVotes() ?? branchCounts;
+      const winner = resolveBranchWinner(latestCounts);
+      if (!winner) {
+        setBranchNotice(language === "ja"
+          ? "まだ0票です。/join から1票以上入るまで進めません。"
+          : "No votes yet. At least one /join vote is required.");
+        return;
+      }
+      const targetIndex = slides.findIndex((item) => item.id === winner.option.targetSlideId);
+      setBranchSelection(winner.option.id);
+      setBranchNotice("");
+      goTo(targetIndex);
+      return;
+    }
+    if (isBranchTargetSlide(slide.id)) {
+      goTo(branchRejoinIndex);
+      return;
+    }
+    goTo(activeSlide + 1);
+  }, [
+    activeSlide,
+    branchCounts,
+    branchRejoinIndex,
+    branchRoundReady,
+    goTo,
+    language,
+    loadBranchVotes,
+    mode,
+    slide.id,
+  ]);
+
+  const goBack = useCallback(() => {
+    if (isBranchTargetSlide(slide.id)) {
+      goTo(branchSlideIndex);
+      return;
+    }
+    if (slide.id === BRANCH_REJOIN_SLIDE_ID && branchSelection) {
+      const selected = branchOptions.find((option) => option.id === branchSelection);
+      const targetIndex = slides.findIndex((item) => item.id === selected?.targetSlideId);
+      goTo(targetIndex >= 0 ? targetIndex : branchSlideIndex);
+      return;
+    }
+    goTo(activeSlide - 1);
+  }, [activeSlide, branchSelection, branchSlideIndex, goTo, slide.id]);
+
+  const selectWebBranch = useCallback((optionId: string) => {
+    if (mode !== "web") return;
+    const option = branchOptions.find((item) => item.id === optionId);
+    if (!option) return;
+    const targetIndex = slides.findIndex((item) => item.id === option.targetSlideId);
+    setBranchSelection(option.id);
+    setBranchNotice("");
+    void fetch("/api/branch-votes", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ optionId: option.id, visitorId }),
+    });
+    goTo(targetIndex);
+  }, [goTo, mode, visitorId]);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if ((event.target as HTMLElement)?.matches("input, textarea")) return;
       if (event.key === "ArrowRight" || event.key === " ") {
         event.preventDefault();
-        goTo(activeSlide + 1);
+        void advance();
       }
       if (event.key === "ArrowLeft") {
         event.preventDefault();
-        goTo(activeSlide - 1);
+        goBack();
       }
     };
     const onPop = () => setActiveSlide(currentUrlSlideIndex());
@@ -369,7 +592,7 @@ export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initial
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("popstate", onPop);
     };
-  }, [activeSlide, goTo]);
+  }, [advance, goBack]);
 
   useEffect(() => {
     void fetch("/api/me")
@@ -425,8 +648,6 @@ export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initial
     }
   };
 
-  const reactId = useId();
-  const visitorId = `deck-${reactId.replaceAll(":", "")}`;
   const onStamp = async (symbol: string) => {
     setReactionBurst({ symbol, key: Date.now() });
     window.setTimeout(() => setReactionBurst(null), 900);
@@ -442,8 +663,14 @@ export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initial
     }
   };
 
+  const isBranchSlide = slide.id === BRANCH_SLIDE_ID;
+  const nextDisabled = activeSlide === slides.length - 1
+    || (isBranchSlide && mode === "web");
+  const presentHref = `/?slide=${activeSlide + 1}`;
+  const webHref = `/web?slide=${activeSlide + 1}`;
+
   return (
-    <main className={`deck-shell ${mode === "web" ? "is-web-mode" : ""}`}>
+    <main className={`deck-shell ${mode === "web" ? "is-web-mode" : "is-present-mode"}`}>
       <section className={`stage ${slide.theme}`} key={`${slide.id}-${language}`}>
         <div className="ambient-grid" />
         <header className="stage-header">
@@ -452,14 +679,15 @@ export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initial
             <b>NEW ERA<br />PRESENTATION</b>
           </Link>
           <div className="mode-switch" aria-label="Display mode">
-            <Link href="/" className={mode === "present" ? "active" : ""}>PRESENT</Link>
-            <Link href="/web" className={mode === "web" ? "active" : ""}>WEB</Link>
+            <a href={presentHref} className={mode === "present" ? "active" : ""}>PRESENT</a>
+            <a href={webHref} className={mode === "web" ? "active" : ""}>WEB</a>
           </div>
           {isLiveController && mode === "present" && <span className="live-controller-badge">● LIVE SYNC</span>}
           <button className="language-switch" onClick={() => setLanguage((value) => value === "ja" ? "en" : "ja")}>
             {language === "ja" ? "EN" : "日本語"}
           </button>
         </header>
+        {mode === "present" && <PresentJoinChip joinUrl={joinUrl} language={language} />}
 
         <div className="slide-content">
           <div className="slide-copy">
@@ -472,7 +700,18 @@ export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initial
               ))}
             </div>
           </div>
-          <Visual slideIndex={activeSlide} language={language} />
+          {isBranchSlide
+            ? (
+              <BranchPanel
+                mode={mode}
+                language={language}
+                counts={branchCounts}
+                selectedOptionId={branchSelection}
+                notice={branchNotice}
+                onSelect={selectWebBranch}
+              />
+            )
+            : <Visual slideIndex={activeSlide} language={language} />}
         </div>
 
         <footer className="stage-footer">
@@ -483,24 +722,36 @@ export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initial
             <span>/ {String(slides.length).padStart(2, "0")}</span>
           </div>
           <div className="navigation">
-            <button onClick={() => goTo(activeSlide - 1)} disabled={activeSlide === 0} aria-label="前のスライド">←</button>
-            <button onClick={() => goTo(activeSlide + 1)} disabled={activeSlide === slides.length - 1} aria-label="次のスライド">→</button>
+            <button onClick={goBack} disabled={activeSlide === 0} aria-label="前のスライド">←</button>
+            <button
+              onClick={() => void advance()}
+              disabled={nextDisabled}
+              aria-label={isBranchSlide
+                ? mode === "web" ? "四択から選んでください" : "最多票のルートへ進む"
+                : "次のスライド"}
+            >
+              →
+            </button>
           </div>
         </footer>
         {reactionBurst && <div className="reaction-burst" key={reactionBurst.key}>{reactionBurst.symbol}</div>}
       </section>
-      <InteractionRail
-        activeSlide={activeSlide}
-        comments={comments}
-        onComment={onComment}
-        onStamp={onStamp}
-        pulse={pulse}
-        language={language}
-      />
+      {mode === "web" && (
+        <InteractionRail
+          activeSlide={activeSlide}
+          comments={comments}
+          onComment={onComment}
+          onStamp={onStamp}
+          pulse={pulse}
+          language={language}
+        />
+      )}
       {mode === "web" && (
         <div className="web-mode-hint">
           <span>SELF-PACED</span>
-          {language === "ja" ? "矢印キーまたはナビゲーションで読み進められます" : "Use arrow keys or the navigation to explore"}
+          {isBranchSlide
+            ? language === "ja" ? "四択をクリックして次のルートへ" : "Click a choice to take the next path"
+            : language === "ja" ? "矢印キーまたはナビゲーションで読み進められます" : "Use arrow keys or the navigation to explore"}
         </div>
       )}
     </main>

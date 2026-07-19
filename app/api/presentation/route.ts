@@ -1,4 +1,5 @@
 import { getIdentityFromRequest, isAdmin } from "../../../lib/auth";
+import { BRANCH_SLIDE_ID } from "../../../lib/branching";
 import { ensureDatabase, getDatabase, PRESENTATION_SLUG, sha256 } from "../../../lib/db";
 import { slides } from "../../data/slides";
 
@@ -53,9 +54,19 @@ export async function PATCH(request: Request) {
 
   if (Number.isInteger(payload.currentSlide)) {
     const currentSlide = Math.min(slides.length, Math.max(1, payload.currentSlide!));
-    await database.prepare(
-      "UPDATE presentations SET current_slide = ?, updated_at = CURRENT_TIMESTAMP WHERE slug = ?",
-    ).bind(currentSlide, PRESENTATION_SLUG).run();
+    const statements = [
+      database.prepare(
+        "UPDATE presentations SET current_slide = ?, updated_at = CURRENT_TIMESTAMP WHERE slug = ?",
+      ).bind(currentSlide, PRESENTATION_SLUG),
+    ];
+    if (slides[currentSlide - 1]?.id === BRANCH_SLIDE_ID) {
+      statements.unshift(
+        database.prepare(
+          "DELETE FROM branch_votes WHERE presentation_slug = ? AND slide_id = ?",
+        ).bind(PRESENTATION_SLUG, BRANCH_SLIDE_ID),
+      );
+    }
+    await database.batch(statements);
   }
 
   return Response.json({ ok: true });

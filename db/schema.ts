@@ -66,6 +66,20 @@ export const reactions = sqliteTable("reactions", {
   index("reactions_slide_idx").on(table.presentationSlug, table.slideId, table.stamp),
 ]);
 
+export const branchVotes = sqliteTable("branch_votes", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  presentationSlug: text("presentation_slug").notNull().default("build-week"),
+  slideId: text("slide_id").notNull(),
+  optionId: text("option_id").notNull(),
+  visitorId: text("visitor_id").notNull(),
+  userId: text("user_id").references(() => users.id),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+}, (table) => [
+  uniqueIndex("branch_votes_visitor_idx").on(table.presentationSlug, table.slideId, table.visitorId),
+  index("branch_votes_option_idx").on(table.presentationSlug, table.slideId, table.optionId),
+]);
+
 export const campaigns = sqliteTable("campaigns", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   subject: text("subject").notNull(),

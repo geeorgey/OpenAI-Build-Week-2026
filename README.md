@@ -23,6 +23,8 @@ New Era Presentation is an antithesis to that pattern. It does not use AI to mak
 - Marks email, Google, and ChatGPT identities as verified
 - Anchors every stamp, comment, and question to the active slide
 - Moves the conversation rail to the matching comment group when the slide changes
+- Lets the live audience choose one of four story branches from `/join`, then routes the presenter to the top vote
+- Requires a direct four-choice click in WEB mode and rejoins every branch at the shared build story
 - Gives verified participants a personal reaction and comment history at `/mypage`
 - Protects `/admin` with an allowlisted Build Week ID and shared judging password
 - Lets the admin moderate comments and users, control public/password/private visibility, and send consent-based follow-up campaigns
@@ -37,7 +39,7 @@ This project stores consented interest signals on ChatGPT Sites: participation, 
 
 Codex and GPT-5.6 were used as one continuous build environment:
 
-1. Turn the product thesis into a 17-scene narrative.
+1. Turn the product thesis into an 18-scene branching narrative.
 2. Design the stage, self-paced web mode, QR join surface, participant memory, and control room.
 3. Implement routes, responsive motion, authentication boundaries, and slide-aware interaction.
 4. Persist presentations, users, sessions, magic links, comments, reactions, and campaigns in Sites D1.
@@ -52,7 +54,7 @@ flowchart LR
   A["Presenter /"] --> S["ChatGPT Sites"]
   B["Audience /join"] --> S
   C["Reader /web"] --> S
-  S --> D["D1: users, slides, reactions, comments, campaigns"]
+  S --> D["D1: users, slides, reactions, comments, branch votes, campaigns"]
   S --> G["Google OAuth"]
   S --> H["Sign in with ChatGPT"]
   S --> E["Cloudflare Email Worker"]
@@ -161,7 +163,7 @@ Magic links expire after 15 minutes. Campaign mail includes consent language and
 
 ## Build Week scope and judging notes
 
-The underlying observation came from building earlier presentation decks. This repository and its working implementation were created during the Build Week submission period. The new work includes the product narrative, 17-scene visual system, dual-mode deck, QR participation, D1 persistence, slide-linked interaction, four identity paths, participant memory, restricted admin control room, access modes, campaign workflow, Cloudflare email extension, tests, and production deployment.
+The underlying observation came from building earlier presentation decks. This repository and its working implementation were created during the Build Week submission period. The new work includes the product narrative, 18-scene branching visual system, dual-mode deck, QR participation, D1 persistence, slide-linked interaction, live four-choice routing, four identity paths, participant memory, restricted admin control room, access modes, campaign workflow, Cloudflare email extension, tests, and production deployment.
 
 The demo should show the real path in under three minutes:
 

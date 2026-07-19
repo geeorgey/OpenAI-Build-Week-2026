@@ -2,6 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import {
+  BRANCH_SLIDE_ID,
+  branchOptions,
+  type BranchCounts,
+} from "../../lib/branching";
 import { slides } from "../data/slides";
 
 type Identity = {
@@ -28,6 +33,11 @@ export function JoinExperience() {
   const [emailStatus, setEmailStatus] = useState("");
   const [comment, setComment] = useState("");
   const [sent, setSent] = useState("");
+  const [branchCounts, setBranchCounts] = useState<BranchCounts>(() => Object.fromEntries(
+    branchOptions.map((option) => [option.id, 0]),
+  ));
+  const [selectedBranch, setSelectedBranch] = useState<string | null>(null);
+  const [voteStatus, setVoteStatus] = useState("");
   const visitorId = useMemo(() => {
     if (typeof window === "undefined") return "join";
     const existing = window.localStorage.getItem("nep_visitor");
@@ -49,7 +59,25 @@ export function JoinExperience() {
           const payload = await presentationResponse.json() as {
             presentation?: { currentSlide?: number };
           };
-          if (payload.presentation?.currentSlide) setCurrentSlide(payload.presentation.currentSlide);
+          const nextSlide = payload.presentation?.currentSlide;
+          if (nextSlide) {
+            setCurrentSlide(nextSlide);
+            const nextSlideId = slides[Math.min(slides.length - 1, Math.max(0, nextSlide - 1))]?.id;
+            if (nextSlideId === BRANCH_SLIDE_ID) {
+              const voteResponse = await fetch(
+                `/api/branch-votes?visitorId=${encodeURIComponent(visitorId)}`,
+                { cache: "no-store" },
+              );
+              if (voteResponse.ok) {
+                const votePayload = await voteResponse.json() as {
+                  counts?: BranchCounts;
+                  selectedOptionId?: string | null;
+                };
+                setBranchCounts((counts) => ({ ...counts, ...votePayload.counts }));
+                setSelectedBranch(votePayload.selectedOptionId ?? null);
+              }
+            }
+          }
         }
         if (meResponse.ok) {
           const payload = await meResponse.json() as { identity?: Identity | null };
@@ -60,9 +88,9 @@ export function JoinExperience() {
       }
     };
     void load();
-    const timer = window.setInterval(load, 4000);
+    const timer = window.setInterval(load, 2000);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [visitorId]);
 
   const startEmail = async () => {
     setEmailStatus("送信中…");
@@ -99,7 +127,31 @@ export function JoinExperience() {
     if (response.ok) setComment("");
   };
 
+  const vote = async (optionId: string) => {
+    setVoteStatus("投票を送信中…");
+    const response = await fetch("/api/branch-votes", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ optionId, visitorId }),
+    });
+    const payload = await response.json() as {
+      counts?: BranchCounts;
+      selectedOptionId?: string | null;
+      error?: string;
+    };
+    if (!response.ok) {
+      setVoteStatus(payload.error ?? "投票できませんでした。");
+      return;
+    }
+    setBranchCounts((counts) => ({ ...counts, ...payload.counts }));
+    setSelectedBranch(payload.selectedOptionId ?? optionId);
+    const option = branchOptions.find((item) => item.id === optionId);
+    setVoteStatus(`${option?.shortLabel ?? optionId} に投票しました。変更もできます。`);
+  };
+
   const joined = Boolean(identity || guest);
+  const isBranchSlide = slide.id === BRANCH_SLIDE_ID;
+  const branchTotal = Object.values(branchCounts).reduce((sum, count) => sum + count, 0);
 
   return (
     <div className="join-layout">
@@ -162,6 +214,30 @@ export function JoinExperience() {
             {!identity && (
               <div className="join-composer">
                 <input value={guestName} onChange={(event) => setGuestName(event.target.value)} placeholder="表示名" maxLength={40} />
+              </div>
+            )}
+            {isBranchSlide && (
+              <div className="join-branch-vote">
+                <span className="surface-eyebrow">CHOOSE THE NEXT PATH</span>
+                <h3>次に見たいテーマへ投票</h3>
+                <p>最多票のルートへ、登壇者が次に進んだ瞬間に分岐します。</p>
+                <div className="join-branch-options">
+                  {branchOptions.map((option, index) => {
+                    const count = Math.max(0, Number(branchCounts[option.id]) || 0);
+                    return (
+                      <button
+                        type="button"
+                        className={selectedBranch === option.id ? "is-selected" : ""}
+                        key={option.id}
+                        onClick={() => void vote(option.id)}
+                      >
+                        <i>{String.fromCharCode(65 + index)}</i>
+                        <span><b>{option.label}</b><small>{count}票</small></span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <small>{voteStatus || `${branchTotal}票をリアルタイム集計中 · 同数はA→Dの順で決定`}</small>
               </div>
             )}
             <div className="join-composer">

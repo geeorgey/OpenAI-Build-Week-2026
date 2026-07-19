@@ -15,6 +15,13 @@
       "when": 1784336033149,
       "tag": "0001_polite_human_fly",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1784420309171,
+      "tag": "0002_curved_mentallo",
+      "breakpoints": true
     }
   ]
 }

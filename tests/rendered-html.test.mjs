@@ -10,11 +10,15 @@ test("build emits the deployable Sites worker", async () => {
 });
 
 test("the deck carries the Build Week story and dual-mode interaction", async () => {
-  const [slides, deck, layout, styles] = await Promise.all([
+  const [slides, deck, join, branchApi, branching, layout, styles, migration] = await Promise.all([
     readFile(new URL("app/data/slides.ts", root), "utf8"),
     readFile(new URL("app/components/DeckExperience.tsx", root), "utf8"),
+    readFile(new URL("app/components/JoinExperience.tsx", root), "utf8"),
+    readFile(new URL("app/api/branch-votes/route.ts", root), "utf8"),
+    readFile(new URL("lib/branching.ts", root), "utf8"),
     readFile(new URL("app/layout.tsx", root), "utf8"),
     readFile(new URL("app/globals.css", root), "utf8"),
+    readFile(new URL("drizzle/0002_curved_mentallo.sql", root), "utf8"),
   ]);
   assert.match(slides, /THE AI PRESENTATION FATIGUE/);
   assert.match(slides, /プレゼンテーションは、\\n新時代へ。\\n観るものから、\\n参加するものへ。/);
@@ -25,9 +29,20 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
   assert.match(deck, /initialSlide/);
   assert.match(deck, /\/api\/comments/);
   assert.match(deck, /slideId/);
+  assert.match(slides, /THE ROOM CHOOSES THE NEXT PATH/);
+  assert.match(deck, /mode === "web" && \(\s*<InteractionRail/);
+  assert.match(deck, /\/web\?slide=/);
+  assert.match(deck, /BRANCH_REJOIN_SLIDE_ID/);
+  assert.match(deck, /resolveBranchWinner/);
+  assert.match(join, /\/api\/branch-votes/);
+  assert.match(join, /CHOOSE THE NEXT PATH/);
+  assert.match(branchApi, /ON CONFLICT\(presentation_slug, slide_id, visitor_id\)/);
+  assert.match(branching, /count > highestCount/);
+  assert.match(migration, /CREATE TABLE `branch_votes`/);
   assert.match(layout, /New Era Presentation/);
   assert.doesNotMatch(layout, /Starter Project|codex-preview/);
   assert.match(styles, /\.join-qr svg[\s\S]*width:\s*100%[\s\S]*height:\s*100%/);
+  assert.match(styles, /\.deck-shell\.is-present-mode[\s\S]*display:\s*block/);
 });
 
 test("authentication, admin boundaries, and Cloudflare email are wired", async () => {
