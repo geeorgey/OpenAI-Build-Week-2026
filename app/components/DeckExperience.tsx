@@ -1,5 +1,7 @@
 "use client";
 
+import { ChatCircleDots } from "@phosphor-icons/react/dist/icons/ChatCircleDots";
+import { X } from "@phosphor-icons/react/dist/icons/X";
 import { QRCodeSVG } from "qrcode.react";
 import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
@@ -307,9 +309,12 @@ function InteractionRail({
   const [body, setBody] = useState("");
   const [displayName, setDisplayName] = useState("Guest");
   const [sending, setSending] = useState(false);
+  const [composerOpenSlide, setComposerOpenSlide] = useState<number | null>(null);
+  const composerOpen = composerOpenSlide === activeSlide;
   const currentSlide = slides[activeSlide];
   const currentComments = comments.filter((comment) => comment.slideId === currentSlide.id);
   const commentStreamRef = useRef<HTMLDivElement>(null);
+  const composerTextareaRef = useRef<HTMLTextAreaElement>(null);
   const joinUrl = useSyncExternalStore(
     subscribeToOrigin,
     () => `${window.location.origin}/join`,
@@ -320,12 +325,26 @@ function InteractionRail({
     commentStreamRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   }, [activeSlide, pulse]);
 
+  useEffect(() => {
+    if (!composerOpen) return;
+    const frame = window.requestAnimationFrame(() => composerTextareaRef.current?.focus());
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setComposerOpenSlide(null);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [composerOpen]);
+
   const submit = async () => {
     if (!body.trim() || sending) return;
     setSending(true);
     await onComment(body.trim(), displayName.trim() || "Guest");
     setBody("");
     setSending(false);
+    setComposerOpenSlide(null);
   };
 
   return (
@@ -368,17 +387,51 @@ function InteractionRail({
 
       {!readOnly && (
         <>
-          <div className="stamp-row">
-            {stamps.map((stamp) => (
-              <button key={stamp.symbol} onClick={() => onStamp(stamp.symbol)} title={stamp.label} aria-label={stamp.label}>
-                {stamp.symbol}
-              </button>
-            ))}
+          <div className="rail-actions">
+            <div className="stamp-row">
+              {stamps.map((stamp) => (
+                <button key={stamp.symbol} onClick={() => onStamp(stamp.symbol)} title={stamp.label} aria-label={stamp.label}>
+                  {stamp.symbol}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              className="mobile-chat-trigger"
+              aria-label={language === "ja" ? "コメントを入力" : "Write a comment"}
+              aria-controls="slide-comment-composer"
+              aria-expanded={composerOpen}
+              onClick={() => setComposerOpenSlide(activeSlide)}
+            >
+              <ChatCircleDots size={20} weight="bold" aria-hidden="true" />
+              <span>{language === "ja" ? "コメント" : "Comment"}</span>
+            </button>
           </div>
 
-          <div className="composer">
+          {composerOpen && (
+            <button
+              type="button"
+              className="composer-backdrop"
+              aria-label={language === "ja" ? "コメント入力を閉じる" : "Close comment composer"}
+              onClick={() => setComposerOpenSlide(null)}
+            />
+          )}
+
+          <div
+            id="slide-comment-composer"
+            className={`composer ${composerOpen ? "is-mobile-open" : ""}`}
+          >
+            <button
+              type="button"
+              className="composer-close"
+              aria-label={language === "ja" ? "コメント入力を閉じる" : "Close comment composer"}
+              onClick={() => setComposerOpenSlide(null)}
+            >
+              <X size={18} weight="bold" aria-hidden="true" />
+            </button>
             <input value={displayName} onChange={(event) => setDisplayName(event.target.value)} aria-label="表示名" />
             <textarea
+              ref={composerTextareaRef}
               value={body}
               onChange={(event) => setBody(event.target.value)}
               placeholder={language === "ja" ? "このスライドにコメント…" : "Comment on this slide…"}

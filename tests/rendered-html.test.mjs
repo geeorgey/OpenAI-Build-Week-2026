@@ -33,7 +33,7 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
   assert.match(deck, /slideId/);
   assert.match(slides, /THE ROOM CHOOSES THE NEXT PATH/);
   assert.match(deck, /<InteractionRail[\s\S]*readOnly=\{mode === "present"\}/);
-  assert.match(deck, /\{!readOnly && \(\s*<>[\s\S]*className="stamp-row"[\s\S]*className="composer"/);
+  assert.match(deck, /\{!readOnly && \(\s*<>[\s\S]*className="rail-actions"[\s\S]*className="stamp-row"[\s\S]*className=\{`composer/);
   assert.match(deck, /\/web\?slide=/);
   assert.match(deck, /BRANCH_REJOIN_SLIDE_ID/);
   assert.match(deck, /resolveBranchWinner/);
@@ -49,6 +49,13 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
   assert.match(deck, /onTouchStart=\{onStageTouchStart\}/);
   assert.match(deck, /onTouchEnd=\{onStageTouchEnd\}/);
   assert.match(deck, /deltaX < 0[\s\S]*void advance\(\)[\s\S]*goBack\(\)/);
+  assert.match(deck, /className="mobile-chat-trigger"/);
+  assert.match(deck, /aria-expanded=\{composerOpen\}/);
+  assert.match(deck, /className=\{`composer \$\{composerOpen \? "is-mobile-open" : ""\}`\}/);
+  assert.match(deck, /setComposerOpenSlide\(null\)/);
+  assert.match(styles, /\.composer\.is-mobile-open/);
+  assert.match(styles, /\.theme-choice \.slide-content[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
+  assert.match(styles, /\.branch-options[\s\S]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
   assert.match(styles, /@keyframes titleDrop/);
   assert.match(styles, /@keyframes titleMosaic/);
   assert.match(styles, /@keyframes titleSlice/);
