@@ -16,50 +16,56 @@ Narration: **OpenAI `gpt-4o-mini-tts`, Cedar voice**
 
 ## Storyboard and narration
 
-### 1. Hook — AI presentation fatigue
+### 1. Slides became cheap. Attention did not.
 
-**Visual:** New Era Presentation title, then the AI presentation fatigue slide. The title resolves from fragments while duplicated “AI slide” cards briefly fill the background.
+**Visual:** The manifesto gives way to repeated AI-deck patterns. The words “SLIDES BECAME CHEAP” multiply while “ATTENTION IS STILL SCARCE” remains singular.
 
-> AI can make a presentation deck in seconds. But when every deck is generated in one shot, audiences feel the sameness: the same structure, the same tone, the same visual rhythm. New Era Presentation is an answer to that AI presentation fatigue.
+> AI can make a deck in seconds. That made slides cheap, but not attention. When every presentation repeats the same structure, tone, and visual rhythm, audiences stop listening. New Era Presentation asks a different question: what if people did not just watch a presentation, but helped create it?
 
-### 2. The idea — shared time
+### 2. Make shared time
 
-**Visual:** “Don’t make more slides. Make shared time.” Presenter and audience nodes move toward a shared live moment.
+**Visual:** Presenter and participant nodes move toward one live moment, then the public `/join` screen enters.
 
-> Instead of using AI to make more disposable slides, it turns a presentation into participatory media. The presenter and the audience create the same live moment together—then carry that moment beyond the room.
+> Instead of generating more disposable slides, it turns the speaker and audience into one shared live system. A single QR code opens the room. No app installation, no separate event platform.
 
-### 3. Join — one QR
+### 3. The room answers
 
-**Visual:** The real presentation screen and QR rail. A phone-shaped `/join` panel enters beside it. Guest and verified participation paths appear.
+**Visual:** The English `/join` screen shows guest, email, Google, and ChatGPT entry. Maya, Ken, Sofia, and Leo arrive in sequence while stamps burst over the active slide.
 
-> The audience scans one QR code and opens the join screen. They can enter instantly as a guest, or participate with a verified email, Google, or ChatGPT identity. Input stays on their own device, so the presenter screen remains clean.
+> On the join screen, people enter instantly as guests or verify with email, Google, or ChatGPT. Maya leaves an insight. Ken asks a question. Sofia agrees. Leo stamps the moment he wants to remember. Every signal stays attached to the slide that caused it.
 
-### 4. React — comments and stamps follow the slide
+### 4. The room shapes the story
 
-**Visual:** Four participant avatars appear. Comments from Maya, Ken, Sofia, and Leo enter the rail one after another. Fire, lightbulb, applause, and question stamps burst over the active slide. When the slide changes, the rail moves to the matching conversation.
+**Visual:** The conversation rail follows a slide change. Live vote totals rise, the winning route lights up, and the presenter advances into that route.
 
-> Now the presentation answers back. Maya leaves an insight. Ken asks a question. Sofia agrees. Leo marks the moment that changed his mind. Every comment and stamp is stored with the active slide. When the presenter moves forward, the conversation follows that slide instead of leaving the last comment stuck on screen. The presenter can see what the room is thinking and respond while it still matters.
+> When the slide moves, the conversation follows. The presenter responds while the moment still matters. On a decision slide, the audience votes from their phones, and the winning route becomes the next part of the presentation.
 
-### 5. Branch — the room chooses
+### 5. The Sites reveal
 
-**Visual:** Four-choice slide with live vote counters rising. Option C wins and the deck transitions to that route. A small WEB-mode preview shows a reader clicking a different path.
+**Visual:** Hard cut to “THIS IS NOT A DECK. IT’S A LIVE APP.” Five surfaces orbit the Sites core: PRESENT, WEB, JOIN, MY PAGE, and ADMIN.
 
-> The audience can also change the story. On a decision slide, everyone votes from the join screen. The live totals update in real time, and when the presenter advances, the most popular route becomes the next slide. In web mode, each reader chooses their own path. Every branch rejoins the shared story.
+> Now the reveal. This is not a deck hosted on Sites. It is a live, multi-user application built in ChatGPT Sites. One Sites project powers five connected experiences: the presenter stage, web mode, join screen, My Page, and the admin control room.
 
-### 6. Remember — from applause to a relationship
+### 6. One action, every screen
 
-**Visual:** Participant history timeline, then admin and marketing panels. Slide-linked reactions become interest segments and a follow-up message.
+**Visual:** One comment travels from `/join` to Sites D1, then fans out to PRESENT, MY PAGE, and ADMIN. Each surface responds as the line reaches it.
 
-> After the presentation, verified participants can revisit where they reacted and what they said on My Page. For the presenter, consented interest signals become useful context: moderate the conversation, understand which themes mattered, create segments, and send a relevant follow-up. The presentation no longer ends at applause. It starts the next conversation.
+> Watch one action travel. A comment enters through slash join, becomes shared state in Sites D1, appears on the presenter screen, remains in the participant's memory, and becomes context for the admin. The slide changed. The database wrote. Every screen responded.
 
-### 7. Build — Codex, GPT-5.6, and Sites
+### 7. From moment to relationship
 
-**Visual:** Build pipeline assembles from concept to UI, routes, D1, authentication, and deployment. A Codex session strip and source tree animate alongside the finished product.
+**Visual:** My Page memory and the English admin control room appear side by side. A consented signal becomes a relevant follow-up.
 
-> I built this end to end during OpenAI Build Week with Codex, GPT-5.6, and ChatGPT Sites. Codex helped turn the product thesis into an eighteen-scene branching narrative, then implemented the responsive UI, motion system, routes, D1 persistence, authentication boundaries, admin controls, and production deployment. GPT-5.6 accelerated the engineering loop, while I made the core product, editorial, and design decisions. For email verification and follow-up delivery, the Cloudflare deployment skill extends Sites with an email worker.
+> After the presentation, verified participants revisit what they felt and said. For the presenter, consented interest signals become useful context for moderation, segments, and relevant follow-up. The presentation does not end at applause. It starts the next conversation.
 
-### 8. Close
+### 8. Built end to end
 
-**Visual:** Final slide, product URL, and five verbs: Scan, Join, React, Remember, Relate.
+**Visual:** Five product surfaces, eleven API routes, eight D1 tables, and four identity paths resolve into one deployed product. Codex, GPT-5.6, GPT Image 2, Sites, and the Cloudflare email boundary appear in order.
 
-> New Era Presentation makes every slide answer back. Not more AI slides—presentations worth joining, remembering, and continuing. Built with Codex and GPT-5.6. Narration generated with OpenAI text to speech.
+> I built this during OpenAI Build Week with Codex, GPT-5.6, and ChatGPT Sites: five product surfaces, eleven API routes, eight D1 tables, four identity paths, and one deployed product. GPT Image 2 supported the visual system. Cloudflare handles only the external email delivery.
+
+### 9. Close
+
+**Visual:** Final published slide and product URL.
+
+> Software you can present. A presentation people can use. ChatGPT Sites turned an idea into a product people can enter, influence, remember, and continue.

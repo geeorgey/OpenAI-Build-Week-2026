@@ -85,7 +85,7 @@ const Screen = ({
   const drift = interpolate(frame, [0, durationInFrames], [0, 18], clamp);
   return (
     <Img
-      src={staticFile(`screens/${src}`)}
+      src={staticFile(`screens-v2/${src}`)}
       style={{
         width: "100%",
         height: "100%",
@@ -504,90 +504,6 @@ const VotePanel = () => {
   );
 };
 
-const WebChoicePreview = () => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
-  const entrance = spring({frame: frame - 360, fps, config: {damping: 200}, durationInFrames: 22});
-  return (
-    <div
-      style={{
-        position: "absolute",
-        zIndex: 47,
-        left: 58,
-        bottom: 118,
-        width: 560,
-        overflow: "hidden",
-        border: "1px solid rgba(255,255,255,.28)",
-        background: palette.black,
-        boxShadow: "0 24px 70px rgba(0,0,0,.4)",
-        opacity: entrance,
-        transform: `translateY(${(1 - entrance) * 40}px)`,
-      }}
-    >
-      <div style={{display: "flex", justifyContent: "space-between", padding: "10px 13px", color: palette.white, background: "#181a1f", fontFamily: "monospace", fontSize: 10}}>
-        <span>WEB MODE</span>
-        <span style={{color: palette.yellow}}>CLICK TO CHOOSE</span>
-      </div>
-      <Img src={staticFile("screens/slide-07-web.png")} style={{display: "block", width: "100%"}} />
-    </div>
-  );
-};
-
-const MemorySignals = () => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
-  const items = [
-    {stamp: "🔥", title: "Slide 05 · Resonated", note: "Audience as part of the story", start: 40},
-    {stamp: "💡", title: "Slide 08 · Insight", note: "Relationship marketing", start: 75},
-    {stamp: "❓", title: "Slide 12 · Question", note: "How the Sites build works", start: 110},
-  ];
-  return (
-    <div
-      style={{
-        position: "absolute",
-        zIndex: 46,
-        top: 215,
-        right: 372,
-        width: 510,
-        padding: 18,
-        color: "#15171b",
-        border: "1px solid rgba(0,0,0,.16)",
-        background: palette.paper,
-        boxShadow: "0 28px 80px rgba(0,0,0,.38)",
-        fontFamily: "Arial, Helvetica, sans-serif",
-      }}
-    >
-      <div style={{fontFamily: "monospace", fontSize: 10, fontWeight: 900, letterSpacing: ".12em"}}>MY PAGE / SAVED MOMENTS</div>
-      <div style={{display: "grid", gap: 9, marginTop: 15}}>
-        {items.map((item) => {
-          const entrance = spring({frame: frame - item.start, fps, config: {damping: 200}, durationInFrames: 18});
-          return (
-            <div
-              key={item.title}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "38px 1fr",
-                gap: 12,
-                padding: 12,
-                border: "1px solid rgba(0,0,0,.12)",
-                background: "#fff",
-                opacity: entrance,
-                transform: `translateX(${(1 - entrance) * 28}px)`,
-              }}
-            >
-              <div style={{display: "grid", width: 38, height: 38, placeItems: "center", borderRadius: "50%", background: "#f4f0e8", fontSize: 20}}>{item.stamp}</div>
-              <div>
-                <div style={{fontSize: 12, fontWeight: 900}}>{item.title}</div>
-                <div style={{marginTop: 5, color: "rgba(0,0,0,.52)", fontSize: 11}}>{item.note}</div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
 const BuildPipeline = () => {
   const frame = useCurrentFrame();
   const steps = ["CONCEPT", "UI + MOTION", "ROUTES + D1", "AUTH", "DEPLOY"];
@@ -636,89 +552,329 @@ const BuildPipeline = () => {
   );
 };
 
-const HookScene = () => {
+const SitesRevealBanner = () => {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const surfaces = ["PRESENT", "WEB", "JOIN", "MY PAGE", "ADMIN"];
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        zIndex: 48,
+        right: 370,
+        bottom: 96,
+        left: 54,
+        display: "grid",
+        gridTemplateColumns: "260px repeat(5, 1fr)",
+        gap: 8,
+        padding: 10,
+        border: "1px solid rgba(201,255,61,.3)",
+        background: "rgba(5,7,9,.92)",
+        boxShadow: "0 24px 80px rgba(0,0,0,.42)",
+        fontFamily: "Arial, Helvetica, sans-serif",
+      }}
+    >
+      <div style={{padding: "14px 16px", color: palette.black, background: palette.lime}}>
+        <div style={{fontFamily: "monospace", fontSize: 9, fontWeight: 900, letterSpacing: ".1em"}}>ONE SITES PROJECT</div>
+        <div style={{marginTop: 7, fontSize: 18, fontWeight: 900}}>ONE SHARED STATE</div>
+      </div>
+      {surfaces.map((surface, index) => {
+        const entrance = spring({
+          frame: frame - (75 + index * 18),
+          fps,
+          config: {damping: 200},
+          durationInFrames: 22,
+        });
+        return (
+          <div
+            key={surface}
+            style={{
+              display: "grid",
+              placeItems: "center",
+              padding: 12,
+              color: palette.white,
+              border: "1px solid rgba(255,255,255,.18)",
+              background: "rgba(255,255,255,.05)",
+              fontFamily: "monospace",
+              fontSize: 11,
+              fontWeight: 900,
+              opacity: entrance,
+              transform: `translateY(${(1 - entrance) * 18}px)`,
+            }}
+          >
+            {surface}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const StateProofStrip = () => {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const targets = [
+    {label: "PRESENT · RESPOND NOW", src: "05-interaction.jpg", start: 160},
+    {label: "MY PAGE · REMEMBER", src: "mypage-english.jpg", start: 235},
+    {label: "ADMIN · UNDERSTAND", src: "admin-english.jpg", start: 310},
+  ];
+  const sourceEntrance = spring({frame: frame - 35, fps, config: {damping: 200}, durationInFrames: 22});
+  const d1Entrance = spring({frame: frame - 105, fps, config: {damping: 16, stiffness: 170}, durationInFrames: 28});
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        zIndex: 48,
+        right: 370,
+        bottom: 88,
+        left: 50,
+        display: "grid",
+        gridTemplateColumns: "330px 110px 145px 110px 1fr",
+        alignItems: "center",
+        gap: 0,
+        minHeight: 228,
+        padding: 18,
+        border: "1px solid rgba(88,230,223,.34)",
+        background: "rgba(4,8,11,.94)",
+        boxShadow: "0 28px 90px rgba(0,0,0,.46)",
+        fontFamily: "Arial, Helvetica, sans-serif",
+      }}
+    >
+      <div style={{opacity: sourceEntrance, transform: `translateX(${(1 - sourceEntrance) * -32}px)`}}>
+        <div style={{overflow: "hidden", height: 126, border: "1px solid rgba(255,255,255,.2)"}}>
+          <Img
+            src={staticFile("screens-v2/join-english.jpg")}
+            style={{width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%"}}
+          />
+        </div>
+        <div style={{padding: "10px 12px", color: palette.black, background: palette.cyan, fontFamily: "monospace", fontSize: 10, fontWeight: 900}}>
+          /JOIN · COMMENT ENTERS
+        </div>
+      </div>
+      <div style={{height: 2, background: "rgba(88,230,223,.24)"}}>
+        <div style={{width: `${interpolate(frame, [70, 125], [0, 100], clamp)}%`, height: "100%", background: palette.cyan}} />
+      </div>
+      <div
+        style={{
+          display: "grid",
+          width: 112,
+          height: 112,
+          placeItems: "center",
+          color: palette.black,
+          borderRadius: "50%",
+          background: palette.cyan,
+          boxShadow: `0 0 70px rgba(88,230,223,${d1Entrance * .35})`,
+          opacity: d1Entrance,
+          transform: `scale(${d1Entrance})`,
+        }}
+      >
+        <div style={{textAlign: "center"}}>
+          <div style={{fontFamily: "monospace", fontSize: 8, fontWeight: 900}}>SITES</div>
+          <div style={{fontSize: 29, fontWeight: 900}}>D1</div>
+          <div style={{fontFamily: "monospace", fontSize: 7}}>SHARED STATE</div>
+        </div>
+      </div>
+      <div style={{height: 2, background: "rgba(88,230,223,.24)"}}>
+        <div style={{width: `${interpolate(frame, [125, 185], [0, 100], clamp)}%`, height: "100%", background: palette.cyan}} />
+      </div>
+      <div style={{display: "grid", gap: 7}}>
+        {targets.map((target) => {
+          const entrance = spring({frame: frame - target.start, fps, config: {damping: 200}, durationInFrames: 22});
+          return (
+            <div
+              key={target.label}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "126px 1fr",
+                alignItems: "center",
+                gap: 12,
+                boxSizing: "border-box",
+                minHeight: 62,
+                padding: 8,
+                border: "1px solid rgba(255,255,255,.16)",
+                background: "rgba(255,255,255,.055)",
+                opacity: entrance,
+                transform: `translateX(${(1 - entrance) * 34}px)`,
+              }}
+            >
+              <div style={{height: 44, overflow: "hidden"}}>
+                <Img src={staticFile(`screens-v2/${target.src}`)} style={{width: "100%", height: "100%", objectFit: "cover"}} />
+              </div>
+              <div style={{color: palette.white, fontFamily: "monospace", fontSize: 9, fontWeight: 900}}>{target.label}</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+const BuildMetrics = () => {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const metrics = [
+    ["05", "PRODUCT SURFACES"],
+    ["11", "API ROUTES"],
+    ["08", "D1 TABLES"],
+    ["04", "IDENTITY PATHS"],
+    ["01", "DEPLOYED PRODUCT"],
+  ];
+  return (
+    <div
+      style={{
+        position: "absolute",
+        zIndex: 48,
+        top: 185,
+        right: 376,
+        width: 610,
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 9,
+        padding: 12,
+        color: palette.white,
+        border: "1px solid rgba(201,255,61,.28)",
+        background: "rgba(5,7,9,.92)",
+        fontFamily: "Arial, Helvetica, sans-serif",
+      }}
+    >
+      {metrics.map(([value, label], index) => {
+        const entrance = spring({frame: frame - (55 + index * 24), fps, config: {damping: 200}, durationInFrames: 20});
+        const final = index === metrics.length - 1;
+        return (
+          <div
+            key={label}
+            style={{
+              gridColumn: final ? "1 / 3" : undefined,
+              display: "flex",
+              alignItems: "end",
+              justifyContent: "space-between",
+              minHeight: final ? 76 : 116,
+              padding: 15,
+              color: final ? palette.black : palette.white,
+              border: "1px solid rgba(255,255,255,.14)",
+              background: final ? palette.lime : "rgba(255,255,255,.05)",
+              opacity: entrance,
+              transform: `translateY(${(1 - entrance) * 18}px)`,
+            }}
+          >
+            <strong style={{fontSize: final ? 42 : 54, lineHeight: .8, letterSpacing: "-.07em"}}>{value}</strong>
+            <span style={{fontFamily: "monospace", fontSize: 9, fontWeight: 900}}>{label}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const AttentionScene = () => {
   const frame = useCurrentFrame();
   const duration = scenes[0].durationInFrames;
   return (
-    <SceneFrame durationInFrames={duration} accent={palette.lime} section="THE IDEA">
+    <SceneFrame durationInFrames={duration} accent={palette.orange} section="ATTENTION IS SCARCE">
       <CrossfadeScreens
-        first="slide-00-manifesto.png"
-        second="slide-01-fatigue.png"
-        changeAt={245}
+        first="01-manifesto.jpg"
+        second="02-fatigue.jpg"
+        changeAt={280}
         durationInFrames={duration}
       />
-      <RailOverlay frame={frame} slideLabel={frame < 245 ? "01 · THE IDEA" : "02 · THE PROBLEM"} activeColor={frame < 245 ? palette.lime : palette.orange} />
+      <RailOverlay frame={frame} slideLabel={frame < 280 ? "01 · THE IDEA" : "02 · THE PROBLEM"} activeColor={frame < 280 ? palette.lime : palette.orange} />
+      <div
+        style={{
+          position: "absolute",
+          zIndex: 48,
+          left: 68,
+          bottom: 98,
+          display: "flex",
+          gap: 8,
+          color: palette.white,
+          fontFamily: "monospace",
+          fontSize: 11,
+          fontWeight: 900,
+        }}
+      >
+        <span style={{padding: "11px 14px", color: palette.black, background: palette.orange}}>SLIDES BECAME CHEAP</span>
+        <span style={{padding: "11px 14px", border: `1px solid ${palette.orange}`, background: "rgba(5,7,9,.82)"}}>ATTENTION DID NOT</span>
+      </div>
     </SceneFrame>
   );
 };
 
-const IdeaScene = () => {
+const SharedScene = () => {
   const frame = useCurrentFrame();
   const duration = scenes[1].durationInFrames;
   return (
-    <SceneFrame durationInFrames={duration} accent={palette.cyan} section="THE ANTITHESIS">
-      <Screen src="slide-02-shared.png" frame={frame} durationInFrames={duration} />
+    <SceneFrame durationInFrames={duration} accent={palette.cyan} section="MAKE SHARED TIME">
+      <Screen src="03-shared.jpg" frame={frame} durationInFrames={duration} />
       <RailOverlay frame={frame} slideLabel="03 · THE IDEA" activeColor={palette.cyan} />
     </SceneFrame>
   );
 };
 
-const JoinScene = () => {
+const ParticipateScene = () => {
   const frame = useCurrentFrame();
   const duration = scenes[2].durationInFrames;
-  return (
-    <SceneFrame durationInFrames={duration} accent={palette.yellow} section="LIVE / JOIN">
-      <Screen src="slide-03-join.png" frame={frame} durationInFrames={duration} />
-      <RailOverlay frame={frame} slideLabel="04 · THE EXPERIENCE" activeColor={palette.yellow} />
-      <PhoneJoin />
-    </SceneFrame>
-  );
-};
-
-const ReactScene = () => {
-  const frame = useCurrentFrame();
-  const duration = scenes[3].durationInFrames;
-  const changed = frame > 405;
-  const comments: CommentSpec[] = changed
-    ? [
-        {name: "Sofia", text: "The conversation moved with the slide.", start: 420, verified: true, accent: palette.cyan},
-        {name: "Leo", text: "Now the context stays readable.", start: 505, verified: true, accent: palette.orange},
-      ]
-    : [
-        {name: "Maya", text: "The audience is part of the story.", start: 65, verified: true, accent: palette.magenta},
-        {name: "Ken", text: "Can discussion follow each slide?", start: 155, accent: palette.yellow},
-        {name: "Sofia", text: "This feels genuinely live.", start: 245, verified: true, accent: palette.cyan},
-        {name: "Leo", text: "I want to remember this moment.", start: 330, verified: true, accent: palette.orange},
-      ];
+  const changed = frame > 250;
+  const comments: CommentSpec[] = [
+    {name: "Maya", text: "The audience is writing the presentation back.", start: 270, verified: true, accent: palette.magenta},
+    {name: "Ken", text: "Can the room change what comes next?", start: 350, accent: palette.yellow},
+    {name: "Sofia", text: "This is what live should feel like.", start: 425, verified: true, accent: palette.cyan},
+    {name: "Leo", text: "I want to remember this slide later.", start: 500, verified: true, accent: palette.orange},
+  ];
   const bursts = [
-    {symbol: "🔥", start: 90, x: 990, y: 560, size: 64},
-    {symbol: "💡", start: 170, x: 1210, y: 430, size: 62},
-    {symbol: "👏", start: 255, x: 780, y: 510, size: 68},
-    {symbol: "❓", start: 335, x: 1120, y: 650, size: 66},
-    {symbol: "🔥", start: 465, x: 900, y: 540, size: 58},
-    {symbol: "👏", start: 545, x: 1240, y: 500, size: 64},
+    {symbol: "🔥", start: 305, x: 980, y: 610, size: 64},
+    {symbol: "💡", start: 385, x: 1210, y: 460, size: 62},
+    {symbol: "👏", start: 460, x: 800, y: 520, size: 68},
+    {symbol: "❓", start: 530, x: 1120, y: 690, size: 66},
   ];
   return (
-    <SceneFrame durationInFrames={duration} accent={palette.magenta} section="REAL-TIME RESPONSE">
+    <SceneFrame durationInFrames={duration} accent={changed ? palette.magenta : palette.yellow} section="THE ROOM ANSWERS">
       <CrossfadeScreens
-        first="slide-04-interaction.png"
-        second="slide-05-context.png"
-        changeAt={405}
+        first="04-join.jpg"
+        second="05-interaction.jpg"
+        changeAt={250}
         durationInFrames={duration}
       />
       <RailOverlay
         frame={frame}
-        slideLabel={changed ? "06 · THE EXPERIENCE" : "05 · THE EXPERIENCE"}
-        comments={comments}
-        activeColor={changed ? palette.cyan : palette.magenta}
+        slideLabel={changed ? "05 · THE EXPERIENCE" : "04 · THE EXPERIENCE"}
+        comments={changed ? comments : []}
+        activeColor={changed ? palette.magenta : palette.yellow}
       />
-      {bursts.map((burst, index) => <StampBurst key={`${burst.symbol}-${index}`} {...burst} frame={frame} />)}
-      {changed ? (
+      {!changed ? <PhoneJoin /> : null}
+      {changed ? bursts.map((burst, index) => <StampBurst key={`${burst.symbol}-${index}`} {...burst} frame={frame} />) : null}
+    </SceneFrame>
+  );
+};
+
+const ShapeStoryScene = () => {
+  const frame = useCurrentFrame();
+  const duration = scenes[3].durationInFrames;
+  const branchVisible = frame > 170;
+  const comments: CommentSpec[] = [
+    {name: "Aoi", text: "The conversation moved with the slide—context preserved.", start: 30, verified: true, accent: palette.cyan},
+  ];
+  return (
+    <SceneFrame durationInFrames={duration} accent={branchVisible ? palette.yellow : palette.cyan} section="THE ROOM SHAPES THE STORY">
+      <CrossfadeScreens
+        first="06-context.jpg"
+        second="08-branch.jpg"
+        changeAt={170}
+        durationInFrames={duration}
+      />
+      <RailOverlay
+        frame={frame}
+        slideLabel={branchVisible ? "08 · THE PARTICIPATION" : "06 · THE EXPERIENCE"}
+        comments={branchVisible ? [] : comments}
+        activeColor={branchVisible ? palette.yellow : palette.cyan}
+      />
+      {branchVisible ? <VotePanel /> : (
         <div
           style={{
             position: "absolute",
-            zIndex: 46,
-            top: 122,
+            zIndex: 48,
+            top: 120,
             left: 650,
             padding: "12px 18px",
             color: palette.black,
@@ -731,96 +887,118 @@ const ReactScene = () => {
         >
           SLIDE CHANGED → CONVERSATION FOLLOWED
         </div>
-      ) : null}
-    </SceneFrame>
-  );
-};
-
-const BranchScene = () => {
-  const frame = useCurrentFrame();
-  const duration = scenes[4].durationInFrames;
-  return (
-    <SceneFrame durationInFrames={duration} accent={palette.yellow} section="THE ROOM CHOOSES">
-      <Screen src="slide-07-branch.png" frame={frame} durationInFrames={duration} />
-      <RailOverlay frame={frame} slideLabel="08 · THE PARTICIPATION" activeColor={palette.yellow} />
-      <VotePanel />
-      <WebChoicePreview />
-    </SceneFrame>
-  );
-};
-
-const RememberScene = () => {
-  const frame = useCurrentFrame();
-  const duration = scenes[5].durationInFrames;
-  return (
-    <SceneFrame durationInFrames={duration} accent={palette.orange} section="FROM MEMORY TO RELATIONSHIP">
-      <CrossfadeScreens
-        first="slide-08-memory.png"
-        second="slide-10-marketing.png"
-        changeAt={350}
-        durationInFrames={duration}
-      />
-      <RailOverlay frame={frame} slideLabel={frame < 350 ? "09 · THE PRODUCT" : "11 · THE PRODUCT"} activeColor={palette.orange} />
-      {frame < 390 ? <MemorySignals /> : (
-        <div
-          style={{
-            position: "absolute",
-            zIndex: 47,
-            top: 235,
-            right: 372,
-            width: 520,
-            padding: 22,
-            color: palette.white,
-            border: "1px solid rgba(255,138,98,.42)",
-            background: "rgba(9,8,8,.92)",
-            boxShadow: "0 28px 80px rgba(0,0,0,.4)",
-            fontFamily: "Arial, Helvetica, sans-serif",
-          }}
-        >
-          <div style={{color: palette.orange, fontFamily: "monospace", fontSize: 10, fontWeight: 900, letterSpacing: ".12em"}}>CONSENTED INTEREST SIGNALS</div>
-          <div style={{marginTop: 15, fontSize: 26, fontWeight: 900, letterSpacing: "-.04em"}}>Presentation → Segment → Follow-up</div>
-          <div style={{display: "flex", flexWrap: "wrap", gap: 8, marginTop: 18}}>
-            {["LIVE EXPERIENCE", "MEMORY", "RELATIONSHIP", "BUILD"].map((label, index) => (
-              <span key={label} style={{padding: "9px 11px", color: index === 2 ? palette.black : palette.white, border: "1px solid rgba(255,255,255,.18)", background: index === 2 ? palette.orange : "rgba(255,255,255,.05)", fontSize: 10, fontWeight: 900}}>
-                {label}
-              </span>
-            ))}
-          </div>
-          <div style={{marginTop: 18, padding: 14, color: "#17191d", background: palette.paper, fontSize: 12, lineHeight: 1.45}}>
-            “You reacted to the relationship loop. Here is the branch you did not see live.”
-          </div>
-        </div>
       )}
     </SceneFrame>
   );
 };
 
-const BuildScene = () => {
+const SitesRevealScene = () => {
   const frame = useCurrentFrame();
-  const duration = scenes[6].durationInFrames;
-  const secondOpacity = interpolate(frame, [345, 370], [0, 1], clamp);
-  const thirdOpacity = interpolate(frame, [700, 725], [0, 1], clamp);
+  const duration = scenes[4].durationInFrames;
   return (
-    <SceneFrame durationInFrames={duration} accent={palette.lime} section="THE BUILD">
-      <Screen src="slide-11-build.png" frame={frame} durationInFrames={duration} />
-      <AbsoluteFill style={{opacity: secondOpacity}}>
-        <Screen src="slide-13-cloudflare.png" frame={frame} durationInFrames={duration} />
-      </AbsoluteFill>
-      <AbsoluteFill style={{opacity: thirdOpacity}}>
-        <Screen src="slide-15-buildweek.png" frame={frame} durationInFrames={duration} />
-      </AbsoluteFill>
+    <SceneFrame durationInFrames={duration} accent={palette.lime} section="THE SITES REVEAL">
+      <Screen src="07-sites-reveal.jpg" frame={frame} durationInFrames={duration} />
       <RailOverlay
         frame={frame}
-        slideLabel={frame < 355 ? "12 · THE BUILD" : frame < 710 ? "14 · THE BUILD" : "16 · THE ENTRY"}
-        activeColor={frame < 355 ? palette.lime : frame < 710 ? palette.orange : palette.magenta}
+        slideLabel="07 · THE REVEAL"
+        comments={[
+          {name: "Devpost Judge", text: "Wait—this is one live Sites application?", start: 55, verified: true, accent: palette.lime},
+        ]}
+        activeColor={palette.lime}
       />
-      <BuildPipeline />
+      <SitesRevealBanner />
+    </SceneFrame>
+  );
+};
+
+const StateProofScene = () => {
+  const frame = useCurrentFrame();
+  const duration = scenes[5].durationInFrames;
+  return (
+    <SceneFrame durationInFrames={duration} accent={palette.cyan} section="ONE ACTION · EVERY SCREEN">
+      <Screen src="13-shared-state.jpg" frame={frame} durationInFrames={duration} />
+      <RailOverlay
+        frame={frame}
+        slideLabel="13 · THE PROOF"
+        comments={[
+          {name: "Nao", text: "One comment reached the stage, memory, and admin.", start: 320, verified: true, accent: palette.cyan},
+        ]}
+        activeColor={palette.cyan}
+      />
+      <StateProofStrip />
+    </SceneFrame>
+  );
+};
+
+const RelationshipStoryScene = () => {
+  const frame = useCurrentFrame();
+  const duration = scenes[6].durationInFrames;
+  const relationshipVisible = frame > 265;
+  const surfaceEntrance = interpolate(frame, [60, 90], [0, 1], clamp);
+  return (
+    <SceneFrame durationInFrames={duration} accent={palette.orange} section="FROM MOMENT TO RELATIONSHIP">
+      <CrossfadeScreens
+        first="09-memory.jpg"
+        second="11-marketing.jpg"
+        changeAt={265}
+        durationInFrames={duration}
+      />
+      <RailOverlay
+        frame={frame}
+        slideLabel={relationshipVisible ? "11 · THE PRODUCT" : "09 · THE PRODUCT"}
+        activeColor={palette.orange}
+      />
       <div
         style={{
           position: "absolute",
-          zIndex: 47,
-          top: 98,
-          left: 70,
+          zIndex: 48,
+          top: 190,
+          right: 375,
+          width: 540,
+          overflow: "hidden",
+          border: "1px solid rgba(255,138,98,.34)",
+          background: palette.paper,
+          boxShadow: "0 28px 80px rgba(0,0,0,.42)",
+          opacity: surfaceEntrance,
+          transform: `translateY(${(1 - surfaceEntrance) * 30}px)`,
+        }}
+      >
+        <div style={{padding: "10px 13px", color: palette.black, background: palette.orange, fontFamily: "monospace", fontSize: 10, fontWeight: 900}}>
+          {relationshipVisible ? "ADMIN · TURN SIGNALS INTO RELEVANT FOLLOW-UP" : "MY PAGE · RETURN TO YOUR OWN THINKING"}
+        </div>
+        <Img
+          src={staticFile(`screens-v2/${relationshipVisible ? "admin-english.jpg" : "mypage-english.jpg"}`)}
+          style={{display: "block", width: "100%", height: 304, objectFit: "cover", objectPosition: "center top"}}
+        />
+      </div>
+    </SceneFrame>
+  );
+};
+
+const SitesBuildScene = () => {
+  const frame = useCurrentFrame();
+  const duration = scenes[7].durationInFrames;
+  const loopVisible = frame > 330;
+  return (
+    <SceneFrame durationInFrames={duration} accent={loopVisible ? palette.orange : palette.lime} section="BUILT END TO END">
+      <CrossfadeScreens
+        first="12-sites-build.jpg"
+        second="14-build-loop.jpg"
+        changeAt={330}
+        durationInFrames={duration}
+      />
+      <RailOverlay
+        frame={frame}
+        slideLabel={loopVisible ? "14 · THE BUILD" : "12 · THE BUILD"}
+        activeColor={loopVisible ? palette.orange : palette.lime}
+      />
+      {loopVisible ? <BuildPipeline /> : <BuildMetrics />}
+      <div
+        style={{
+          position: "absolute",
+          zIndex: 49,
+          top: 96,
+          left: 68,
           display: "flex",
           gap: 8,
           color: palette.white,
@@ -830,7 +1008,15 @@ const BuildScene = () => {
         }}
       >
         {["CODEX", "GPT-5.6", "CHATGPT SITES"].map((label, index) => (
-          <span key={label} style={{padding: "9px 12px", color: index === 1 ? palette.black : palette.white, border: "1px solid rgba(255,255,255,.18)", background: index === 1 ? palette.lime : "rgba(6,7,10,.72)"}}>
+          <span
+            key={label}
+            style={{
+              padding: "9px 12px",
+              color: index === 2 ? palette.black : palette.white,
+              border: "1px solid rgba(255,255,255,.18)",
+              background: index === 2 ? palette.lime : "rgba(6,7,10,.78)",
+            }}
+          >
             {label}
           </span>
         ))}
@@ -839,31 +1025,16 @@ const BuildScene = () => {
   );
 };
 
-const CloseScene = () => {
+const FinalScene = () => {
   const frame = useCurrentFrame();
-  const duration = scenes[7].durationInFrames;
+  const duration = scenes[8].durationInFrames;
   const words = ["SCAN", "JOIN", "REACT", "REMEMBER", "RELATE"];
   return (
-    <SceneFrame durationInFrames={duration} accent={palette.yellow} section="THE ASK">
-      <Screen
-        src="slide-17-finale.png"
-        frame={frame}
-        durationInFrames={duration}
-        zoom={1.22}
-        origin="left center"
-      />
-      <div
-        style={{
-          position: "absolute",
-          zIndex: 48,
-          right: 80,
-          bottom: 170,
-          display: "flex",
-          gap: 8,
-        }}
-      >
+    <SceneFrame durationInFrames={duration} accent={palette.white} section="THE ASK">
+      <Screen src="15-finale.jpg" frame={frame} durationInFrames={duration} zoom={1.21} origin="left center" />
+      <div style={{position: "absolute", zIndex: 48, right: 80, bottom: 170, display: "flex", gap: 8}}>
         {words.map((word, index) => {
-          const entrance = interpolate(frame, [75 + index * 18, 95 + index * 18], [0, 1], clamp);
+          const entrance = interpolate(frame, [55 + index * 16, 75 + index * 16], [0, 1], clamp);
           return (
             <div
               key={word}
@@ -871,7 +1042,7 @@ const CloseScene = () => {
                 padding: "12px 14px",
                 color: index === words.length - 1 ? palette.black : palette.white,
                 border: "1px solid rgba(255,255,255,.18)",
-                background: index === words.length - 1 ? palette.yellow : "rgba(6,7,10,.78)",
+                background: index === words.length - 1 ? palette.white : "rgba(6,7,10,.78)",
                 fontFamily: "monospace",
                 fontSize: 11,
                 fontWeight: 900,
@@ -884,32 +1055,10 @@ const CloseScene = () => {
           );
         })}
       </div>
-      <div
-        style={{
-          position: "absolute",
-          zIndex: 48,
-          right: 80,
-          bottom: 105,
-          color: palette.white,
-          fontFamily: "Arial, Helvetica, sans-serif",
-          fontSize: 20,
-          fontWeight: 800,
-        }}
-      >
+      <div style={{position: "absolute", zIndex: 48, right: 80, bottom: 105, color: palette.white, fontFamily: "Arial, Helvetica, sans-serif", fontSize: 20, fontWeight: 800}}>
         new-era-presentation.lvnsk.jp
       </div>
-      <div
-        style={{
-          position: "absolute",
-          zIndex: 48,
-          right: 80,
-          bottom: 75,
-          color: "rgba(255,255,255,.45)",
-          fontFamily: "monospace",
-          fontSize: 9,
-          letterSpacing: ".08em",
-        }}
-      >
+      <div style={{position: "absolute", zIndex: 48, right: 80, bottom: 75, color: "rgba(255,255,255,.45)", fontFamily: "monospace", fontSize: 9, letterSpacing: ".08em"}}>
         NARRATION GENERATED WITH OPENAI TEXT TO SPEECH
       </div>
     </SceneFrame>
@@ -917,14 +1066,15 @@ const CloseScene = () => {
 };
 
 const sceneComponents = [
-  HookScene,
-  IdeaScene,
-  JoinScene,
-  ReactScene,
-  BranchScene,
-  RememberScene,
-  BuildScene,
-  CloseScene,
+  AttentionScene,
+  SharedScene,
+  ParticipateScene,
+  ShapeStoryScene,
+  SitesRevealScene,
+  StateProofScene,
+  RelationshipStoryScene,
+  SitesBuildScene,
+  FinalScene,
 ] as const;
 
 export const NewEraBuildWeek = () => (

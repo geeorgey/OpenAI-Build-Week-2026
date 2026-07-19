@@ -1,50 +1,56 @@
 [
   {
-    "id": "01-hook",
-    "audio": "audio/01-hook.mp3",
-    "audioDuration": 15.504,
-    "duration": 16.704
+    "id": "01-attention",
+    "audio": "audio/01-attention.mp3",
+    "audioDuration": 19.08,
+    "duration": 21.1
   },
   {
-    "id": "02-idea",
-    "audio": "audio/02-idea.mp3",
-    "audioDuration": 14.904,
-    "duration": 16.104
+    "id": "02-shared",
+    "audio": "audio/02-shared.mp3",
+    "audioDuration": 12.84,
+    "duration": 14.8666666667
   },
   {
-    "id": "03-join",
-    "audio": "audio/03-join.mp3",
-    "audioDuration": 14.184,
-    "duration": 15.384
+    "id": "03-participate",
+    "audio": "audio/03-participate.mp3",
+    "audioDuration": 18.216,
+    "duration": 20.2333333333
   },
   {
-    "id": "04-react",
-    "audio": "audio/04-react.mp3",
-    "audioDuration": 24.48,
-    "duration": 25.68
+    "id": "04-shape",
+    "audio": "audio/04-shape.mp3",
+    "audioDuration": 11.904,
+    "duration": 13.9333333333
   },
   {
-    "id": "05-branch",
-    "audio": "audio/05-branch.mp3",
-    "audioDuration": 17.736,
-    "duration": 18.936
+    "id": "05-reveal",
+    "audio": "audio/05-reveal.mp3",
+    "audioDuration": 16.824,
+    "duration": 18.8333333333
   },
   {
-    "id": "06-remember",
-    "audio": "audio/06-remember.mp3",
-    "audioDuration": 22.344,
-    "duration": 23.544
+    "id": "06-proof",
+    "audio": "audio/06-proof.mp3",
+    "audioDuration": 16.272,
+    "duration": 18.3
   },
   {
-    "id": "07-build",
-    "audio": "audio/07-build.mp3",
-    "audioDuration": 34.968,
-    "duration": 36.168
+    "id": "07-relationship",
+    "audio": "audio/07-relationship.mp3",
+    "audioDuration": 15.984,
+    "duration": 18
   },
   {
-    "id": "08-close",
-    "audio": "audio/08-close.mp3",
-    "audioDuration": 15.096,
-    "duration": 16.296
+    "id": "08-build",
+    "audio": "audio/08-build.mp3",
+    "audioDuration": 20.544,
+    "duration": 22.5666666667
+  },
+  {
+    "id": "09-close",
+    "audio": "audio/09-close.mp3",
+    "audioDuration": 10.296,
+    "duration": 12.3
   }
 ]

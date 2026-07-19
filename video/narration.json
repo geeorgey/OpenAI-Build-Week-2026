@@ -1,42 +1,47 @@
 [
   {
-    "id": "01-hook",
-    "title": "AI presentation fatigue",
-    "text": "AI can make a presentation deck in seconds. But when every deck is generated in one shot, audiences feel the sameness: the same structure, the same tone, the same visual rhythm. New Era Presentation is an answer to that AI presentation fatigue."
+    "id": "01-attention",
+    "title": "Slides became cheap",
+    "text": "AI can make a deck in seconds. That made slides cheap, but not attention. When every presentation repeats the same structure, tone, and visual rhythm, audiences stop listening. New Era Presentation asks a different question: what if people did not just watch a presentation, but helped create it?"
   },
   {
-    "id": "02-idea",
-    "title": "Shared time",
-    "text": "Instead of using AI to make more disposable slides, it turns a presentation into participatory media. The presenter and the audience create the same live moment together—then carry that moment beyond the room."
+    "id": "02-shared",
+    "title": "Make shared time",
+    "text": "Instead of generating more disposable slides, it turns the speaker and audience into one shared live system. A single QR code opens the room. No app installation, no separate event platform."
   },
   {
-    "id": "03-join",
-    "title": "One QR",
-    "text": "The audience scans one QR code and opens the join screen. They can enter instantly as a guest, or participate with a verified email, Google, or ChatGPT identity. Input stays on their own device, so the presenter screen remains clean."
+    "id": "03-participate",
+    "title": "The room answers",
+    "text": "On the join screen, people enter instantly as guests or verify with email, Google, or ChatGPT. Maya leaves an insight. Ken asks a question. Sofia agrees. Leo stamps the moment he wants to remember. Every signal stays attached to the slide that caused it."
   },
   {
-    "id": "04-react",
-    "title": "Comments and stamps",
-    "text": "Now the presentation answers back. Maya leaves an insight. Ken asks a question. Sofia agrees. Leo marks the moment that changed his mind. Every comment and stamp is stored with the active slide. When the presenter moves forward, the conversation follows that slide instead of leaving the last comment stuck on screen. The presenter can see what the room is thinking and respond while it still matters."
+    "id": "04-shape",
+    "title": "The room shapes the story",
+    "text": "When the slide moves, the conversation follows. The presenter responds while the moment still matters. On a decision slide, the audience votes from their phones, and the winning route becomes the next part of the presentation."
   },
   {
-    "id": "05-branch",
-    "title": "The room chooses",
-    "text": "The audience can also change the story. On a decision slide, everyone votes from the join screen. The live totals update in real time, and when the presenter advances, the most popular route becomes the next slide. In web mode, each reader chooses their own path. Every branch rejoins the shared story."
+    "id": "05-reveal",
+    "title": "This is a live application",
+    "text": "Now the reveal. This is not a deck hosted on Sites. It is a live, multi-user application built in ChatGPT Sites. One Sites project powers five connected experiences: the presenter stage, web mode, join screen, My Page, and the admin control room."
   },
   {
-    "id": "06-remember",
-    "title": "From applause to a relationship",
-    "text": "After the presentation, verified participants can revisit where they reacted and what they said on My Page. For the presenter, consented interest signals become useful context: moderate the conversation, understand which themes mattered, create segments, and send a relevant follow-up. The presentation no longer ends at applause. It starts the next conversation."
+    "id": "06-proof",
+    "title": "One action, every screen",
+    "text": "Watch one action travel. A comment enters through slash join, becomes shared state in Sites D1, appears on the presenter screen, remains in the participant's memory, and becomes context for the admin. The slide changed. The database wrote. Every screen responded."
   },
   {
-    "id": "07-build",
-    "title": "Built with Codex",
-    "text": "I built this end to end during OpenAI Build Week with Codex, GPT-5.6, and ChatGPT Sites. Codex helped turn the product thesis into an eighteen-scene branching narrative, then implemented the responsive UI, motion system, routes, D1 persistence, authentication boundaries, admin controls, and production deployment. GPT-5.6 accelerated the engineering loop, while I made the core product, editorial, and design decisions. For email verification and follow-up delivery, the Cloudflare deployment skill extends Sites with an email worker."
+    "id": "07-relationship",
+    "title": "From moment to relationship",
+    "text": "After the presentation, verified participants revisit what they felt and said. For the presenter, consented interest signals become useful context for moderation, segments, and relevant follow-up. The presentation does not end at applause. It starts the next conversation."
   },
   {
-    "id": "08-close",
-    "title": "Make every slide answer back",
-    "text": "New Era Presentation makes every slide answer back. Not more AI slides—presentations worth joining, remembering, and continuing. Built with Codex and GPT-5.6. Narration generated with OpenAI text to speech."
+    "id": "08-build",
+    "title": "Built end to end",
+    "text": "I built this during OpenAI Build Week with Codex, GPT-5.6, and ChatGPT Sites: five product surfaces, eleven API routes, eight D1 tables, four identity paths, and one deployed product. GPT Image 2 supported the visual system. Cloudflare handles only the external email delivery."
+  },
+  {
+    "id": "09-close",
+    "title": "Software you can present",
+    "text": "Software you can present. A presentation people can use. ChatGPT Sites turned an idea into a product people can enter, influence, remember, and continue."
   }
 ]

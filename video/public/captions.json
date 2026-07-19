@@ -1,338 +1,345 @@
 [
   {
-    "text": "AI can make a presentation deck in seconds.",
+    "text": "AI can make a deck in seconds.",
     "startMs": 450,
-    "endMs": 3216,
+    "endMs": 2417,
     "timestampMs": 450,
     "confidence": 1
   },
   {
-    "text": "But when every deck is generated in one shot, audiences feel the sameness:",
-    "startMs": 3216,
-    "endMs": 7977,
-    "timestampMs": 3216,
+    "text": "That made slides cheap, but not attention.",
+    "startMs": 2417,
+    "endMs": 5171,
+    "timestampMs": 2417,
     "confidence": 1
   },
   {
-    "text": "the same structure, the same tone, the same visual rhythm.",
-    "startMs": 7977,
-    "endMs": 11708,
-    "timestampMs": 7977,
+    "text": "When every presentation repeats the same structure, tone, and visual rhythm,",
+    "startMs": 5171,
+    "endMs": 10154,
+    "timestampMs": 5171,
     "confidence": 1
   },
   {
-    "text": "New Era Presentation is an answer to that AI presentation fatigue.",
-    "startMs": 11708,
-    "endMs": 15954,
-    "timestampMs": 11708,
+    "text": "audiences stop listening.",
+    "startMs": 10154,
+    "endMs": 11793,
+    "timestampMs": 10154,
     "confidence": 1
   },
   {
-    "text": "Instead of using AI to make more disposable slides,",
-    "startMs": 17154,
-    "endMs": 20826,
-    "timestampMs": 17154,
+    "text": "New Era Presentation asks a different question:",
+    "startMs": 11793,
+    "endMs": 14875,
+    "timestampMs": 11793,
     "confidence": 1
   },
   {
-    "text": "it turns a presentation into participatory media.",
-    "startMs": 20826,
-    "endMs": 24354,
-    "timestampMs": 20826,
+    "text": "what if people did not just watch a presentation, but helped create it?",
+    "startMs": 14875,
+    "endMs": 19530,
+    "timestampMs": 14875,
     "confidence": 1
   },
   {
-    "text": "The presenter and the audience create the same live moment together—then carry that moment beyond the room.",
-    "startMs": 24354,
-    "endMs": 32058,
-    "timestampMs": 24354,
+    "text": "Instead of generating more disposable slides,",
+    "startMs": 21550,
+    "endMs": 24640,
+    "timestampMs": 21550,
     "confidence": 1
   },
   {
-    "text": "The audience scans one QR code and opens the join screen.",
-    "startMs": 33258,
-    "endMs": 36773,
-    "timestampMs": 33258,
+    "text": "it turns the speaker and audience into one shared live system.",
+    "startMs": 24640,
+    "endMs": 28897,
+    "timestampMs": 24640,
     "confidence": 1
   },
   {
-    "text": "They can enter instantly as a guest, or participate with a verified email,",
-    "startMs": 36773,
-    "endMs": 41337,
-    "timestampMs": 36773,
+    "text": "A single QR code opens the room.",
+    "startMs": 28897,
+    "endMs": 31094,
+    "timestampMs": 28897,
     "confidence": 1
   },
   {
-    "text": "Google, or ChatGPT identity.",
-    "startMs": 41337,
-    "endMs": 43063,
-    "timestampMs": 41337,
+    "text": "No app installation, no separate event platform.",
+    "startMs": 31094,
+    "endMs": 34390,
+    "timestampMs": 31094,
     "confidence": 1
   },
   {
-    "text": "Input stays on their own device, so the presenter screen remains clean.",
-    "startMs": 43063,
-    "endMs": 47442,
-    "timestampMs": 43063,
+    "text": "On the join screen, people enter instantly as guests or verify with email,",
+    "startMs": 36417,
+    "endMs": 41852,
+    "timestampMs": 36417,
     "confidence": 1
   },
   {
-    "text": "Now the presentation answers back.",
-    "startMs": 48642,
-    "endMs": 50760,
-    "timestampMs": 48642,
+    "text": "Google, or ChatGPT.",
+    "startMs": 41852,
+    "endMs": 43248,
+    "timestampMs": 41852,
     "confidence": 1
   },
   {
     "text": "Maya leaves an insight.",
-    "startMs": 50760,
-    "endMs": 52193,
-    "timestampMs": 50760,
+    "startMs": 43248,
+    "endMs": 44937,
+    "timestampMs": 43248,
     "confidence": 1
   },
   {
     "text": "Ken asks a question.",
-    "startMs": 52193,
-    "endMs": 53438,
-    "timestampMs": 52193,
+    "startMs": 44937,
+    "endMs": 46406,
+    "timestampMs": 44937,
     "confidence": 1
   },
   {
     "text": "Sofia agrees.",
-    "startMs": 53438,
-    "endMs": 54248,
-    "timestampMs": 53438,
+    "startMs": 46406,
+    "endMs": 47361,
+    "timestampMs": 46406,
     "confidence": 1
   },
   {
-    "text": "Leo marks the moment that changed his mind.",
-    "startMs": 54248,
-    "endMs": 56927,
-    "timestampMs": 54248,
+    "text": "Leo stamps the moment he wants to remember.",
+    "startMs": 47361,
+    "endMs": 50519,
+    "timestampMs": 47361,
     "confidence": 1
   },
   {
-    "text": "Every comment and stamp is stored with the active slide.",
-    "startMs": 56927,
-    "endMs": 60415,
-    "timestampMs": 56927,
+    "text": "Every signal stays attached to the slide that caused it.",
+    "startMs": 50519,
+    "endMs": 54633,
+    "timestampMs": 50519,
     "confidence": 1
   },
   {
-    "text": "When the presenter moves forward,",
-    "startMs": 60415,
-    "endMs": 62470,
-    "timestampMs": 60415,
+    "text": "When the slide moves, the conversation follows.",
+    "startMs": 56650,
+    "endMs": 59159,
+    "timestampMs": 56650,
     "confidence": 1
   },
   {
-    "text": "the conversation follows that slide instead of leaving the last comment stuck on screen.",
-    "startMs": 62470,
-    "endMs": 67952,
-    "timestampMs": 62470,
+    "text": "The presenter responds while the moment still matters.",
+    "startMs": 59159,
+    "endMs": 62041,
+    "timestampMs": 59159,
     "confidence": 1
   },
   {
-    "text": "The presenter can see what the room is thinking and respond while it still matters.",
-    "startMs": 67952,
-    "endMs": 73122,
-    "timestampMs": 67952,
+    "text": "On a decision slide, the audience votes from their phones,",
+    "startMs": 62041,
+    "endMs": 65138,
+    "timestampMs": 62041,
     "confidence": 1
   },
   {
-    "text": "The audience can also change the story.",
-    "startMs": 74322,
-    "endMs": 76651,
-    "timestampMs": 74322,
+    "text": "and the winning route becomes the next part of the presentation.",
+    "startMs": 65138,
+    "endMs": 68554,
+    "timestampMs": 65138,
     "confidence": 1
   },
   {
-    "text": "On a decision slide, everyone votes from the join screen.",
-    "startMs": 76651,
-    "endMs": 80055,
-    "timestampMs": 76651,
+    "text": "Now the reveal.",
+    "startMs": 70583,
+    "endMs": 71626,
+    "timestampMs": 70583,
     "confidence": 1
   },
   {
-    "text": "The live totals update in real time, and when the presenter advances,",
-    "startMs": 80055,
-    "endMs": 84175,
-    "timestampMs": 80055,
+    "text": "This is not a deck hosted on Sites.",
+    "startMs": 71626,
+    "endMs": 74059,
+    "timestampMs": 71626,
     "confidence": 1
   },
   {
-    "text": "the most popular route becomes the next slide.",
-    "startMs": 84175,
-    "endMs": 86922,
-    "timestampMs": 84175,
+    "text": "It is a live, multi-user application built in ChatGPT Sites.",
+    "startMs": 74059,
+    "endMs": 78231,
+    "timestampMs": 74059,
     "confidence": 1
   },
   {
-    "text": "In web mode, each reader chooses their own path.",
-    "startMs": 86922,
-    "endMs": 89789,
-    "timestampMs": 86922,
+    "text": "One Sites project powers five connected experiences: the presenter stage,",
+    "startMs": 78231,
+    "endMs": 83306,
+    "timestampMs": 78231,
     "confidence": 1
   },
   {
-    "text": "Every branch rejoins the shared story.",
-    "startMs": 89789,
-    "endMs": 92058,
-    "timestampMs": 89789,
+    "text": "web mode, join screen, My Page, and the admin control room.",
+    "startMs": 83306,
+    "endMs": 87407,
+    "timestampMs": 83306,
+    "confidence": 1
+  },
+  {
+    "text": "Watch one action travel.",
+    "startMs": 89417,
+    "endMs": 90936,
+    "timestampMs": 89417,
+    "confidence": 1
+  },
+  {
+    "text": "A comment enters through slash join, becomes shared state in Sites D1,",
+    "startMs": 90936,
+    "endMs": 95368,
+    "timestampMs": 90936,
+    "confidence": 1
+  },
+  {
+    "text": "appears on the presenter screen, remains in the participant's memory,",
+    "startMs": 95368,
+    "endMs": 99737,
+    "timestampMs": 95368,
+    "confidence": 1
+  },
+  {
+    "text": "and becomes context for the admin.",
+    "startMs": 99737,
+    "endMs": 101890,
+    "timestampMs": 99737,
+    "confidence": 1
+  },
+  {
+    "text": "The slide changed.",
+    "startMs": 101890,
+    "endMs": 103029,
+    "timestampMs": 101890,
+    "confidence": 1
+  },
+  {
+    "text": "The database wrote.",
+    "startMs": 103029,
+    "endMs": 104232,
+    "timestampMs": 103029,
+    "confidence": 1
+  },
+  {
+    "text": "Every screen responded.",
+    "startMs": 104232,
+    "endMs": 105689,
+    "timestampMs": 104232,
     "confidence": 1
   },
   {
     "text": "After the presentation,",
-    "startMs": 93258,
-    "endMs": 94698,
-    "timestampMs": 93258,
+    "startMs": 107717,
+    "endMs": 109099,
+    "timestampMs": 107717,
     "confidence": 1
   },
   {
-    "text": "verified participants can revisit where they reacted and what they said on My Page.",
-    "startMs": 94698,
-    "endMs": 99892,
-    "timestampMs": 94698,
+    "text": "verified participants revisit what they felt and said.",
+    "startMs": 109099,
+    "endMs": 112344,
+    "timestampMs": 109099,
     "confidence": 1
   },
   {
-    "text": "For the presenter, consented interest signals become useful context:",
-    "startMs": 99892,
-    "endMs": 104148,
-    "timestampMs": 99892,
+    "text": "For the presenter,",
+    "startMs": 112344,
+    "endMs": 113425,
+    "timestampMs": 112344,
     "confidence": 1
   },
   {
-    "text": "moderate the conversation, understand which themes mattered,",
-    "startMs": 104148,
-    "endMs": 107904,
-    "timestampMs": 104148,
+    "text": "consented interest signals become useful context for moderation, segments,",
+    "startMs": 113425,
+    "endMs": 117872,
+    "timestampMs": 113425,
     "confidence": 1
   },
   {
-    "text": "create segments, and send a relevant follow-up.",
-    "startMs": 107904,
-    "endMs": 110845,
-    "timestampMs": 107904,
+    "text": "and relevant follow-up.",
+    "startMs": 117872,
+    "endMs": 119254,
+    "timestampMs": 117872,
     "confidence": 1
   },
   {
-    "text": "The presentation no longer ends at applause.",
-    "startMs": 110845,
-    "endMs": 113599,
-    "timestampMs": 110845,
+    "text": "The presentation does not end at applause.",
+    "startMs": 119254,
+    "endMs": 121778,
+    "timestampMs": 119254,
     "confidence": 1
   },
   {
     "text": "It starts the next conversation.",
-    "startMs": 113599,
-    "endMs": 115602,
-    "timestampMs": 113599,
+    "startMs": 121778,
+    "endMs": 123701,
+    "timestampMs": 121778,
     "confidence": 1
   },
   {
-    "text": "I built this end to end during OpenAI Build Week with Codex, GPT-5.",
-    "startMs": 116802,
-    "endMs": 121239,
-    "timestampMs": 116802,
+    "text": "I built this during OpenAI Build Week with Codex, GPT-5.",
+    "startMs": 125717,
+    "endMs": 129915,
+    "timestampMs": 125717,
     "confidence": 1
   },
   {
-    "text": "6, and ChatGPT Sites.",
-    "startMs": 121239,
-    "endMs": 122630,
-    "timestampMs": 121239,
+    "text": "6, and ChatGPT Sites: five product surfaces, eleven API routes,",
+    "startMs": 129915,
+    "endMs": 134639,
+    "timestampMs": 129915,
     "confidence": 1
   },
   {
-    "text": "Codex helped turn the product thesis into an eighteen-scene branching narrative,",
-    "startMs": 122630,
-    "endMs": 127928,
-    "timestampMs": 122630,
+    "text": "eight D1 tables, four identity paths, and one deployed product.",
+    "startMs": 134639,
+    "endMs": 139363,
+    "timestampMs": 134639,
     "confidence": 1
   },
   {
-    "text": "then implemented the responsive UI, motion system, routes, D1 persistence,",
-    "startMs": 127928,
-    "endMs": 132829,
-    "timestampMs": 127928,
+    "text": "GPT Image 2 supported the visual system.",
+    "startMs": 139363,
+    "endMs": 142362,
+    "timestampMs": 139363,
     "confidence": 1
   },
   {
-    "text": "authentication boundaries, admin controls, and production deployment.",
-    "startMs": 132829,
-    "endMs": 137399,
-    "timestampMs": 132829,
+    "text": "Cloudflare handles only the external email delivery.",
+    "startMs": 142362,
+    "endMs": 146261,
+    "timestampMs": 142362,
     "confidence": 1
   },
   {
-    "text": "GPT-5.",
-    "startMs": 137399,
-    "endMs": 137796,
-    "timestampMs": 137399,
+    "text": "Software you can present.",
+    "startMs": 148283,
+    "endMs": 149999,
+    "timestampMs": 148283,
     "confidence": 1
   },
   {
-    "text": "6 accelerated the engineering loop, while I made the core product,",
-    "startMs": 137796,
-    "endMs": 142167,
-    "timestampMs": 137796,
+    "text": "A presentation people can use.",
+    "startMs": 149999,
+    "endMs": 152059,
+    "timestampMs": 149999,
     "confidence": 1
   },
   {
-    "text": "editorial, and design decisions.",
-    "startMs": 142167,
-    "endMs": 144286,
-    "timestampMs": 142167,
+    "text": "ChatGPT Sites turned an idea into a product people can enter, influence,",
+    "startMs": 152059,
+    "endMs": 157001,
+    "timestampMs": 152059,
     "confidence": 1
   },
   {
-    "text": "For email verification and follow-up delivery,",
-    "startMs": 144286,
-    "endMs": 147333,
-    "timestampMs": 144286,
-    "confidence": 1
-  },
-  {
-    "text": "the Cloudflare deployment skill extends Sites with an email worker.",
-    "startMs": 147333,
-    "endMs": 151770,
-    "timestampMs": 147333,
-    "confidence": 1
-  },
-  {
-    "text": "New Era Presentation makes every slide answer back.",
-    "startMs": 152970,
-    "endMs": 156763,
-    "timestampMs": 152970,
-    "confidence": 1
-  },
-  {
-    "text": "Not more AI slides—presentations worth joining, remembering, and continuing.",
-    "startMs": 156763,
-    "endMs": 162414,
-    "timestampMs": 156763,
-    "confidence": 1
-  },
-  {
-    "text": "Built with Codex and GPT-5.",
-    "startMs": 162414,
-    "endMs": 164422,
-    "timestampMs": 162414,
-    "confidence": 1
-  },
-  {
-    "text": "6.",
-    "startMs": 164422,
-    "endMs": 164571,
-    "timestampMs": 164422,
-    "confidence": 1
-  },
-  {
-    "text": "Narration generated with OpenAI text to speech.",
-    "startMs": 164571,
-    "endMs": 168066,
-    "timestampMs": 164571,
+    "text": "remember, and continue.",
+    "startMs": 157001,
+    "endMs": 158579,
+    "timestampMs": 157001,
     "confidence": 1
   }
 ]
