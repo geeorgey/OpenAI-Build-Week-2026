@@ -487,6 +487,7 @@ export function DeckExperience({
   const [branchSelection, setBranchSelection] = useState<string | null>(null);
   const [branchNotice, setBranchNotice] = useState("");
   const [branchRoundReady, setBranchRoundReady] = useState(true);
+  const swipeStartRef = useRef<{ x: number; y: number; startedAt: number } | null>(null);
   const reactId = useId();
   const visitorId = `deck-${reactId.replaceAll(":", "")}`;
   const slide = slides[activeSlide];
@@ -608,6 +609,46 @@ export function DeckExperience({
     goTo(activeSlide - 1);
   }, [activeSlide, branchSelection, branchSlideIndex, goTo, slide.id]);
 
+  const onStageTouchStart = useCallback((event: React.TouchEvent<HTMLElement>) => {
+    const target = event.target as HTMLElement;
+    const isInteractive = target.closest("a, button, input, textarea, select, label, [data-swipe-ignore]");
+    if (event.touches.length !== 1 || isInteractive) {
+      swipeStartRef.current = null;
+      return;
+    }
+
+    const touch = event.touches[0];
+    swipeStartRef.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+      startedAt: Date.now(),
+    };
+  }, []);
+
+  const onStageTouchEnd = useCallback((event: React.TouchEvent<HTMLElement>) => {
+    const start = swipeStartRef.current;
+    swipeStartRef.current = null;
+    if (!start || event.changedTouches.length !== 1) return;
+
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - start.x;
+    const deltaY = touch.clientY - start.y;
+    const elapsed = Date.now() - start.startedAt;
+    const isHorizontalSwipe = Math.abs(deltaX) >= 48
+      && Math.abs(deltaX) > Math.abs(deltaY) * 1.25;
+
+    if (!isHorizontalSwipe || elapsed > 750) return;
+    if (deltaX < 0) {
+      void advance();
+    } else {
+      goBack();
+    }
+  }, [advance, goBack]);
+
+  const onStageTouchCancel = useCallback(() => {
+    swipeStartRef.current = null;
+  }, []);
+
   const selectWebBranch = useCallback((optionId: string) => {
     if (mode !== "web") return;
     const option = branchOptions.find((item) => item.id === optionId);
@@ -721,7 +762,13 @@ export function DeckExperience({
 
   return (
     <main className={`deck-shell ${mode === "web" ? "is-web-mode" : "is-present-mode"}`}>
-      <section className={`stage ${slide.theme}`} key={`${slide.id}-${language}`}>
+      <section
+        className={`stage ${slide.theme}`}
+        key={`${slide.id}-${language}`}
+        onTouchStart={onStageTouchStart}
+        onTouchEnd={onStageTouchEnd}
+        onTouchCancel={onStageTouchCancel}
+      >
         <div className="ambient-grid" />
         <header className="stage-header">
           <Link href="/" className="brand-lockup">

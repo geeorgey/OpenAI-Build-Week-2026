@@ -43,6 +43,12 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
   assert.match(deck, /New Era Presentation is a participatory presentation medium where audiences join by QR code to react,/);
   assert.match(deck, /titleMotionVariants = \["drop", "mosaic", "slice", "rise", "focus", "scatter"\]/);
   assert.match(deck, /data-title-motion=\{variant\}/);
+  assert.match(deck, /swipeStartRef = useRef/);
+  assert.match(deck, /Math\.abs\(deltaX\) >= 48/);
+  assert.match(deck, /Math\.abs\(deltaX\) > Math\.abs\(deltaY\) \* 1\.25/);
+  assert.match(deck, /onTouchStart=\{onStageTouchStart\}/);
+  assert.match(deck, /onTouchEnd=\{onStageTouchEnd\}/);
+  assert.match(deck, /deltaX < 0[\s\S]*void advance\(\)[\s\S]*goBack\(\)/);
   assert.match(styles, /@keyframes titleDrop/);
   assert.match(styles, /@keyframes titleMosaic/);
   assert.match(styles, /@keyframes titleSlice/);
@@ -58,6 +64,8 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
   assert.doesNotMatch(layout, /Starter Project|codex-preview/);
   assert.match(styles, /\.join-qr svg[\s\S]*width:\s*100%[\s\S]*height:\s*100%/);
   assert.match(styles, /\.interaction-rail\.is-read-only[\s\S]*grid-template-rows:\s*auto auto minmax\(0,\s*1fr\)/);
+  assert.match(styles, /touch-action:\s*pan-y/);
+  assert.match(styles, /overscroll-behavior-x:\s*contain/);
   assert.doesNotMatch(styles, /\.deck-shell\.is-present-mode/);
 });
 

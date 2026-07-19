@@ -45,6 +45,7 @@ a {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 340px;
   min-height: 100dvh;
+  overscroll-behavior-x: contain;
   background: #050609;
 }
 
@@ -54,6 +55,7 @@ a {
   min-height: 100dvh;
   overflow: hidden;
   isolation: isolate;
+  touch-action: pan-y;
   background:
     radial-gradient(circle at 74% 44%, color-mix(in srgb, var(--slide-accent) 12%, transparent), transparent 34%),
     #08090e;
