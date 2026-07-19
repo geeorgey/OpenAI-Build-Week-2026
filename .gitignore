@@ -44,5 +44,6 @@ next-env.d.ts
 **/node_modules/
 **/.dev.vars
 /outputs/
+/video/output/
 /work/
 /.private/

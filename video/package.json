@@ -1,0 +1,27 @@
+{
+  "name": "new-era-presentation-build-week-video",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "captions": "node scripts/build-captions.mjs",
+    "studio": "remotion studio src/index.ts",
+    "still": "remotion still src/index.ts NewEraBuildWeek output/preview.png --frame=2460",
+    "render": "remotion render src/index.ts NewEraBuildWeek output/new-era-presentation-build-week.mp4 --codec=h264 --audio-codec=aac --crf=18",
+    "render:720": "remotion render src/index.ts NewEraBuildWeek output/new-era-presentation-build-week-720p.mp4 --codec=h264 --audio-codec=aac --crf=20 --scale=0.6666667"
+  },
+  "dependencies": {
+    "@remotion/captions": "4.0.491",
+    "@remotion/cli": "4.0.491",
+    "@remotion/media": "4.0.491",
+    "@remotion/transitions": "4.0.491",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.491"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "typescript": "^5.9.3"
+  }
+}

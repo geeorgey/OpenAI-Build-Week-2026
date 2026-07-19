@@ -1,0 +1,50 @@
+[
+  {
+    "id": "01-hook",
+    "audio": "audio/01-hook.mp3",
+    "audioDuration": 15.504,
+    "duration": 16.704
+  },
+  {
+    "id": "02-idea",
+    "audio": "audio/02-idea.mp3",
+    "audioDuration": 14.904,
+    "duration": 16.104
+  },
+  {
+    "id": "03-join",
+    "audio": "audio/03-join.mp3",
+    "audioDuration": 14.184,
+    "duration": 15.384
+  },
+  {
+    "id": "04-react",
+    "audio": "audio/04-react.mp3",
+    "audioDuration": 24.48,
+    "duration": 25.68
+  },
+  {
+    "id": "05-branch",
+    "audio": "audio/05-branch.mp3",
+    "audioDuration": 17.736,
+    "duration": 18.936
+  },
+  {
+    "id": "06-remember",
+    "audio": "audio/06-remember.mp3",
+    "audioDuration": 22.344,
+    "duration": 23.544
+  },
+  {
+    "id": "07-build",
+    "audio": "audio/07-build.mp3",
+    "audioDuration": 34.968,
+    "duration": 36.168
+  },
+  {
+    "id": "08-close",
+    "audio": "audio/08-close.mp3",
+    "audioDuration": 15.096,
+    "duration": 16.296
+  }
+]

@@ -170,7 +170,13 @@ The demo should show the real path in under three minutes:
 
 `AI presentation fatigue → live QR join → stamp/comment → slide-linked conversation → personal memory → relationship follow-up → Codex + GPT-5.6 + Sites build`
 
-Before submission, add the required Codex feedback session ID to the Devpost project and include a public demo video with audio.
+The English submission video, narration source, captions, and reproducible
+Remotion project are in [`video/`](video/). The finished demo is 2:49 with
+English OpenAI text-to-speech narration and burned-in English captions.
+
+Before submission, add the required Codex feedback session ID to the Devpost
+project, upload the finished demo as a public YouTube video, and add that URL to
+Devpost.
 
 ## Why it matters
 

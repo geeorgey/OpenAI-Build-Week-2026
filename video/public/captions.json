@@ -1,0 +1,338 @@
+[
+  {
+    "text": "AI can make a presentation deck in seconds.",
+    "startMs": 450,
+    "endMs": 3216,
+    "timestampMs": 450,
+    "confidence": 1
+  },
+  {
+    "text": "But when every deck is generated in one shot, audiences feel the sameness:",
+    "startMs": 3216,
+    "endMs": 7977,
+    "timestampMs": 3216,
+    "confidence": 1
+  },
+  {
+    "text": "the same structure, the same tone, the same visual rhythm.",
+    "startMs": 7977,
+    "endMs": 11708,
+    "timestampMs": 7977,
+    "confidence": 1
+  },
+  {
+    "text": "New Era Presentation is an answer to that AI presentation fatigue.",
+    "startMs": 11708,
+    "endMs": 15954,
+    "timestampMs": 11708,
+    "confidence": 1
+  },
+  {
+    "text": "Instead of using AI to make more disposable slides,",
+    "startMs": 17154,
+    "endMs": 20826,
+    "timestampMs": 17154,
+    "confidence": 1
+  },
+  {
+    "text": "it turns a presentation into participatory media.",
+    "startMs": 20826,
+    "endMs": 24354,
+    "timestampMs": 20826,
+    "confidence": 1
+  },
+  {
+    "text": "The presenter and the audience create the same live moment together—then carry that moment beyond the room.",
+    "startMs": 24354,
+    "endMs": 32058,
+    "timestampMs": 24354,
+    "confidence": 1
+  },
+  {
+    "text": "The audience scans one QR code and opens the join screen.",
+    "startMs": 33258,
+    "endMs": 36773,
+    "timestampMs": 33258,
+    "confidence": 1
+  },
+  {
+    "text": "They can enter instantly as a guest, or participate with a verified email,",
+    "startMs": 36773,
+    "endMs": 41337,
+    "timestampMs": 36773,
+    "confidence": 1
+  },
+  {
+    "text": "Google, or ChatGPT identity.",
+    "startMs": 41337,
+    "endMs": 43063,
+    "timestampMs": 41337,
+    "confidence": 1
+  },
+  {
+    "text": "Input stays on their own device, so the presenter screen remains clean.",
+    "startMs": 43063,
+    "endMs": 47442,
+    "timestampMs": 43063,
+    "confidence": 1
+  },
+  {
+    "text": "Now the presentation answers back.",
+    "startMs": 48642,
+    "endMs": 50760,
+    "timestampMs": 48642,
+    "confidence": 1
+  },
+  {
+    "text": "Maya leaves an insight.",
+    "startMs": 50760,
+    "endMs": 52193,
+    "timestampMs": 50760,
+    "confidence": 1
+  },
+  {
+    "text": "Ken asks a question.",
+    "startMs": 52193,
+    "endMs": 53438,
+    "timestampMs": 52193,
+    "confidence": 1
+  },
+  {
+    "text": "Sofia agrees.",
+    "startMs": 53438,
+    "endMs": 54248,
+    "timestampMs": 53438,
+    "confidence": 1
+  },
+  {
+    "text": "Leo marks the moment that changed his mind.",
+    "startMs": 54248,
+    "endMs": 56927,
+    "timestampMs": 54248,
+    "confidence": 1
+  },
+  {
+    "text": "Every comment and stamp is stored with the active slide.",
+    "startMs": 56927,
+    "endMs": 60415,
+    "timestampMs": 56927,
+    "confidence": 1
+  },
+  {
+    "text": "When the presenter moves forward,",
+    "startMs": 60415,
+    "endMs": 62470,
+    "timestampMs": 60415,
+    "confidence": 1
+  },
+  {
+    "text": "the conversation follows that slide instead of leaving the last comment stuck on screen.",
+    "startMs": 62470,
+    "endMs": 67952,
+    "timestampMs": 62470,
+    "confidence": 1
+  },
+  {
+    "text": "The presenter can see what the room is thinking and respond while it still matters.",
+    "startMs": 67952,
+    "endMs": 73122,
+    "timestampMs": 67952,
+    "confidence": 1
+  },
+  {
+    "text": "The audience can also change the story.",
+    "startMs": 74322,
+    "endMs": 76651,
+    "timestampMs": 74322,
+    "confidence": 1
+  },
+  {
+    "text": "On a decision slide, everyone votes from the join screen.",
+    "startMs": 76651,
+    "endMs": 80055,
+    "timestampMs": 76651,
+    "confidence": 1
+  },
+  {
+    "text": "The live totals update in real time, and when the presenter advances,",
+    "startMs": 80055,
+    "endMs": 84175,
+    "timestampMs": 80055,
+    "confidence": 1
+  },
+  {
+    "text": "the most popular route becomes the next slide.",
+    "startMs": 84175,
+    "endMs": 86922,
+    "timestampMs": 84175,
+    "confidence": 1
+  },
+  {
+    "text": "In web mode, each reader chooses their own path.",
+    "startMs": 86922,
+    "endMs": 89789,
+    "timestampMs": 86922,
+    "confidence": 1
+  },
+  {
+    "text": "Every branch rejoins the shared story.",
+    "startMs": 89789,
+    "endMs": 92058,
+    "timestampMs": 89789,
+    "confidence": 1
+  },
+  {
+    "text": "After the presentation,",
+    "startMs": 93258,
+    "endMs": 94698,
+    "timestampMs": 93258,
+    "confidence": 1
+  },
+  {
+    "text": "verified participants can revisit where they reacted and what they said on My Page.",
+    "startMs": 94698,
+    "endMs": 99892,
+    "timestampMs": 94698,
+    "confidence": 1
+  },
+  {
+    "text": "For the presenter, consented interest signals become useful context:",
+    "startMs": 99892,
+    "endMs": 104148,
+    "timestampMs": 99892,
+    "confidence": 1
+  },
+  {
+    "text": "moderate the conversation, understand which themes mattered,",
+    "startMs": 104148,
+    "endMs": 107904,
+    "timestampMs": 104148,
+    "confidence": 1
+  },
+  {
+    "text": "create segments, and send a relevant follow-up.",
+    "startMs": 107904,
+    "endMs": 110845,
+    "timestampMs": 107904,
+    "confidence": 1
+  },
+  {
+    "text": "The presentation no longer ends at applause.",
+    "startMs": 110845,
+    "endMs": 113599,
+    "timestampMs": 110845,
+    "confidence": 1
+  },
+  {
+    "text": "It starts the next conversation.",
+    "startMs": 113599,
+    "endMs": 115602,
+    "timestampMs": 113599,
+    "confidence": 1
+  },
+  {
+    "text": "I built this end to end during OpenAI Build Week with Codex, GPT-5.",
+    "startMs": 116802,
+    "endMs": 121239,
+    "timestampMs": 116802,
+    "confidence": 1
+  },
+  {
+    "text": "6, and ChatGPT Sites.",
+    "startMs": 121239,
+    "endMs": 122630,
+    "timestampMs": 121239,
+    "confidence": 1
+  },
+  {
+    "text": "Codex helped turn the product thesis into an eighteen-scene branching narrative,",
+    "startMs": 122630,
+    "endMs": 127928,
+    "timestampMs": 122630,
+    "confidence": 1
+  },
+  {
+    "text": "then implemented the responsive UI, motion system, routes, D1 persistence,",
+    "startMs": 127928,
+    "endMs": 132829,
+    "timestampMs": 127928,
+    "confidence": 1
+  },
+  {
+    "text": "authentication boundaries, admin controls, and production deployment.",
+    "startMs": 132829,
+    "endMs": 137399,
+    "timestampMs": 132829,
+    "confidence": 1
+  },
+  {
+    "text": "GPT-5.",
+    "startMs": 137399,
+    "endMs": 137796,
+    "timestampMs": 137399,
+    "confidence": 1
+  },
+  {
+    "text": "6 accelerated the engineering loop, while I made the core product,",
+    "startMs": 137796,
+    "endMs": 142167,
+    "timestampMs": 137796,
+    "confidence": 1
+  },
+  {
+    "text": "editorial, and design decisions.",
+    "startMs": 142167,
+    "endMs": 144286,
+    "timestampMs": 142167,
+    "confidence": 1
+  },
+  {
+    "text": "For email verification and follow-up delivery,",
+    "startMs": 144286,
+    "endMs": 147333,
+    "timestampMs": 144286,
+    "confidence": 1
+  },
+  {
+    "text": "the Cloudflare deployment skill extends Sites with an email worker.",
+    "startMs": 147333,
+    "endMs": 151770,
+    "timestampMs": 147333,
+    "confidence": 1
+  },
+  {
+    "text": "New Era Presentation makes every slide answer back.",
+    "startMs": 152970,
+    "endMs": 156763,
+    "timestampMs": 152970,
+    "confidence": 1
+  },
+  {
+    "text": "Not more AI slides—presentations worth joining, remembering, and continuing.",
+    "startMs": 156763,
+    "endMs": 162414,
+    "timestampMs": 156763,
+    "confidence": 1
+  },
+  {
+    "text": "Built with Codex and GPT-5.",
+    "startMs": 162414,
+    "endMs": 164422,
+    "timestampMs": 162414,
+    "confidence": 1
+  },
+  {
+    "text": "6.",
+    "startMs": 164422,
+    "endMs": 164571,
+    "timestampMs": 164422,
+    "confidence": 1
+  },
+  {
+    "text": "Narration generated with OpenAI text to speech.",
+    "startMs": 164571,
+    "endMs": 168066,
+    "timestampMs": 164571,
+    "confidence": 1
+  }
+]
