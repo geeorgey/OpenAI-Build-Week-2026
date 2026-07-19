@@ -421,7 +421,15 @@ function BranchPanel({
   );
 }
 
-export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initialSlide?: number }) {
+export function DeckExperience({
+  mode,
+  initialSlide = 0,
+  showGoogleBranding = false,
+}: {
+  mode: Mode;
+  initialSlide?: number;
+  showGoogleBranding?: boolean;
+}) {
   const [activeSlide, setActiveSlide] = useState(initialSlide);
   const [language, setLanguage] = useState<Language>("ja");
   const [comments, setComments] = useState<CommentItem[]>(starterComments);
@@ -688,6 +696,15 @@ export function DeckExperience({ mode, initialSlide = 0 }: { mode: Mode; initial
           </button>
         </header>
         {mode === "present" && <PresentJoinChip joinUrl={joinUrl} language={language} />}
+        {showGoogleBranding && activeSlide === 0 && (
+          <aside className="google-branding-proof" aria-label="Application identity">
+            <strong>New Era Presentation</strong>
+            <p>
+              New Era Presentation is a participatory presentation medium where audiences join by QR code to react,
+              comment, and ask questions in sync with each slide.
+            </p>
+          </aside>
+        )}
 
         <div className="slide-content">
           <div className="slide-copy">

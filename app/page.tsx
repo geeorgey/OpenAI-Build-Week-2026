@@ -17,7 +17,11 @@ type Props = {
 
 export default async function Home({ searchParams }: Props) {
   const { slide } = await searchParams;
-  return <PresentationGate><DeckExperience mode="present" initialSlide={parseSlide(slide)} /></PresentationGate>;
+  return (
+    <PresentationGate>
+      <DeckExperience mode="present" initialSlide={parseSlide(slide)} showGoogleBranding />
+    </PresentationGate>
+  );
 }
 
 function parseSlide(value: string | string[] | undefined) {

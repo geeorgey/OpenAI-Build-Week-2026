@@ -10,12 +10,14 @@ test("build emits the deployable Sites worker", async () => {
 });
 
 test("the deck carries the Build Week story and dual-mode interaction", async () => {
-  const [slides, deck, join, branchApi, branching, layout, styles, migration] = await Promise.all([
+  const [slides, deck, join, branchApi, branching, home, web, layout, styles, migration] = await Promise.all([
     readFile(new URL("app/data/slides.ts", root), "utf8"),
     readFile(new URL("app/components/DeckExperience.tsx", root), "utf8"),
     readFile(new URL("app/components/JoinExperience.tsx", root), "utf8"),
     readFile(new URL("app/api/branch-votes/route.ts", root), "utf8"),
     readFile(new URL("lib/branching.ts", root), "utf8"),
+    readFile(new URL("app/page.tsx", root), "utf8"),
+    readFile(new URL("app/web/page.tsx", root), "utf8"),
     readFile(new URL("app/layout.tsx", root), "utf8"),
     readFile(new URL("app/globals.css", root), "utf8"),
     readFile(new URL("drizzle/0002_curved_mentallo.sql", root), "utf8"),
@@ -34,6 +36,10 @@ test("the deck carries the Build Week story and dual-mode interaction", async ()
   assert.match(deck, /\/web\?slide=/);
   assert.match(deck, /BRANCH_REJOIN_SLIDE_ID/);
   assert.match(deck, /resolveBranchWinner/);
+  assert.match(home, /showGoogleBranding/);
+  assert.doesNotMatch(web, /showGoogleBranding/);
+  assert.match(deck, /showGoogleBranding && activeSlide === 0/);
+  assert.match(deck, /New Era Presentation is a participatory presentation medium where audiences join by QR code to react,/);
   assert.match(join, /\/api\/branch-votes/);
   assert.match(join, /CHOOSE THE NEXT PATH/);
   assert.match(branchApi, /ON CONFLICT\(presentation_slug, slide_id, visitor_id\)/);
